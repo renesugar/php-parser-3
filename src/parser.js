@@ -1,11 +1,12 @@
-/*!
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
+"use strict";
 
 /**
- * @private check if argument is a number
+ * @private
  */
 function isNumber(n) {
   return n != "." && n != "," && !isNaN(parseFloat(n)) && isFinite(n);
@@ -13,11 +14,14 @@ function isNumber(n) {
 
 /**
  * The PHP Parser class that build the AST tree from the lexer
- * @constructor {Parser}
+ *
+ * @class
+ * @tutorial Parser
  * @property {Lexer} lexer - current lexer instance
  * @property {AST} ast - the AST factory instance
  * @property {Integer|String} token - current token
  * @property {Boolean} extractDoc - should extract documentation as AST node
+ * @property {Boolean} extractTokens - should extract each token
  * @property {Boolean} suppressErrors - should ignore parsing errors and continue
  * @property {Boolean} debug - should output debug informations
  */
@@ -31,6 +35,7 @@ const parser = function(lexer, ast) {
   this.debug = false;
   this.php7 = true;
   this.extractDoc = false;
+  this.extractTokens = false;
   this.suppressErrors = false;
   const mapIt = function(item) {
     return [item, null];
@@ -252,12 +257,20 @@ parser.prototype.parse = function(code, filename) {
   } else {
     this._docs = null;
   }
+  if (this.extractTokens) {
+    this._tokens = [];
+  } else {
+    this._tokens = null;
+  }
   this._docIndex = 0;
+  this._lastNode = null;
   this.lexer.setInput(code);
+  this.lexer.all_tokens = this.extractTokens;
   this.lexer.comment_tokens = this.extractDoc;
   this.length = this.lexer._input.length;
   this.innerList = false;
-  const program = this.ast.prepare("program", null, this);
+  this.innerListForm = false;
+  const program = this.node("program");
   let childs = [];
   this.next();
   while (this.token != this.EOF) {
@@ -270,7 +283,31 @@ parser.prototype.parse = function(code, filename) {
       }
     }
   }
-  return program(childs, this._errors, this._docs);
+  // #176 : register latest position
+  this.prev = [
+    this.lexer.yylloc.last_line,
+    this.lexer.yylloc.last_column,
+    this.lexer.offset
+  ];
+  const result = program(childs, this._errors, this._docs, this._tokens);
+  if (this.debug) {
+    const errors = this.ast.checkNodes();
+    if (errors.length > 0) {
+      errors.forEach(function(error) {
+        // eslint-disable-next-line no-console
+        console.log(
+          "Node at line " +
+            error.position.line +
+            ", column " +
+            error.position.column
+        );
+        // eslint-disable-next-line no-console
+        console.log(error.stack.join("\n"));
+      });
+      throw new Error("Some nodes are not closed");
+    }
+  }
+  return result;
 };
 
 /**
@@ -332,11 +369,73 @@ parser.prototype.error = function(expect) {
  */
 parser.prototype.node = function(name) {
   if (this.extractDoc) {
+    let docs = null;
     if (this._docIndex < this._docs.length) {
-      const docs = this._docs.slice(this._docIndex);
+      docs = this._docs.slice(this._docIndex);
       this._docIndex = this._docs.length;
-      return this.ast.prepare(name, docs, this);
+      if (this.debug) {
+        // eslint-disable-next-line no-console
+        console.log(new Error("Append docs on " + name));
+        // eslint-disable-next-line no-console
+        console.log(docs);
+      }
     }
+    const node = this.ast.prepare(name, docs, this);
+    /**
+     * TOKENS :
+     * node1 commentA token commmentB node2 commentC token commentD node3 commentE token
+     *
+     * AST :
+     * structure:S1 [
+     *    left: node1 ( trail: commentA ),
+     *    right: structure:S2 [
+     *       node2 (lead: commentB, trail: commentC),
+     *       node3 (lead: commentD)
+     *    ],
+     *    trail: commentE
+     * ]
+     *
+     * Algorithm :
+     *
+     * Attach the last comments on parent of current node
+     * If a new node is started and the parent has a trailing comment
+     * the move it on previous node
+     *
+     * start S2
+     * start node1
+     * consume node1 & set commentA as trailingComment on S2
+     * start S2
+     * S1 has a trailingComment, attach it on node1
+     * ...
+     * NOTE : As the trailingComment Behavior depends on AST, it will be build on
+     * the AST layer - last child node will keep it's trailingComment nodes
+     */
+    node.postBuild = function(self) {
+      if (this._docIndex < this._docs.length) {
+        if (this._lastNode) {
+          const offset = this.prev[2];
+          let max = this._docIndex;
+          for (; max < this._docs.length; max++) {
+            if (this._docs[max].offset > offset) {
+              break;
+            }
+          }
+          if (max > this._docIndex) {
+            // inject trailing comment on child node
+            this._lastNode.setTrailingComments(
+              this._docs.slice(this._docIndex, max)
+            );
+            this._docIndex = max;
+          }
+        } else if (this.token === this.EOF) {
+          // end of content
+          self.setTrailingComments(this._docs.slice(this._docIndex));
+          this._docIndex = this._docs.length;
+        }
+      }
+      this._lastNode = self;
+    }.bind(this);
+    return node;
   }
   return this.ast.prepare(name, null, this);
 };
@@ -345,18 +444,23 @@ parser.prototype.node = function(name) {
  * expects an end of statement or end of file
  * @return {boolean}
  */
-parser.prototype.expectEndOfStatement = function() {
+parser.prototype.expectEndOfStatement = function(node) {
   if (this.token === ";") {
-    this.next();
+    // include only real ';' statements
+    // https://github.com/glayzzle/php-parser/issues/164
+    if (node && this.lexer.yytext === ";") {
+      node.includeToken(this);
+    }
   } else if (this.token !== this.tok.T_INLINE_HTML && this.token !== this.EOF) {
     this.error(";");
     return false;
   }
+  this.next();
   return true;
 };
 
 /** outputs some debug information on current token **/
-const ignoreStack = ["parser.next"];
+const ignoreStack = ["parser.next", "parser.node", "parser.showlog"];
 parser.prototype.showlog = function() {
   const stack = new Error().stack.split("\n");
   let line;
@@ -425,14 +529,18 @@ parser.prototype.text = function() {
 /** consume the next token **/
 parser.prototype.next = function() {
   // prepare the back command
-  this.prev = [
-    this.lexer.yylloc.first_line,
-    this.lexer.yylloc.first_column,
-    this.lexer.offset
-  ];
+  if (this.token !== ";" || this.lexer.yytext === ";") {
+    // ignore '?>' from automated resolution
+    // https://github.com/glayzzle/php-parser/issues/168
+    this.prev = [
+      this.lexer.yylloc.last_line,
+      this.lexer.yylloc.last_column,
+      this.lexer.offset
+    ];
+  }
 
   // eating the token
-  this.token = this.lexer.lex() || this.EOF;
+  this.lex();
 
   // showing the debug
   if (this.debug) {
@@ -454,6 +562,57 @@ parser.prototype.next = function() {
     }
   }
 
+  return this;
+};
+
+/**
+ * Eating a token
+ */
+parser.prototype.lex = function() {
+  // append on token stack
+  if (this.extractTokens) {
+    do {
+      // the token
+      this.token = this.lexer.lex() || this.EOF;
+      if (this.token === this.EOF) return this;
+      let entry = this.lexer.yytext;
+      if (this.lexer.engine.tokens.values.hasOwnProperty(this.token)) {
+        entry = [
+          this.lexer.engine.tokens.values[this.token],
+          entry,
+          this.lexer.yylloc.first_line,
+          this.lexer.yylloc.first_offset,
+          this.lexer.offset
+        ];
+      } else {
+        entry = [
+          null,
+          entry,
+          this.lexer.yylloc.first_line,
+          this.lexer.yylloc.first_offset,
+          this.lexer.offset
+        ];
+      }
+      this._tokens.push(entry);
+      if (this.token === this.tok.T_CLOSE_TAG) {
+        // https://github.com/php/php-src/blob/7ff186434e82ee7be7c59d0db9a976641cf7b09c/Zend/zend_compile.c#L1680
+        this.token = ";";
+        return this;
+      } else if (this.token === this.tok.T_OPEN_TAG_WITH_ECHO) {
+        this.token = this.tok.T_ECHO;
+        return this;
+      }
+    } while (
+      this.token === this.tok.T_WHITESPACE || // ignore white space
+      (!this.extractDoc &&
+        (this.token === this.tok.T_COMMENT || // ignore single lines comments
+          this.token === this.tok.T_DOC_COMMENT)) || // ignore doc comments
+      // ignore open tags
+      this.token === this.tok.T_OPEN_TAG
+    );
+  } else {
+    this.token = this.lexer.lex() || this.EOF;
+  }
   return this;
 };
 
@@ -486,6 +645,10 @@ parser.prototype.is = function(type) {
   require("./parser/variable.js")
 ].forEach(function(ext) {
   for (const k in ext) {
+    if (parser.prototype.hasOwnProperty(k)) {
+      // @see https://github.com/glayzzle/php-parser/issues/234
+      throw new Error("Function " + k + " is already defined - collision");
+    }
     parser.prototype[k] = ext[k];
   }
 });

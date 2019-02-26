@@ -1,5 +1,5 @@
-/*!
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
@@ -40,8 +40,9 @@ module.exports = {
         return result(name.name, body, true);
       } else if (this.token === "(") {
         // resolve ambuiguity between namespace & function call
-        name.resolution = this.ast.identifier.RELATIVE_NAME;
+        name.resolution = this.ast.reference.RELATIVE_NAME;
         name.name = name.name.substring(1);
+        result.destroy();
         return this.node("call")(name, this.read_function_argument_list());
       } else {
         this.error(["{", ";"]);
@@ -59,19 +60,32 @@ module.exports = {
    *  namespace_name ::= T_NS_SEPARATOR? (T_STRING T_NS_SEPARATOR)* T_STRING
    * ```
    * @see http://php.net/manual/en/language.namespaces.rules.php
-   * @return {Identifier}
+   * @return {Reference}
    */
-  read_namespace_name: function() {
-    const result = this.node("identifier");
+  read_namespace_name: function(resolveReference) {
+    const result = this.node();
     let relative = false;
     if (this.token === this.tok.T_NAMESPACE) {
       this.next().expect(this.tok.T_NS_SEPARATOR) && this.next();
       relative = true;
     }
-    return result(
-      this.read_list(this.tok.T_STRING, this.tok.T_NS_SEPARATOR, true),
-      relative
+    const names = this.read_list(
+      this.tok.T_STRING,
+      this.tok.T_NS_SEPARATOR,
+      true
     );
+    if (
+      !relative &&
+      names.length === 1 &&
+      (resolveReference || this.token !== "(")
+    ) {
+      if (names[0].toLowerCase() === "parent") {
+        return result("parentreference", names[0]);
+      } else if (names[0].toLowerCase() === "self") {
+        return result("selfreference", names[0]);
+      }
+    }
+    return result("classreference", names, relative);
   },
   /**
    * Reads a use statement
@@ -86,7 +100,7 @@ module.exports = {
    * @return {UseGroup}
    */
   read_use_statement: function() {
-    const result = this.node("usegroup");
+    let result = this.node("usegroup");
     let items = [];
     let name = null;
     this.expect(this.tok.T_USE) && this.next();
@@ -99,8 +113,17 @@ module.exports = {
       items = this.next().read_use_declarations(type === null);
       this.expect("}") && this.next();
     }
+    result = result(name, type, items);
     this.expect(";") && this.next();
-    return result(name, type, items);
+    return result;
+  },
+  /**
+   *
+   * @see https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L1045
+   */
+  read_class_name_reference: function() {
+    // resolved as the same
+    return this.read_variable(true, false, false);
   },
   /**
    * Reads a use declaration
@@ -129,7 +152,19 @@ module.exports = {
   read_use_declarations: function(typed) {
     const result = [this.read_use_declaration(typed)];
     while (this.token === ",") {
-      result.push(this.next().read_use_declaration(typed));
+      this.next();
+      if (typed) {
+        if (
+          this.token !== this.tok.T_FUNCTION &&
+          this.token !== this.tok.T_CONST &&
+          this.token !== this.tok.T_STRING
+        ) {
+          break;
+        }
+      } else if (this.token !== this.tok.T_STRING) {
+        break;
+      }
+      result.push(this.read_use_declaration(typed));
     }
     return result;
   },
@@ -144,8 +179,10 @@ module.exports = {
     let result = null;
     if (this.token === this.tok.T_AS) {
       if (this.next().expect(this.tok.T_STRING)) {
-        result = this.text();
+        let aliasName = this.node("identifier");
+        const name = this.text();
         this.next();
+        result = aliasName(name);
       }
     }
     return result;

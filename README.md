@@ -5,6 +5,7 @@
 <a title="npm version" href="https://www.npmjs.com/package/php-parser"><img src="https://badge.fury.io/js/php-parser.svg"></a>
 <a title="npm downloads" href="https://www.npmjs.com/package/php-parser"><img src="https://img.shields.io/npm/dm/php-parser.svg?style=flat"></a>
 <a title="Gitter" href="https://gitter.im/glayzzle/Lobby"><img src="https://img.shields.io/badge/GITTER-join%20chat-green.svg"></a>
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fglayzzle%2Fphp-parser?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fglayzzle%2Fphp-parser.svg?type=shield"/></a>
 </p>
 <p align="center">This javascript library parses PHP code and convert it to AST.</p>
 
@@ -75,7 +76,7 @@ Sample AST output
 }
 ```
 
-- Try it online (demo) : http://glayzzle.com/php-parser/#demo
+- Try it online (demo) : http://glayzzle.com/php-parser/
 - Or from AST Explorer : https://astexplorer.net/
 
 
@@ -93,27 +94,27 @@ You can also [pass options](https://github.com/glayzzle/php-parser/wiki/Options)
 Documentation
 -------------
 
-- [AST nodes definition](https://github.com/glayzzle/php-parser/blob/master/docs/AST.md)
+- [AST nodes definition](https://glayzzle.com/docs/)
+- [Sandbox](https://glayzzle.com/)
 - [List of options](https://github.com/glayzzle/php-parser/wiki/Options)
-- [Main API](https://github.com/glayzzle/php-parser/tree/master/docs)
-- [Lexer API](https://github.com/glayzzle/php-parser/blob/master/docs/lexer.md)
-- [Parser API](https://github.com/glayzzle/php-parser/blob/master/docs/parser.md)
 
 Related projects
 ----------------
 
-- [babel-preset-php](https://gitlab.com/kornelski/babel-preset-php) : Babel preset for converting PHP syntax to JavaScript. It can run subset of PHP in the browser or in Node.js. .
+- [prettier/plugin-php](https://github.com/prettier/plugin-php) : Prettier PHP Plugin
+- [babel-preset-php](https://gitlab.com/kornelski/babel-preset-php) : Babel preset for converting PHP syntax to JavaScript. It can run subset of PHP in the browser or in Node.js
+- [wp-pot](https://github.com/rasmusbe/wp-pot) : Generate pot file for WordPress plugins and themes
+- [crane](https://github.com/HvyIndustries/crane) : PHP Intellisense/code-completion for VS Code
 - [php-unparser](https://github.com/chris-l/php-unparser) : Produce code that uses the style format recommended by PSR-1 and PSR-2.
 - [php-writer](https://github.com/glayzzle/php-writer) : Update PHP scripts from their AST
 - [ts-php-inspections](https://github.com/DaGhostman/ts-php-inspections) : Provide PHP code inspections written in typescript
 - [php-reflection](https://github.com/glayzzle/php-reflection) : Reflection API for PHP files
-- [wp-pot](https://github.com/rasmusbe/wp-pot) : Generate pot file for WordPress plugins and themes
-- [crane](https://github.com/HvyIndustries/crane) : PHP Intellisense/code-completion for VS Code
+- [vscode-phpunit](https://github.com/recca0120/vscode-phpunit) : vscode phpunit extension
 
 > You can add here your own project by opening an issue request.
 
-# Misc
+## License
 
 This library is released under BSD-3 license clause.
 
-If you want to contribute please visit this repository https://github.com/glayzzle/php-parser-dev.
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fglayzzle%2Fphp-parser.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fglayzzle%2Fphp-parser?ref=badge_large)

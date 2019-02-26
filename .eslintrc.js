@@ -5,11 +5,12 @@ module.exports = {
     sourceType: "module"
   },
   plugins: ["prettier"],
-  extends: ["eslint:recommended", "prettier"],
+  extends: ["eslint:recommended"],
   env: {
     browser: true,
     node: true,
     mocha: true,
+    jest: true,
     es6: true
   },
   rules: {

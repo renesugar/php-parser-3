@@ -1,5 +1,56 @@
 # Releases
 
+## 3.0.0-prerelease.8 : (2019-01-07)
+ - #235 : invalid ast for `self` and `parent`
+ - #234 : regression with parens in `3.0.0-prerelease.7`
+ - #230 : `resolvePrecedence` break location for `bin` nodes
+ - #202 : [bug] comment position in lookup
+ - #194 : [feature] implement trailingComments on nodes 
+ - #185 : [bug] parens and staticlookup
+ - #172 : cast precedence
+ - #182 : strange with parens, staticlookup and offsetlookup
+ - #167 : staticlookup is broken with curly
+ - #239 : [bug] call should be in ExpressionStatement
+ - #207 : [feature] use `identifier` for `class/interface/trait` name 
+ - #243 : Regression in prerelease 7 with echo
+ - #181 : strange with parens and unary
+
+## 3.0.0-prerelease.7 : (2018-11-10)
+ - #201 : [bug] curly in staticlookup bug
+ - #175 : impossible detect curly in `encapsed` AST enhancement
+ - #210 : [bug] invalid ast for `const` enhancement
+ - #220 : regression in `rc-6`
+ - #204 : [bug] invalid start offset encapsed AST bug
+ - #165 : declare doesn't support inline nodes investigating
+
+Many thanks to @evilebottnawi for his help
+
+## 3.0.0-prerelease.6 : (2018-10-21)
+ - fix #113 : Unhandled native identifiers
+ - fix #183 : `static` parsed as constref
+ - fix #188 : `constref` vs `identifier`
+ - impl #196 : identifier for function/method name
+
+## 3.0.0-alpha3 : (2018-08-15)
+ - fix #168 : End location of `if` without semicolon
+ - impl #147 : Node informations about Binary and unicode strings
+ - impl #83 : Adding full support for PHP 7.2
+ - fix #122 : Detect foreach bad syntax
+ - impl #152 : Improve tests with JEST
+ - fix #164 : Fixing some location issues (partial)
+
+## 3.0.0-alpha2 : (2018-04-14)
+ - fix #137 : Bug with parsing `list`
+ - fix #149 : Binary cast: isDoubleQuote incorrect
+ - fix #150 : strange ast with list
+ - fix #151 : Declare inside if
+
+## 3.0.0-alpha1 : (2018-04-11)
+ - https://github.com/glayzzle/php-parser/milestone/10
+ - many fixes
+ - changed the way comments are handled
+ - add a new `raw` property on some nodes
+
 ## 2.2.0 : (2017-12-27)
 - Impl #108 : add an option to disable PHP7 support
 - Fix #107 : fix T_DOUBLE_COLON handler

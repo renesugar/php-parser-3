@@ -1,9 +1,10 @@
-/*!
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
 "use strict";
+
 const Statement = require("./statement");
 const KIND = "useitem";
 
@@ -13,11 +14,11 @@ const KIND = "useitem";
  * @extends {Statement}
  * @property {String} name
  * @property {String|null} type - Possible value : function, const
- * @property {String|null} alias
+ * @property {Identifier|null} alias
  * @see {Namespace}
  * @see http://php.net/manual/en/language.namespaces.importing.php
  */
-const UseItem = Statement.extends(function UseItem(
+const UseItem = Statement.extends(KIND, function UseItem(
   name,
   alias,
   type,

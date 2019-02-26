@@ -1,6 +1,5 @@
-/*!
- * Defines a list of helper functions for parsing
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
@@ -34,7 +33,7 @@ module.exports = {
     const result = [];
 
     if (this.token == separator) {
-      if (preserveFirstSeparator) result.push("");
+      if (preserveFirstSeparator) result.push(null);
       this.next();
     }
 
@@ -74,7 +73,7 @@ module.exports = {
    * ```
    *
    * @see https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L726
-   * @return {Identifier[]}
+   * @return {Reference[]}
    */
   read_name_list: function() {
     return this.read_list(this.read_namespace_name, ",", false);
@@ -90,14 +89,14 @@ module.exports = {
    *
    * Sample code :
    * ```php
-   * <?php class foo extends bar, baz { }
+   * <?php static $a = 'hello', $b = 'world';
    * ```
-   * @return {Variable[]|Assign[]} Returns an array composed by a list of variables, or
+   * @return {StaticVariable[]} Returns an array composed by a list of variables, or
    * assign values
    */
   read_variable_declarations: function() {
     return this.read_list(function() {
-      const node = this.node("assign");
+      const node = this.node("staticvariable");
       let variable = this.node("variable");
       // plain variable name
       if (this.expect(this.tok.T_VARIABLE)) {

@@ -1,8 +1,9 @@
-/*!
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
+"use strict";
 
 module.exports = {
   /**
@@ -11,16 +12,25 @@ module.exports = {
    * class ::= class_scope? T_CLASS T_STRING (T_EXTENDS NAMESPACE_NAME)? (T_IMPLEMENTS (NAMESPACE_NAME ',')* NAMESPACE_NAME)? '{' CLASS_BODY '}'
    * ```
    */
-  read_class: function(flag) {
+  read_class: function() {
     const result = this.node("class");
-    this.expect(this.tok.T_CLASS);
+    const flag = this.read_class_scope();
+    // graceful mode : ignore token & go next
+    if (this.token !== this.tok.T_CLASS) {
+      this.error(this.tok.T_CLASS);
+      this.next();
+      return null;
+    }
     this.next().expect(this.tok.T_STRING);
-    const propName = this.text();
+    let propName = this.node("identifier");
+    const name = this.text();
+    this.next();
+    propName = propName(name);
     let propExtends = null;
-    let propImplements = null;
-    if (this.next().token == this.tok.T_EXTENDS) {
+    if (this.token == this.tok.T_EXTENDS) {
       propExtends = this.next().read_namespace_name();
     }
+    let propImplements = null;
     if (this.token == this.tok.T_IMPLEMENTS) {
       propImplements = this.next().read_name_list();
     }
@@ -67,7 +77,7 @@ module.exports = {
 
       // check T_USE trait
       if (this.token === this.tok.T_USE) {
-        result = result.concat(this.next().read_trait_use_statement());
+        result = result.concat(this.read_trait_use_statement());
         continue;
       }
 
@@ -87,7 +97,8 @@ module.exports = {
       // jump over T_VAR then land on T_VARIABLE
       if (this.token === this.tok.T_VAR) {
         this.next().expect(this.tok.T_VARIABLE);
-        flags[0] = flags[1] = 0; // public & non static var
+        flags[0] = null; // public (as null)
+        flags[1] = 0; // non static var
       }
 
       if (this.token === this.tok.T_VARIABLE) {
@@ -121,7 +132,9 @@ module.exports = {
    * ```
    */
   read_variable_list: function(flags) {
-    return this.read_list(
+    const result = this.node("propertystatement");
+
+    const properties = this.read_list(
       /**
        * Reads a variable declaration
        *
@@ -132,20 +145,24 @@ module.exports = {
       function read_variable_declaration() {
         const result = this.node("property");
         this.expect(this.tok.T_VARIABLE);
+        let propName = this.node("identifier");
         const name = this.text().substring(1); // ignore $
         this.next();
+        propName = propName(name);
         if (this.token === ";" || this.token === ",") {
-          return result(name, null, flags);
+          return result(propName, null);
         } else if (this.token === "=") {
           // https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L815
-          return result(name, this.next().read_expr(), flags);
+          return result(propName, this.next().read_expr());
         } else {
           this.expect([",", ";", "="]);
-          return result(name, null, flags);
+          return result(propName, null);
         }
       },
       ","
     );
+
+    return result(null, properties, flags);
   },
   /**
    * Reads constant list
@@ -157,7 +174,8 @@ module.exports = {
     if (this.expect(this.tok.T_CONST)) {
       this.next();
     }
-    return this.read_list(
+    const result = this.node("classconstant");
+    const items = this.read_list(
       /**
        * Reads a constant declaration
        *
@@ -167,25 +185,29 @@ module.exports = {
        * @return {Constant} [:link:](AST.md#constant)
        */
       function read_constant_declaration() {
-        const result = this.node("classconstant");
-        let name = null;
+        const result = this.node("constant");
+        let constName = null;
         let value = null;
         if (
           this.token === this.tok.T_STRING ||
           (this.php7 && this.is("IDENTIFIER"))
         ) {
-          name = this.text();
+          constName = this.node("identifier");
+          const name = this.text();
           this.next();
+          constName = constName(name);
         } else {
           this.expect("IDENTIFIER");
         }
         if (this.expect("=")) {
           value = this.next().read_expr();
         }
-        return result(name, value, flags);
+        return result(constName, value);
       },
       ","
     );
+
+    return result(null, items, flags);
   },
   /**
    * Read member flags
@@ -258,23 +280,23 @@ module.exports = {
    */
   read_interface: function() {
     const result = this.node("interface");
-    let name = null;
-    let body = null;
+    if (this.token !== this.tok.T_INTERFACE) {
+      this.error(this.tok.T_INTERFACE);
+      this.next();
+      return null;
+    }
+    this.next().expect(this.tok.T_STRING);
+    let propName = this.node("identifier");
+    const name = this.text();
+    this.next();
+    propName = propName(name);
     let propExtends = null;
-    if (this.expect(this.tok.T_INTERFACE)) {
-      this.next();
-    }
-    if (this.expect(this.tok.T_STRING)) {
-      name = this.text();
-      this.next();
-    }
     if (this.token === this.tok.T_EXTENDS) {
       propExtends = this.next().read_name_list();
     }
-    if (this.expect("{")) {
-      body = this.next().read_interface_body();
-    }
-    return result(name, propExtends, body);
+    this.expect("{");
+    const body = this.next().read_interface_body();
+    return result(propName, propExtends, body);
   },
   /**
    * Reads an interface body
@@ -333,26 +355,20 @@ module.exports = {
    */
   read_trait: function() {
     const result = this.node("trait");
-    let propName = null;
-    let propExtends = null;
-    let propImplements = null;
-    let body = null;
-    if (this.expect(this.tok.T_TRAIT)) {
+    // graceful mode : ignore token & go next
+    if (this.token !== this.tok.T_TRAIT) {
+      this.error(this.tok.T_TRAIT);
       this.next();
+      return null;
     }
-    if (this.expect(this.tok.T_STRING)) {
-      propName = this.text();
-    }
-    if (this.next().token == this.tok.T_EXTENDS) {
-      propExtends = this.next().read_namespace_name();
-    }
-    if (this.token == this.tok.T_IMPLEMENTS) {
-      propImplements = this.next().read_name_list();
-    }
-    if (this.expect("{")) {
-      body = this.next().read_class_body();
-    }
-    return result(propName, propExtends, propImplements, body);
+    this.next().expect(this.tok.T_STRING);
+    let propName = this.node("identifier");
+    const name = this.text();
+    this.next();
+    propName = propName(name);
+    this.expect("{");
+    const body = this.next().read_class_body();
+    return result(propName, body);
   },
   /**
    * reading a use statement
@@ -363,6 +379,7 @@ module.exports = {
   read_trait_use_statement: function() {
     // defines use statements
     const node = this.node("traituse");
+    this.expect(this.tok.T_USE) && this.next();
     const traits = [this.read_namespace_name()];
     let adaptations = null;
     while (this.token === ",") {
@@ -400,8 +417,10 @@ module.exports = {
     let method;
 
     if (this.is("IDENTIFIER")) {
-      method = this.text();
+      method = this.node("identifier");
+      const methodName = this.text();
       this.next();
+      method = method(methodName);
     } else {
       method = this.read_namespace_name();
 
@@ -412,8 +431,10 @@ module.exports = {
           (this.php7 && this.is("IDENTIFIER"))
         ) {
           trait = method;
-          method = this.text();
+          method = this.node("identifier");
+          const methodName = this.text();
           this.next();
+          method = method(methodName);
         } else {
           this.expect(this.tok.T_STRING);
         }
@@ -443,8 +464,10 @@ module.exports = {
         this.token === this.tok.T_STRING ||
         (this.php7 && this.is("IDENTIFIER"))
       ) {
-        alias = this.text();
+        alias = this.node("identifier");
+        const name = this.text();
         this.next();
+        alias = alias(name);
       } else if (flags === false) {
         // no visibility flags and no name => too bad
         this.expect(this.tok.T_STRING);

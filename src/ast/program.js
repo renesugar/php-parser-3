@@ -1,8 +1,9 @@
-/*!
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
+"use strict";
 
 const Block = require("./block");
 const KIND = "program";
@@ -13,11 +14,13 @@ const KIND = "program";
  * @extends {Block}
  * @property {Error[]} errors
  * @property {Doc[]?} comments
+ * @property {String[]?} tokens
  */
-const Program = Block.extends(function Program(
+module.exports = Block.extends(KIND, function Program(
   children,
   errors,
   comments,
+  tokens,
   docs,
   location
 ) {
@@ -26,6 +29,7 @@ const Program = Block.extends(function Program(
   if (comments) {
     this.comments = comments;
   }
+  if (tokens) {
+    this.tokens = tokens;
+  }
 });
-
-module.exports = Program;

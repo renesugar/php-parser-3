@@ -1,8 +1,9 @@
-/*!
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
+"use strict";
 
 module.exports = {
   /**
@@ -18,7 +19,7 @@ module.exports = {
     let alternate = null;
     let shortForm = false;
     let test = null;
-    test = this.read_if_expr();
+    test = this.next().read_if_expr();
 
     if (this.token === ":") {
       shortForm = true;
@@ -27,10 +28,10 @@ module.exports = {
       const items = [];
       while (this.token !== this.EOF && this.token !== this.tok.T_ENDIF) {
         if (this.token === this.tok.T_ELSEIF) {
-          alternate = this.next().read_elseif_short();
+          alternate = this.read_elseif_short();
           break;
         } else if (this.token === this.tok.T_ELSE) {
-          alternate = this.next().read_else_short();
+          alternate = this.read_else_short();
           break;
         }
         items.push(this.read_inner_statement());
@@ -41,7 +42,7 @@ module.exports = {
     } else {
       body = this.read_statement();
       if (this.token === this.tok.T_ELSEIF) {
-        alternate = this.next().read_if();
+        alternate = this.read_if();
       } else if (this.token === this.tok.T_ELSE) {
         alternate = this.next().read_statement();
       }
@@ -66,15 +67,15 @@ module.exports = {
     let test = null;
     let body = null;
     const items = [];
-    test = this.read_if_expr();
+    test = this.next().read_if_expr();
     if (this.expect(":")) this.next();
     body = this.node("block");
     while (this.token != this.EOF && this.token !== this.tok.T_ENDIF) {
       if (this.token === this.tok.T_ELSEIF) {
-        alternate = this.next().read_elseif_short();
+        alternate = this.read_elseif_short();
         break;
       } else if (this.token === this.tok.T_ELSE) {
-        alternate = this.next().read_else_short();
+        alternate = this.read_else_short();
         break;
       }
       items.push(this.read_inner_statement());
@@ -86,8 +87,8 @@ module.exports = {
    *
    */
   read_else_short: function() {
-    if (this.expect(":")) this.next();
     const body = this.node("block");
+    if (this.next().expect(":")) this.next();
     const items = [];
     while (this.token != this.EOF && this.token !== this.tok.T_ENDIF) {
       items.push(this.read_inner_statement());

@@ -1,8 +1,9 @@
-/*!
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
+"use strict";
 
 const Node = require("./node");
 const KIND = "traitalias";
@@ -17,11 +18,11 @@ const IS_PRIVATE = "private";
  * @constructor TraitAlias
  * @extends {Node}
  * @property {Identifier|null} trait
- * @property {string} method
- * @property {string|null} as
+ * @property {Identifier} method
+ * @property {Identifier|null} as
  * @property {string|null} visibility
  */
-const TraitAlias = Node.extends(function TraitAlias(
+module.exports = Node.extends(KIND, function TraitAlias(
   trait,
   method,
   as,
@@ -44,5 +45,3 @@ const TraitAlias = Node.extends(function TraitAlias(
     }
   }
 });
-
-module.exports = TraitAlias;

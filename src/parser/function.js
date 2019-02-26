@@ -1,8 +1,9 @@
-/*!
- * Copyright (C) 2017 Glayzzle (BSD3 License)
+/**
+ * Copyright (C) 2018 Glayzzle (BSD3 License)
  * @authors https://github.com/glayzzle/php-parser/graphs/contributors
  * @url http://glayzzle.com
  */
+"use strict";
 
 module.exports = {
   /**
@@ -79,6 +80,7 @@ module.exports = {
       returnType = null,
       nullable = false;
     if (type !== 1) {
+      const nameNode = this.node("identifier");
       if (type === 2) {
         if (
           this.token === this.tok.T_STRING ||
@@ -95,6 +97,7 @@ module.exports = {
         }
         this.next();
       }
+      name = nameNode(name);
     }
     if (this.expect("(")) this.next();
     const params = this.read_parameter_list();
@@ -165,7 +168,7 @@ module.exports = {
    */
   read_parameter: function() {
     const node = this.node("parameter");
-    let name = null;
+    let parameterName = null;
     let value = null;
     let type = null;
     let nullable = false;
@@ -182,13 +185,15 @@ module.exports = {
     const isRef = this.is_reference();
     const isVariadic = this.is_variadic();
     if (this.expect(this.tok.T_VARIABLE)) {
-      name = this.text().substring(1);
+      parameterName = this.node("identifier");
+      const name = this.text().substring(1);
       this.next();
+      parameterName = parameterName(name);
     }
     if (this.token == "=") {
       value = this.next().read_expr();
     }
-    return node(name, type, value, isRef, isVariadic, nullable);
+    return node(parameterName, type, value, isRef, isVariadic, nullable);
   },
   /**
    * Reads a list of arguments
@@ -237,20 +242,32 @@ module.exports = {
    * ```
    */
   read_type: function() {
-    const result = this.node("identifier");
-    switch (this.token) {
-      case this.tok.T_ARRAY:
+    const result = this.node();
+    if (this.token === this.tok.T_ARRAY || this.token === this.tok.T_CALLABLE) {
+      const type = this.text();
+      this.next();
+      return result("typereference", type.toLowerCase(), type);
+    } else if (this.token === this.tok.T_STRING) {
+      const type = this.text();
+      const backup = [this.token, this.lexer.getState()];
+      this.next();
+      if (
+        this.token !== this.tok.T_NS_SEPARATOR &&
+        this.ast.typereference.types.indexOf(type.toLowerCase()) > -1
+      ) {
+        return result("typereference", type.toLowerCase(), type);
+      } else {
+        // rollback a classic namespace
+        this.lexer.tokens.push(backup);
         this.next();
-        return result(["", "array"], false);
-      case this.tok.T_NAMESPACE:
-      case this.tok.T_NS_SEPARATOR:
-      case this.tok.T_STRING:
         return this.read_namespace_name();
-      case this.tok.T_CALLABLE:
-        this.next();
-        return result(["", "callable"], false);
-      default:
-        return null;
+      }
+    } else if (
+      this.token === this.tok.T_NAMESPACE ||
+      this.token === this.tok.T_NS_SEPARATOR
+    ) {
+      return this.read_namespace_name();
     }
+    return null;
   }
 };
