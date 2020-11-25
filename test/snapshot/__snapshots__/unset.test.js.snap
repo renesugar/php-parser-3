@@ -7,19 +7,16 @@ Program {
       "kind": "unset",
       "variables": Array [
         Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
         },
         Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
         },
         Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -39,10 +36,52 @@ Program {
       "kind": "unset",
       "variables": Array [
         Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
+        },
+      ],
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`unset trailing comma #2 1`] = `
+Program {
+  "children": Array [
+    Unset {
+      "kind": "unset",
+      "variables": Array [
+        Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "foo",
+        },
+        Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "bar",
+        },
+      ],
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`unset trailing comma 1`] = `
+Program {
+  "children": Array [
+    Unset {
+      "kind": "unset",
+      "variables": Array [
+        Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "foo",
         },
       ],
     },

@@ -6,8 +6,14 @@
 "use strict";
 
 module.exports = {
-  read_expr: function(expr) {
+  read_expr: function (expr) {
     const result = this.node();
+    if (this.token === "@") {
+      if (!expr) {
+        expr = this.next().read_expr();
+      }
+      return result("silent", expr);
+    }
     if (!expr) {
       expr = this.read_expr_item();
     }
@@ -106,8 +112,110 @@ module.exports = {
   /**
    * Reads a cast expression
    */
-  read_expr_cast: function(type) {
+  read_expr_cast: function (type) {
     return this.node("cast")(type, this.text(), this.next().read_expr());
+  },
+
+  /**
+   * Read a isset variable
+   */
+  read_isset_variable: function () {
+    return this.read_expr();
+  },
+
+  /**
+   * Reads isset variables
+   */
+  read_isset_variables: function () {
+    return this.read_function_list(this.read_isset_variable, ",");
+  },
+
+  /*
+   * Reads internal PHP functions
+   */
+  read_internal_functions_in_yacc: function () {
+    let result = null;
+    switch (this.token) {
+      case this.tok.T_ISSET:
+        {
+          result = this.node("isset");
+          if (this.next().expect("(")) {
+            this.next();
+          }
+          const variables = this.read_isset_variables();
+          if (this.expect(")")) {
+            this.next();
+          }
+          result = result(variables);
+        }
+        break;
+      case this.tok.T_EMPTY:
+        {
+          result = this.node("empty");
+          if (this.next().expect("(")) {
+            this.next();
+          }
+          const expression = this.read_expr();
+          if (this.expect(")")) {
+            this.next();
+          }
+          result = result(expression);
+        }
+        break;
+      case this.tok.T_INCLUDE:
+        result = this.node("include")(false, false, this.next().read_expr());
+        break;
+      case this.tok.T_INCLUDE_ONCE:
+        result = this.node("include")(true, false, this.next().read_expr());
+        break;
+      case this.tok.T_EVAL:
+        {
+          result = this.node("eval");
+          if (this.next().expect("(")) {
+            this.next();
+          }
+          const expr = this.read_expr();
+          if (this.expect(")")) {
+            this.next();
+          }
+          result = result(expr);
+        }
+        break;
+      case this.tok.T_REQUIRE:
+        result = this.node("include")(false, true, this.next().read_expr());
+        break;
+      case this.tok.T_REQUIRE_ONCE:
+        result = this.node("include")(true, true, this.next().read_expr());
+        break;
+    }
+
+    return result;
+  },
+
+  /**
+   * Reads optional expression
+   */
+  read_optional_expr: function (stopToken) {
+    if (this.token !== stopToken) {
+      return this.read_expr();
+    }
+
+    return null;
+  },
+
+  /**
+   * Reads exit expression
+   */
+  read_exit_expr: function () {
+    let expression = null;
+
+    if (this.token === "(") {
+      this.next();
+      expression = this.read_optional_expr(")");
+      this.expect(")") && this.next();
+    }
+
+    return expression;
   },
 
   /**
@@ -116,9 +224,8 @@ module.exports = {
    *  expr ::= @todo
    * ```
    */
-  read_expr_item: function() {
+  read_expr_item: function () {
     let result, expr;
-    if (this.token === "@") return this.node("silent")(this.next().read_expr());
     if (this.token === "+")
       return this.node("unary")("+", this.next().read_expr());
     if (this.token === "-")
@@ -162,7 +269,7 @@ module.exports = {
       // check if contains at least one assignment statement
       let hasItem = false;
       for (let i = 0; i < assignList.length; i++) {
-        if (assignList[i] !== null) {
+        if (assignList[i] !== null && assignList[i].kind !== "noop") {
           hasItem = true;
           break;
         }
@@ -197,65 +304,22 @@ module.exports = {
 
     switch (this.token) {
       case this.tok.T_INC:
-        return this.node("pre")(
-          "+",
-          this.next().read_variable(false, false, false)
-        );
+        return this.node("pre")("+", this.next().read_variable(false, false));
 
       case this.tok.T_DEC:
-        return this.node("pre")(
-          "-",
-          this.next().read_variable(false, false, false)
-        );
+        return this.node("pre")("-", this.next().read_variable(false, false));
 
       case this.tok.T_NEW:
         return this.read_new_expr();
 
-      case this.tok.T_ISSET: {
-        result = this.node("isset");
-        if (this.next().expect("(")) {
-          this.next();
-        }
-        const variables = this.read_list(this.read_expr, ",");
-        if (this.expect(")")) {
-          this.next();
-        }
-        return result(variables);
-      }
-      case this.tok.T_EMPTY: {
-        result = this.node("empty");
-        if (this.next().expect("(")) {
-          this.next();
-        }
-        const expression = this.read_expr();
-        if (this.expect(")")) {
-          this.next();
-        }
-        return result(expression);
-      }
+      case this.tok.T_ISSET:
+      case this.tok.T_EMPTY:
       case this.tok.T_INCLUDE:
-        return this.node("include")(false, false, this.next().read_expr());
-
       case this.tok.T_INCLUDE_ONCE:
-        return this.node("include")(true, false, this.next().read_expr());
-
-      case this.tok.T_REQUIRE:
-        return this.node("include")(false, true, this.next().read_expr());
-
-      case this.tok.T_REQUIRE_ONCE:
-        return this.node("include")(true, true, this.next().read_expr());
-
       case this.tok.T_EVAL:
-        result = this.node("eval");
-        if (this.next().expect("(")) {
-          this.next();
-        }
-        expr = this.read_expr();
-        if (this.expect(")")) {
-          this.next();
-        }
-        return result(expr);
-
+      case this.tok.T_REQUIRE:
+      case this.tok.T_REQUIRE_ONCE:
+        return this.read_internal_functions_in_yacc();
       case this.tok.T_INT_CAST:
         return this.read_expr_cast("int");
 
@@ -282,18 +346,9 @@ module.exports = {
       case this.tok.T_EXIT: {
         const useDie = this.lexer.yytext.toLowerCase() === "die";
         result = this.node("exit");
-        let status = null;
-        if (this.next().token === "(") {
-          if (this.next().token !== ")") {
-            status = this.read_expr();
-            if (this.expect(")")) {
-              this.next();
-            }
-          } else {
-            this.next();
-          }
-        }
-        return result(status, useDie);
+        this.next();
+        const expression = this.read_exit_expr();
+        return result(expression, useDie);
       }
 
       case this.tok.T_PRINT:
@@ -322,14 +377,19 @@ module.exports = {
         expr = this.next().read_expr();
         return result(expr);
 
+      case this.tok.T_FN:
       case this.tok.T_FUNCTION:
-        return this.read_function(true);
+        return this.read_inline_function();
 
       case this.tok.T_STATIC: {
         const backup = [this.token, this.lexer.getState()];
-        if (this.next().token === this.tok.T_FUNCTION) {
+        this.next();
+        if (
+          this.token === this.tok.T_FUNCTION ||
+          (this.version >= 704 && this.token === this.tok.T_FN)
+        ) {
           // handles static function
-          return this.read_function(true, [0, 1, 0]);
+          return this.read_inline_function([0, 1, 0]);
         } else {
           // rollback
           this.lexer.tokens.push(backup);
@@ -341,7 +401,7 @@ module.exports = {
     // SCALAR | VARIABLE
     if (this.is("VARIABLE")) {
       result = this.node();
-      expr = this.read_variable(false, false, false);
+      expr = this.read_variable(false, false);
 
       // https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L877
       // should accept only a variable
@@ -353,17 +413,10 @@ module.exports = {
       switch (this.token) {
         case "=": {
           if (isConst) this.error("VARIABLE");
-          let right;
           if (this.next().token == "&") {
-            if (this.next().token === this.tok.T_NEW) {
-              right = this.read_new_expr();
-            } else {
-              right = this.read_variable(false, false, true);
-            }
-          } else {
-            right = this.read_expr();
+            return this.read_assignref(result, expr);
           }
-          return result("assign", expr, right, "=");
+          return result("assign", expr, this.read_expr(), "=");
         }
 
         // operations :
@@ -415,6 +468,10 @@ module.exports = {
           if (isConst) this.error("VARIABLE");
           return result("assign", expr, this.next().read_expr(), ">>=");
 
+        case this.tok.T_COALESCE_EQUAL:
+          if (isConst) this.error("VARIABLE");
+          return result("assign", expr, this.next().read_expr(), "??=");
+
         case this.tok.T_INC:
           if (isConst) this.error("VARIABLE");
           this.next();
@@ -432,7 +489,7 @@ module.exports = {
       expr = this.read_scalar();
       if (expr.kind === "array" && expr.shortForm && this.token === "=") {
         // list assign
-        const list = this.node("list")(expr.items, true);
+        const list = this.convertToList(expr);
         if (expr.loc) list.loc = expr.loc;
         const right = this.next().read_expr();
         return result("assign", list, right, "=");
@@ -450,31 +507,120 @@ module.exports = {
     // returns variable | scalar
     return expr;
   },
+
+  /**
+   * Recursively convert nested array to nested list.
+   */
+  convertToList: function (array) {
+    const convertedItems = array.items.map((entry) => {
+      if (
+        entry.value &&
+        entry.value.kind === "array" &&
+        entry.value.shortForm
+      ) {
+        entry.value = this.convertToList(entry.value);
+      }
+      return entry;
+    });
+    const node = this.node("list")(convertedItems, true);
+    if (array.loc) node.loc = array.loc;
+    if (array.leadingComments) node.leadingComments = array.leadingComments;
+    if (array.trailingComments) node.trailingComments = array.trailingComments;
+    return node;
+  },
+
+  /**
+   * Reads assignment
+   * @param {*} left
+   */
+  read_assignref: function (result, left) {
+    this.next();
+    let right;
+    if (this.token === this.tok.T_NEW) {
+      if (this.version >= 700) {
+        this.error();
+      }
+      right = this.read_new_expr();
+    } else {
+      right = this.read_variable(false, false);
+    }
+
+    return result("assignref", left, right);
+  },
+
+  /**
+   *
+   * inline_function:
+   * 		function returns_ref backup_doc_comment '(' parameter_list ')' lexical_vars return_type
+   * 		backup_fn_flags '{' inner_statement_list '}' backup_fn_flags
+   * 			{ $$ = zend_ast_create_decl(ZEND_AST_CLOSURE, $2 | $13, $1, $3,
+   * 				  zend_string_init("{closure}", sizeof("{closure}") - 1, 0),
+   * 				  $5, $7, $11, $8); CG(extra_fn_flags) = $9; }
+   * 	|	fn returns_ref '(' parameter_list ')' return_type backup_doc_comment T_DOUBLE_ARROW backup_fn_flags backup_lex_pos expr backup_fn_flags
+   * 			{ $$ = zend_ast_create_decl(ZEND_AST_ARROW_FUNC, $2 | $12, $1, $7,
+   * 				  zend_string_init("{closure}", sizeof("{closure}") - 1, 0), $4, NULL,
+   * 				  zend_ast_create(ZEND_AST_RETURN, $11), $6);
+   * 				  ((zend_ast_decl *) $$)->lex_pos = $10;
+   * 				  CG(extra_fn_flags) = $9; }   *
+   */
+  read_inline_function: function (flags) {
+    if (this.token === this.tok.T_FUNCTION) {
+      return this.read_function(true, flags);
+    }
+    // introduced in PHP 7.4
+    if (!this.version >= 704) {
+      this.raiseError("Arrow Functions are not allowed");
+    }
+    // as an arrowfunc
+    const node = this.node("arrowfunc");
+    // eat T_FN
+    if (this.expect(this.tok.T_FN)) this.next();
+    // check the &
+    const isRef = this.is_reference();
+    // ...
+    if (this.expect("(")) this.next();
+    const params = this.read_parameter_list();
+    if (this.expect(")")) this.next();
+    let nullable = false;
+    let returnType = null;
+    if (this.token === ":") {
+      if (this.next().token === "?") {
+        nullable = true;
+        this.next();
+      }
+      returnType = this.read_type();
+    }
+    if (this.expect(this.tok.T_DOUBLE_ARROW)) this.next();
+    const body = this.read_expr();
+    return node(
+      params,
+      isRef,
+      body,
+      returnType,
+      nullable,
+      flags ? true : false
+    );
+  },
+
   /**
    * ```ebnf
    *    new_expr ::= T_NEW (namespace_name function_argument_list) | (T_CLASS ... class declaration)
    * ```
    * https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L850
    */
-  read_new_expr: function() {
+  read_new_expr: function () {
     const result = this.node("new");
     this.expect(this.tok.T_NEW) && this.next();
     let args = [];
     if (this.token === this.tok.T_CLASS) {
       const what = this.node("class");
       // Annonymous class declaration
-      let propExtends = null,
-        propImplements = null,
-        body = null;
       if (this.next().token === "(") {
-        args = this.read_function_argument_list();
+        args = this.read_argument_list();
       }
-      if (this.token == this.tok.T_EXTENDS) {
-        propExtends = this.next().read_namespace_name();
-      }
-      if (this.token == this.tok.T_IMPLEMENTS) {
-        propImplements = this.next().read_name_list();
-      }
+      const propExtends = this.read_extends_from();
+      const propImplements = this.read_implements_list();
+      let body = null;
       if (this.expect("{")) {
         body = this.next().read_class_body();
       }
@@ -486,7 +632,7 @@ module.exports = {
     // Already existing class
     const name = this.read_new_class_name();
     if (this.token === "(") {
-      args = this.read_function_argument_list();
+      args = this.read_argument_list();
     }
     return result(name, args);
   },
@@ -496,7 +642,7 @@ module.exports = {
    * read_new_class_name ::= namespace_name | variable
    * ```
    */
-  read_new_class_name: function() {
+  read_new_class_name: function () {
     if (
       this.token === this.tok.T_NS_SEPARATOR ||
       this.token === this.tok.T_STRING ||
@@ -508,12 +654,12 @@ module.exports = {
       }
       return result;
     } else if (this.is("VARIABLE")) {
-      return this.read_variable(true, false, false);
+      return this.read_variable(true, false);
     } else {
       this.expect([this.tok.T_STRING, "VARIABLE"]);
     }
   },
-  handleDereferencable: function(expr) {
+  handleDereferencable: function (expr) {
     while (this.token !== this.EOF) {
       if (
         this.token === this.tok.T_OBJECT_OPERATOR ||
@@ -524,11 +670,11 @@ module.exports = {
         expr = this.read_dereferencable(expr);
       } else if (this.token === "(") {
         // https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L1118
-        expr = this.node("call")(expr, this.read_function_argument_list());
+        expr = this.node("call")(expr, this.read_argument_list());
       } else {
         return expr;
       }
     }
     return expr;
-  }
+  },
 };

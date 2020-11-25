@@ -24,7 +24,7 @@ module.exports = Expression.extends(KIND, function Assign(
   location
 ) {
   Expression.apply(this, [KIND, docs, location]);
-  this.operator = operator;
   this.left = left;
   this.right = right;
+  this.operator = operator;
 });

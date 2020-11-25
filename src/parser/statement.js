@@ -12,7 +12,7 @@ module.exports = {
    *  top_statements ::= top_statement*
    * ```
    */
-  read_top_statements: function() {
+  read_top_statements: function () {
     let result = [];
     while (this.token !== this.EOF && this.token !== "}") {
       const statement = this.read_top_statement();
@@ -36,7 +36,7 @@ module.exports = {
    *       | statement
    * ```
    */
-  read_top_statement: function() {
+  read_top_statement: function () {
     switch (this.token) {
       case this.tok.T_FUNCTION:
         return this.read_function(false, false);
@@ -44,11 +44,11 @@ module.exports = {
       case this.tok.T_ABSTRACT:
       case this.tok.T_FINAL:
       case this.tok.T_CLASS:
-        return this.read_class();
+        return this.read_class_declaration_statement();
       case this.tok.T_INTERFACE:
-        return this.read_interface();
+        return this.read_interface_declaration_statement();
       case this.tok.T_TRAIT:
-        return this.read_trait();
+        return this.read_trait_declaration_statement();
       case this.tok.T_USE:
         return this.read_use_statement();
       case this.tok.T_CONST: {
@@ -77,7 +77,7 @@ module.exports = {
    *  inner_statements ::= inner_statement*
    * ```
    */
-  read_inner_statements: function() {
+  read_inner_statements: function () {
     let result = [];
     while (this.token != this.EOF && this.token !== "}") {
       const statement = this.read_inner_statement();
@@ -97,9 +97,9 @@ module.exports = {
    *   const_list ::= T_CONST T_STRING '=' expr (',' T_STRING '=' expr)* ';'
    * ```
    */
-  read_const_list: function() {
+  read_const_list: function () {
     return this.read_list(
-      function() {
+      function () {
         this.expect(this.tok.T_STRING);
         const result = this.node("constant");
         let constName = this.node("identifier");
@@ -124,7 +124,7 @@ module.exports = {
    * ```
    * @retrurn {Array}
    */
-  read_declare_list: function() {
+  read_declare_list: function () {
     const result = [];
     while (this.token != this.EOF && this.token !== ")") {
       this.expect(this.tok.T_STRING);
@@ -149,7 +149,7 @@ module.exports = {
    *  inner_statement ::= '{' inner_statements '}' | token
    * ```
    */
-  read_inner_statement: function() {
+  read_inner_statement: function () {
     switch (this.token) {
       case this.tok.T_FUNCTION:
         return this.read_function(false, false);
@@ -157,11 +157,11 @@ module.exports = {
       case this.tok.T_ABSTRACT:
       case this.tok.T_FINAL:
       case this.tok.T_CLASS:
-        return this.read_class();
+        return this.read_class_declaration_statement();
       case this.tok.T_INTERFACE:
-        return this.read_interface();
+        return this.read_interface_declaration_statement();
       case this.tok.T_TRAIT:
-        return this.read_trait();
+        return this.read_trait_declaration_statement();
       case this.tok.T_HALT_COMPILER: {
         this.raiseError(
           "__HALT_COMPILER() can only be used from the outermost scope"
@@ -181,7 +181,7 @@ module.exports = {
   /**
    * Reads statements
    */
-  read_statement: function() {
+  read_statement: function () {
     switch (this.token) {
       case "{":
         return this.read_code_block(false);
@@ -212,10 +212,8 @@ module.exports = {
 
       case this.tok.T_RETURN: {
         const result = this.node("return");
-        let expr = null;
-        if (!this.next().is("EOS")) {
-          expr = this.read_expr();
-        }
+        this.next();
+        const expr = this.read_optional_expr(";");
         this.expectEndOfStatement();
         return result(expr);
       }
@@ -226,11 +224,8 @@ module.exports = {
         const result = this.node(
           this.token === this.tok.T_CONTINUE ? "continue" : "break"
         );
-        let level = null;
-        this.next(); // look ahead
-        if (this.token !== ";") {
-          level = this.read_expr();
-        }
+        this.next();
+        const level = this.read_optional_expr(";");
         this.expectEndOfStatement();
         return result(level);
       }
@@ -264,7 +259,7 @@ module.exports = {
         const result = this.node("echo");
         const text = this.text();
         const shortForm = text === "<?=" || text === "<%=";
-        const expressions = this.next().read_list(this.read_expr, ",");
+        const expressions = this.next().read_function_list(this.read_expr, ",");
         this.expectEndOfStatement();
         return result(expressions, shortForm);
       }
@@ -294,7 +289,7 @@ module.exports = {
       case this.tok.T_UNSET: {
         const result = this.node("unset");
         this.next().expect("(") && this.next();
-        const variables = this.read_list(this.read_variable, ",");
+        const variables = this.read_function_list(this.read_variable, ",");
         this.expect(")") && this.next();
         this.expect(";") && this.next();
         return result(variables);
@@ -316,6 +311,13 @@ module.exports = {
             // @todo : check declare_statement from php / not valid
             body.push(this.read_top_statement());
           }
+          if (
+            body.length === 0 &&
+            this.extractDoc &&
+            this._docs.length > this._docIndex
+          ) {
+            body.push(this.node("noop")());
+          }
           this.expect(this.tok.T_ENDDECLARE) && this.next();
           this.expectEndOfStatement();
           mode = this.ast.declare.MODE_SHORT;
@@ -324,6 +326,13 @@ module.exports = {
           while (this.token != this.EOF && this.token !== "}") {
             // @todo : check declare_statement from php / not valid
             body.push(this.read_top_statement());
+          }
+          if (
+            body.length === 0 &&
+            this.extractDoc &&
+            this._docs.length > this._docIndex
+          ) {
+            body.push(this.node("noop")());
           }
           this.expect("}") && this.next();
           mode = this.ast.declare.MODE_BLOCK;
@@ -353,11 +362,15 @@ module.exports = {
       case this.tok.T_STRING: {
         const result = this.node();
         const current = [this.token, this.lexer.getState()];
-        const label = this.text();
+        const labelNameText = this.text();
+        let labelName = this.node("identifier");
         // AST : https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L457
         if (this.next().token === ":") {
+          labelName = labelName(labelNameText);
           this.next();
-          return result("label", label);
+          return result("label", labelName);
+        } else {
+          labelName.destroy();
         }
 
         // default fallback expr / T_STRING '::' (etc...)
@@ -371,12 +384,15 @@ module.exports = {
 
       case this.tok.T_GOTO: {
         const result = this.node("goto");
-        let label = null;
+        let labelName = null;
         if (this.next().expect(this.tok.T_STRING)) {
-          label = this.text();
-          this.next().expectEndOfStatement();
+          labelName = this.node("identifier");
+          const name = this.text();
+          this.next();
+          labelName = labelName(name);
+          this.expectEndOfStatement();
         }
-        return result(label);
+        return result(labelName);
       }
 
       default: {
@@ -393,13 +409,20 @@ module.exports = {
    *  code_block ::= '{' (inner_statements | top_statements) '}'
    * ```
    */
-  read_code_block: function(top) {
+  read_code_block: function (top) {
     const result = this.node("block");
     this.expect("{") && this.next();
     const body = top
       ? this.read_top_statements()
       : this.read_inner_statements();
+    if (
+      body.length === 0 &&
+      this.extractDoc &&
+      this._docs.length > this._docIndex
+    ) {
+      body.push(this.node("noop")());
+    }
     this.expect("}") && this.next();
     return result(null, body);
-  }
+  },
 };

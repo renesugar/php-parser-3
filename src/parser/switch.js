@@ -14,7 +14,7 @@ module.exports = {
    * @return {Switch}
    * @see http://php.net/manual/en/control-structures.switch.php
    */
-  read_switch: function() {
+  read_switch: function () {
     const result = this.node("switch");
     this.expect(this.tok.T_SWITCH) && this.next();
     this.expect("(") && this.next();
@@ -30,7 +30,7 @@ module.exports = {
    * ```
    * @see https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L566
    */
-  read_switch_case_list: function() {
+  read_switch_case_list: function () {
     // DETECT SWITCH MODE
     let expect = null;
     const result = this.node("block");
@@ -42,14 +42,22 @@ module.exports = {
     } else {
       this.expect(["{", ":"]);
     }
+    this.next();
     // OPTIONNAL ';'
     // https://github.com/php/php-src/blob/master/Zend/zend_language_parser.y#L570
-    if (this.next().token === ";") {
+    if (this.token === ";") {
       this.next();
     }
     // EXTRACTING CASES
     while (this.token !== this.EOF && this.token !== expect) {
       items.push(this.read_case_list(expect));
+    }
+    if (
+      items.length === 0 &&
+      this.extractDoc &&
+      this._docs.length > this._docIndex
+    ) {
+      items.push(this.node("noop")());
     }
     // CHECK END TOKEN
     this.expect(expect) && this.next();
@@ -63,29 +71,29 @@ module.exports = {
    *   case_list ::= ((T_CASE expr) | T_DEFAULT) (':' | ';') inner_statement*
    * ```
    */
-  read_case_list: function(stopToken) {
+  read_case_list: function (stopToken) {
     const result = this.node("case");
     let test = null;
-    let body = null;
-    const items = [];
     if (this.token === this.tok.T_CASE) {
       test = this.next().read_expr();
     } else if (this.token === this.tok.T_DEFAULT) {
-      // the defaut entry - no condition
+      // the default entry - no condition
       this.next();
     } else {
       this.expect([this.tok.T_CASE, this.tok.T_DEFAULT]);
     }
+    // case_separator
     this.expect([":", ";"]) && this.next();
-    body = this.node("block");
+    const body = this.node("block");
+    const items = [];
     while (
-      this.token != this.EOF &&
+      this.token !== this.EOF &&
       this.token !== stopToken &&
       this.token !== this.tok.T_CASE &&
       this.token !== this.tok.T_DEFAULT
     ) {
       items.push(this.read_inner_statement());
     }
-    return result(test, items.length > 0 ? body(null, items) : null);
-  }
+    return result(test, body(null, items));
+  },
 };

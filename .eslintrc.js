@@ -1,11 +1,11 @@
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: 2017,
+    ecmaVersion: 2018,
     sourceType: "module"
   },
   plugins: ["prettier"],
-  extends: ["eslint:recommended"],
+  extends: ["eslint:recommended", "plugin:jest/recommended"],
   env: {
     browser: true,
     node: true,
@@ -17,5 +17,13 @@ module.exports = {
     "prefer-const": "error",
     "no-var": "error",
     "prettier/prettier": "error"
-  }
+  },
+  overrides: [
+    {
+      files: ["test/**/*.js"],
+      rules: {
+        "no-console": "off"
+      }
+    }
+  ]
 };

@@ -53,7 +53,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -67,7 +66,6 @@ Program {
                 "expression": Assign {
                   "kind": "assign",
                   "left": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "foo",
@@ -125,15 +123,15 @@ Program {
             "value": Call {
               "arguments": Array [],
               "kind": "call",
-              "what": ClassReference {
-                "kind": "classreference",
+              "what": Name {
+                "kind": "name",
                 "name": "call",
                 "resolution": "uqn",
               },
             },
           },
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "Foo",
             "resolution": "uqn",
           },
@@ -143,6 +141,108 @@ Program {
     },
   ],
   "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test graceful mode to suppress errors should fail with '[' and '}' 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": OffsetLookup {
+        "kind": "offsetlookup",
+        "offset": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "bar",
+        },
+        "what": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "obj",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+    ExpressionStatement {
+      "expression": undefined,
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": "]",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected '}', expecting ']' on line 1",
+      "token": "'}'",
+    },
+    Error {
+      "expected": ";",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected '}', expecting ';' on line 1",
+      "token": "'}'",
+    },
+    Error {
+      "expected": "EXPR",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected '}' on line 1",
+      "token": "'}'",
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`Test graceful mode to suppress errors should fail with '{' and ']' 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": OffsetLookup {
+        "kind": "offsetlookup",
+        "offset": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "foo",
+        },
+        "what": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "obj",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+    ExpressionStatement {
+      "expression": undefined,
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": "}",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected ']', expecting '}' on line 1",
+      "token": "']'",
+    },
+    Error {
+      "expected": ";",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected ']', expecting ';' on line 1",
+      "token": "']'",
+    },
+    Error {
+      "expected": "EXPR",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected ']' on line 1",
+      "token": "']'",
+    },
+  ],
   "kind": "program",
 }
 `;
@@ -158,15 +258,15 @@ Program {
           "value": Call {
             "arguments": Array [],
             "kind": "call",
-            "what": ClassReference {
-              "kind": "classreference",
+            "what": Name {
+              "kind": "name",
               "name": "call",
               "resolution": "uqn",
             },
           },
         },
-        "what": ClassReference {
-          "kind": "classreference",
+        "what": Name {
+          "kind": "name",
           "name": "Order",
           "resolution": "uqn",
         },
@@ -192,21 +292,25 @@ Program {
   "children": Array [
     Class {
       "body": Array [
-        ClassConstant {
-          "constants": Array [
-            Constant {
-              "kind": "constant",
+        PropertyStatement {
+          "isStatic": false,
+          "kind": "propertystatement",
+          "properties": Array [
+            Property {
+              "kind": "property",
               "name": Identifier {
                 "kind": "identifier",
-                "name": "A",
+                "name": "onst",
               },
-              "value": Number {
-                "kind": "number",
-                "value": "1",
+              "nullable": false,
+              "type": Name {
+                "kind": "name",
+                "name": "foo",
+                "resolution": "uqn",
               },
+              "value": null,
             },
           ],
-          "kind": "classconstant",
           "visibility": "",
         },
       ],
@@ -224,6 +328,31 @@ Program {
   ],
   "errors": Array [
     Error {
+      "expected": 222,
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected 'const' (T_CONST), expecting T_VARIABLE on line 1",
+      "token": "'const' (T_CONST)",
+    },
+    Error {
+      "expected": Array [
+        ",",
+        ";",
+        "=",
+      ],
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected 'A' (T_STRING) on line 1",
+      "token": "'A' (T_STRING)",
+    },
+    Error {
+      "expected": ";",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected 'A' (T_STRING), expecting ';' on line 1",
+      "token": "'A' (T_STRING)",
+    },
+    Error {
       "expected": Array [
         198,
         222,
@@ -231,15 +360,19 @@ Program {
       ],
       "kind": "error",
       "line": 1,
-      "message": "Parse Error : syntax error, unexpected 'foo' (T_STRING) on line 1",
-      "token": "'foo' (T_STRING)",
+      "message": "Parse Error : syntax error, unexpected '=' on line 1",
+      "token": "'='",
     },
     Error {
-      "expected": ";",
+      "expected": Array [
+        198,
+        222,
+        182,
+      ],
       "kind": "error",
       "line": 1,
-      "message": "Parse Error : syntax error, expecting ';' on line 1",
-      "token": "the end of file (EOF)",
+      "message": "Parse Error : syntax error, unexpected '1' (T_LNUMBER) on line 1",
+      "token": "'1' (T_LNUMBER)",
     },
     Error {
       "expected": "}",
@@ -260,7 +393,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -269,7 +401,6 @@ Program {
         "right": Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "b",
@@ -284,14 +415,12 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "operator": "=",
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -508,7 +637,6 @@ Program {
       "expression": Call {
         "arguments": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "arg",
@@ -522,7 +650,6 @@ Program {
             "name": "bar",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "foo",
@@ -535,7 +662,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
@@ -544,15 +670,17 @@ Program {
         "right": New {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "baz",
             },
+            Noop {
+              "kind": "noop",
+            },
           ],
           "kind": "new",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "bar",
             "resolution": "uqn",
           },
@@ -561,8 +689,11 @@ Program {
       "kind": "expressionstatement",
     },
     ExpressionStatement {
+      "expression": undefined,
+      "kind": "expressionstatement",
+    },
+    ExpressionStatement {
       "expression": Variable {
-        "byref": false,
         "curly": false,
         "kind": "variable",
         "name": "foo",
@@ -576,18 +707,18 @@ Program {
   ],
   "errors": Array [
     Error {
-      "expected": "EXPR",
-      "kind": "error",
-      "line": 2,
-      "message": "Parse Error : syntax error, unexpected ')' on line 2",
-      "token": "')'",
-    },
-    Error {
       "expected": ")",
       "kind": "error",
-      "line": 2,
-      "message": "Parse Error : syntax error, unexpected ';', expecting ')' on line 2",
-      "token": "';'",
+      "line": 3,
+      "message": "Parse Error : syntax error, unexpected ',', expecting ')' on line 3",
+      "token": "','",
+    },
+    Error {
+      "expected": ";",
+      "kind": "error",
+      "line": 3,
+      "message": "Parse Error : syntax error, unexpected ',', expecting ';' on line 3",
+      "token": "','",
     },
     Error {
       "expected": "EXPR",
@@ -595,13 +726,6 @@ Program {
       "line": 3,
       "message": "Parse Error : syntax error, unexpected ',' on line 3",
       "token": "','",
-    },
-    Error {
-      "expected": ")",
-      "kind": "error",
-      "line": 3,
-      "message": "Parse Error : syntax error, unexpected '$foo' (T_VARIABLE), expecting ')' on line 3",
-      "token": "'$foo' (T_VARIABLE)",
     },
     Error {
       "expected": ";",
@@ -651,7 +775,6 @@ Program {
                   "name": "once",
                 },
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "this",
@@ -667,7 +790,6 @@ Program {
               "name": "expects",
             },
             "what": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "controller",
@@ -700,7 +822,29 @@ exports[`Test graceful mode to suppress errors trait 1`] = `
 Program {
   "children": Array [
     Trait {
-      "body": Array [],
+      "body": Array [
+        PropertyStatement {
+          "isStatic": false,
+          "kind": "propertystatement",
+          "properties": Array [
+            Property {
+              "kind": "property",
+              "name": Identifier {
+                "kind": "identifier",
+                "name": "mplement",
+              },
+              "nullable": false,
+              "type": Name {
+                "kind": "name",
+                "name": "bar",
+                "resolution": "uqn",
+              },
+              "value": null,
+            },
+          ],
+          "visibility": "",
+        },
+      ],
       "kind": "trait",
       "name": Identifier {
         "kind": "identifier",
@@ -717,36 +861,28 @@ Program {
       "token": "'extends' (T_EXTENDS)",
     },
     Error {
-      "expected": Array [
-        198,
-        222,
-        182,
-      ],
+      "expected": 222,
       "kind": "error",
       "line": 1,
-      "message": "Parse Error : syntax error, unexpected 'bar' (T_STRING) on line 1",
-      "token": "'bar' (T_STRING)",
-    },
-    Error {
-      "expected": Array [
-        198,
-        222,
-        182,
-      ],
-      "kind": "error",
-      "line": 1,
-      "message": "Parse Error : syntax error, unexpected 'implement' (T_STRING) on line 1",
+      "message": "Parse Error : syntax error, unexpected 'implement' (T_STRING), expecting T_VARIABLE on line 1",
       "token": "'implement' (T_STRING)",
     },
     Error {
       "expected": Array [
-        198,
-        222,
-        182,
+        ",",
+        ";",
+        "=",
       ],
       "kind": "error",
       "line": 1,
       "message": "Parse Error : syntax error, unexpected 'baz' (T_STRING) on line 1",
+      "token": "'baz' (T_STRING)",
+    },
+    Error {
+      "expected": ";",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected 'baz' (T_STRING), expecting ';' on line 1",
       "token": "'baz' (T_STRING)",
     },
     Error {

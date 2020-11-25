@@ -42,8 +42,8 @@ Program {
               "offset": 19,
             },
           },
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "loc": Location {
               "end": Position {
                 "column": 15,
@@ -534,8 +534,8 @@ Program {
                 },
               },
               "traits": Array [
-                ClassReference {
-                  "kind": "classreference",
+                Name {
+                  "kind": "name",
                   "loc": Location {
                     "end": Position {
                       "column": 12,
@@ -558,8 +558,8 @@ Program {
               "adaptations": Array [
                 TraitPrecedence {
                   "instead": Array [
-                    ClassReference {
-                      "kind": "classreference",
+                    Name {
+                      "kind": "name",
                       "loc": Location {
                         "end": Position {
                           "column": 28,
@@ -608,8 +608,8 @@ Program {
                     },
                     "name": "baz",
                   },
-                  "trait": ClassReference {
-                    "kind": "classreference",
+                  "trait": Name {
+                    "kind": "name",
                     "loc": Location {
                       "end": Position {
                         "column": 9,
@@ -676,8 +676,8 @@ Program {
                     },
                     "name": "foo",
                   },
-                  "trait": ClassReference {
-                    "kind": "classreference",
+                  "trait": Name {
+                    "kind": "name",
                     "loc": Location {
                       "end": Position {
                         "column": 9,
@@ -715,8 +715,8 @@ Program {
                 },
               },
               "traits": Array [
-                ClassReference {
-                  "kind": "classreference",
+                Name {
+                  "kind": "name",
                   "loc": Location {
                     "end": Position {
                       "column": 11,
@@ -733,8 +733,8 @@ Program {
                   "name": "foo",
                   "resolution": "uqn",
                 },
-                ClassReference {
-                  "kind": "classreference",
+                Name {
+                  "kind": "name",
                   "loc": Location {
                     "end": Position {
                       "column": 16,
@@ -880,9 +880,12 @@ Program {
                     },
                     "name": "dwarf",
                   },
+                  "nullable": false,
+                  "type": null,
                   "value": Array {
                     "items": Array [
                       Entry {
+                        "byRef": false,
                         "key": String {
                           "isDoubleQuote": false,
                           "kind": "string",
@@ -917,6 +920,7 @@ Program {
                             "offset": 594,
                           },
                         },
+                        "unpack": false,
                         "value": String {
                           "isDoubleQuote": false,
                           "kind": "string",
@@ -939,6 +943,7 @@ Program {
                         },
                       },
                       Entry {
+                        "byRef": false,
                         "key": String {
                           "isDoubleQuote": false,
                           "kind": "string",
@@ -973,6 +978,7 @@ Program {
                             "offset": 622,
                           },
                         },
+                        "unpack": false,
                         "value": String {
                           "isDoubleQuote": false,
                           "kind": "string",
@@ -1081,11 +1087,11 @@ Program {
                                       "offset": 829,
                                     },
                                   },
+                                  "syntax": null,
                                 },
                                 EncapsedPart {
                                   "curly": false,
                                   "expression": Variable {
-                                    "byref": false,
                                     "curly": false,
                                     "kind": "variable",
                                     "loc": Location {
@@ -1117,6 +1123,7 @@ Program {
                                       "offset": 836,
                                     },
                                   },
+                                  "syntax": "simple",
                                 },
                                 EncapsedPart {
                                   "curly": false,
@@ -1154,11 +1161,11 @@ Program {
                                       "offset": 841,
                                     },
                                   },
+                                  "syntax": null,
                                 },
                                 EncapsedPart {
                                   "curly": false,
                                   "expression": Variable {
-                                    "byref": false,
                                     "curly": false,
                                     "kind": "variable",
                                     "loc": Location {
@@ -1190,6 +1197,7 @@ Program {
                                       "offset": 843,
                                     },
                                   },
+                                  "syntax": "simple",
                                 },
                                 EncapsedPart {
                                   "curly": false,
@@ -1227,6 +1235,7 @@ Program {
                                       "offset": 852,
                                     },
                                   },
+                                  "syntax": null,
                                 },
                               ],
                             },
@@ -1250,7 +1259,6 @@ Program {
                         Continue {
                           "kind": "continue",
                           "level": Variable {
-                            "byref": false,
                             "curly": false,
                             "kind": "variable",
                             "loc": Location {
@@ -1302,7 +1310,6 @@ Program {
                       },
                     },
                     "key": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "loc": Location {
@@ -1393,7 +1400,6 @@ Program {
                         "name": "dwarf",
                       },
                       "what": Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -1413,7 +1419,6 @@ Program {
                       },
                     },
                     "value": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "loc": Location {
@@ -1484,8 +1489,8 @@ Program {
                           "offset": 900,
                         },
                       },
-                      "what": ClassReference {
-                        "kind": "classreference",
+                      "what": Name {
+                        "kind": "name",
                         "loc": Location {
                           "end": Position {
                             "column": 27,
@@ -1593,8 +1598,8 @@ Program {
           ],
           "extends": null,
           "implements": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "loc": Location {
                 "end": Position {
                   "column": 51,
@@ -1874,8 +1879,8 @@ Program {
             },
           ],
           "extends": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "loc": Location {
                 "end": Position {
                   "column": 32,
@@ -1970,7 +1975,6 @@ Program {
                     },
                   },
                   "value": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "loc": Location {
@@ -2054,8 +2058,8 @@ Program {
                         "offset": 1179,
                       },
                     },
-                    "what": ClassReference {
-                      "kind": "classreference",
+                    "what": Name {
+                      "kind": "name",
                       "loc": Location {
                         "end": Position {
                           "column": 19,
@@ -2226,7 +2230,24 @@ Program {
                     "body": Block {
                       "children": Array [
                         Case {
-                          "body": null,
+                          "body": Block {
+                            "children": Array [],
+                            "kind": "block",
+                            "loc": Location {
+                              "end": Position {
+                                "column": 19,
+                                "line": 63,
+                                "offset": 1314,
+                              },
+                              "source": "
+        ",
+                              "start": Position {
+                                "column": 8,
+                                "line": 64,
+                                "offset": 1323,
+                              },
+                            },
+                          },
                           "kind": "case",
                           "loc": Location {
                             "end": Position {
@@ -2269,7 +2290,6 @@ Program {
                                 "expression": Assign {
                                   "kind": "assign",
                                   "left": Variable {
-                                    "byref": false,
                                     "curly": false,
                                     "kind": "variable",
                                     "loc": Location {
@@ -2415,7 +2435,6 @@ Program {
                                 "expression": Assign {
                                   "kind": "assign",
                                   "left": Variable {
-                                    "byref": false,
                                     "curly": false,
                                     "kind": "variable",
                                     "loc": Location {
@@ -2615,7 +2634,6 @@ Program {
                         "name": "style",
                       },
                       "what": Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -2639,7 +2657,6 @@ Program {
                     "expr": Bin {
                       "kind": "bin",
                       "left": Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -2707,7 +2724,6 @@ Program {
                         },
                         "parenthesizedExpression": true,
                         "test": Variable {
-                          "byref": false,
                           "curly": false,
                           "kind": "variable",
                           "loc": Location {
@@ -2997,7 +3013,6 @@ Program {
               Global {
                 "items": Array [
                   Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "loc": Location {
@@ -3035,7 +3050,6 @@ Program {
                 "expression": Assign {
                   "kind": "assign",
                   "left": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "loc": Location {
@@ -3132,13 +3146,28 @@ Program {
                     "offset": 1660,
                   },
                 },
-                "name": "next",
+                "name": Identifier {
+                  "kind": "identifier",
+                  "loc": Location {
+                    "end": Position {
+                      "column": 4,
+                      "line": 83,
+                      "offset": 1664,
+                    },
+                    "source": "next",
+                    "start": Position {
+                      "column": 0,
+                      "line": 83,
+                      "offset": 1660,
+                    },
+                  },
+                  "name": "next",
+                },
               },
               ExpressionStatement {
                 "expression": Assign {
                   "kind": "assign",
                   "left": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "loc": Location {
@@ -3202,7 +3231,6 @@ Program {
                       },
                       "type": "+",
                       "what": Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -3222,7 +3250,6 @@ Program {
                       },
                     },
                     "what": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "loc": Location {
@@ -3279,7 +3306,6 @@ Program {
                               },
                             },
                             "what": Variable {
-                              "byref": false,
                               "curly": false,
                               "kind": "variable",
                               "loc": Location {
@@ -3346,7 +3372,6 @@ Program {
                             "name": "kick",
                           },
                           "what": Variable {
-                            "byref": false,
                             "curly": false,
                             "kind": "variable",
                             "loc": Location {
@@ -3452,7 +3477,6 @@ Program {
                               "name": "kill",
                             },
                             "what": Variable {
-                              "byref": false,
                               "curly": false,
                               "kind": "variable",
                               "loc": Location {
@@ -3594,8 +3618,8 @@ Program {
                           "offset": 1705,
                         },
                       },
-                      "what": ClassReference {
-                        "kind": "classreference",
+                      "what": Name {
+                        "kind": "name",
                         "loc": Location {
                           "end": Position {
                             "column": 11,
@@ -3651,11 +3675,11 @@ Program {
                       "line": 85,
                       "offset": 1727,
                     },
-                    "source": "5 || false",
+                    "source": "rand(0, 10)>5 || false",
                     "start": Position {
-                      "column": 19,
+                      "column": 7,
                       "line": 85,
-                      "offset": 1717,
+                      "offset": 1705,
                     },
                   },
                   "right": Boolean {
@@ -3683,7 +3707,23 @@ Program {
                 "alternate": null,
                 "body": Goto {
                   "kind": "goto",
-                  "label": "next",
+                  "label": Identifier {
+                    "kind": "identifier",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 49,
+                        "line": 90,
+                        "offset": 1847,
+                      },
+                      "source": "next",
+                      "start": Position {
+                        "column": 45,
+                        "line": 90,
+                        "offset": 1843,
+                      },
+                    },
+                    "name": "next",
+                  },
                   "loc": Location {
                     "end": Position {
                       "column": 50,
@@ -3716,24 +3756,7 @@ Program {
                 "test": Bin {
                   "kind": "bin",
                   "left": Cast {
-                    "kind": "cast",
-                    "loc": Location {
-                      "end": Position {
-                        "column": 19,
-                        "line": 90,
-                        "offset": 1817,
-                      },
-                      "source": "(int)$index",
-                      "start": Position {
-                        "column": 8,
-                        "line": 90,
-                        "offset": 1806,
-                      },
-                    },
-                    "raw": "(int)",
-                    "type": "int",
-                    "what": Variable {
-                      "byref": false,
+                    "expr": Variable {
                       "curly": false,
                       "kind": "variable",
                       "loc": Location {
@@ -3751,6 +3774,22 @@ Program {
                       },
                       "name": "index",
                     },
+                    "kind": "cast",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 19,
+                        "line": 90,
+                        "offset": 1817,
+                      },
+                      "source": "(int)$index",
+                      "start": Position {
+                        "column": 8,
+                        "line": 90,
+                        "offset": 1806,
+                      },
+                    },
+                    "raw": "(int)",
+                    "type": "int",
                   },
                   "loc": Location {
                     "end": Position {
@@ -3768,7 +3807,6 @@ Program {
                   "right": Call {
                     "arguments": Array [
                       Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -3801,8 +3839,8 @@ Program {
                         "offset": 1820,
                       },
                     },
-                    "what": ClassReference {
-                      "kind": "classreference",
+                    "what": Name {
+                      "kind": "name",
                       "loc": Location {
                         "end": Position {
                           "column": 27,
@@ -3998,7 +4036,6 @@ next:
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "loc": Location {
@@ -4159,7 +4196,6 @@ next:
                     },
                     "variables": Array [
                       Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -4190,7 +4226,6 @@ next:
                                   "expression": Assign {
                                     "kind": "assign",
                                     "left": Variable {
-                                      "byref": false,
                                       "curly": false,
                                       "kind": "variable",
                                       "loc": Location {
@@ -4227,7 +4262,6 @@ next:
                                       "left": Bin {
                                         "kind": "bin",
                                         "left": Variable {
-                                          "byref": false,
                                           "curly": false,
                                           "kind": "variable",
                                           "loc": Location {
@@ -4294,7 +4328,6 @@ next:
                                       "right": Bin {
                                         "kind": "bin",
                                         "left": Variable {
-                                          "byref": false,
                                           "curly": false,
                                           "kind": "variable",
                                           "loc": Location {
@@ -4367,7 +4400,6 @@ next:
                                   "expression": Assign {
                                     "kind": "assign",
                                     "left": Variable {
-                                      "byref": false,
                                       "curly": false,
                                       "kind": "variable",
                                       "loc": Location {
@@ -4466,7 +4498,6 @@ next:
                                           },
                                           "type": "+",
                                           "what": Variable {
-                                            "byref": false,
                                             "curly": false,
                                             "kind": "variable",
                                             "loc": Location {
@@ -4501,7 +4532,6 @@ next:
                                             },
                                           },
                                           "offset": Variable {
-                                            "byref": false,
                                             "curly": false,
                                             "kind": "variable",
                                             "loc": Location {
@@ -4520,7 +4550,6 @@ next:
                                             "name": "x",
                                           },
                                           "what": Variable {
-                                            "byref": false,
                                             "curly": false,
                                             "kind": "variable",
                                             "loc": Location {
@@ -4614,7 +4643,6 @@ next:
                                 },
                                 "type": "+",
                                 "what": Variable {
-                                  "byref": false,
                                   "curly": false,
                                   "kind": "variable",
                                   "loc": Location {
@@ -4638,7 +4666,6 @@ next:
                               Assign {
                                 "kind": "assign",
                                 "left": Variable {
-                                  "byref": false,
                                   "curly": false,
                                   "kind": "variable",
                                   "loc": Location {
@@ -4711,7 +4738,6 @@ next:
                               Bin {
                                 "kind": "bin",
                                 "left": Variable {
-                                  "byref": false,
                                   "curly": false,
                                   "kind": "variable",
                                   "loc": Location {
@@ -4777,7 +4803,6 @@ next:
                                         "name": "banana",
                                       },
                                       "what": Variable {
-                                        "byref": false,
                                         "curly": false,
                                         "kind": "variable",
                                         "loc": Location {
@@ -4811,8 +4836,8 @@ next:
                                       "offset": 2651,
                                     },
                                   },
-                                  "what": ClassReference {
-                                    "kind": "classreference",
+                                  "what": Name {
+                                    "kind": "name",
                                     "loc": Location {
                                       "end": Position {
                                         "column": 28,
@@ -4838,7 +4863,6 @@ next:
                             "expr": Bin {
                               "kind": "bin",
                               "left": Variable {
-                                "byref": false,
                                 "curly": false,
                                 "kind": "variable",
                                 "loc": Location {
@@ -4855,7 +4879,6 @@ next:
                                   },
                                 },
                                 "name": Variable {
-                                  "byref": false,
                                   "curly": false,
                                   "kind": "variable",
                                   "loc": Location {
@@ -4991,7 +5014,6 @@ next:
                                     },
                                     "variables": Array [
                                       Variable {
-                                        "byref": false,
                                         "curly": false,
                                         "kind": "variable",
                                         "loc": Location {
@@ -5010,7 +5032,6 @@ next:
                                         "name": "bipbip",
                                       },
                                       Variable {
-                                        "byref": false,
                                         "curly": false,
                                         "kind": "variable",
                                         "loc": Location {
@@ -5062,7 +5083,6 @@ next:
                                     },
                                     "variables": Array [
                                       Variable {
-                                        "byref": false,
                                         "curly": false,
                                         "kind": "variable",
                                         "loc": Location {
@@ -5081,7 +5101,6 @@ next:
                                         "name": "bipbip",
                                       },
                                       Variable {
-                                        "byref": false,
                                         "curly": false,
                                         "kind": "variable",
                                         "loc": Location {
@@ -5280,8 +5299,8 @@ next:
                                               "visibility": "",
                                             },
                                           ],
-                                          "extends": ClassReference {
-                                            "kind": "classreference",
+                                          "extends": Name {
+                                            "kind": "name",
                                             "loc": Location {
                                               "end": Position {
                                                 "column": 40,
@@ -5373,7 +5392,6 @@ next:
                                   "expression": Assign {
                                     "kind": "assign",
                                     "left": Variable {
-                                      "byref": false,
                                       "curly": false,
                                       "kind": "variable",
                                       "loc": Location {
@@ -5421,7 +5439,6 @@ next:
                                         },
                                       },
                                       "what": Variable {
-                                        "byref": false,
                                         "curly": false,
                                         "kind": "variable",
                                         "loc": Location {
@@ -5461,8 +5478,10 @@ next:
                                     "arguments": Array [
                                       Array {
                                         "items": Array [
-                                          Number {
-                                            "kind": "number",
+                                          Entry {
+                                            "byRef": false,
+                                            "key": null,
+                                            "kind": "entry",
                                             "loc": Location {
                                               "end": Position {
                                                 "column": 33,
@@ -5476,10 +5495,29 @@ next:
                                                 "offset": 2327,
                                               },
                                             },
-                                            "value": "1",
+                                            "unpack": false,
+                                            "value": Number {
+                                              "kind": "number",
+                                              "loc": Location {
+                                                "end": Position {
+                                                  "column": 33,
+                                                  "line": 111,
+                                                  "offset": 2328,
+                                                },
+                                                "source": "1",
+                                                "start": Position {
+                                                  "column": 32,
+                                                  "line": 111,
+                                                  "offset": 2327,
+                                                },
+                                              },
+                                              "value": "1",
+                                            },
                                           },
-                                          Number {
-                                            "kind": "number",
+                                          Entry {
+                                            "byRef": false,
+                                            "key": null,
+                                            "kind": "entry",
                                             "loc": Location {
                                               "end": Position {
                                                 "column": 36,
@@ -5493,10 +5531,29 @@ next:
                                                 "offset": 2330,
                                               },
                                             },
-                                            "value": "2",
+                                            "unpack": false,
+                                            "value": Number {
+                                              "kind": "number",
+                                              "loc": Location {
+                                                "end": Position {
+                                                  "column": 36,
+                                                  "line": 111,
+                                                  "offset": 2331,
+                                                },
+                                                "source": "2",
+                                                "start": Position {
+                                                  "column": 35,
+                                                  "line": 111,
+                                                  "offset": 2330,
+                                                },
+                                              },
+                                              "value": "2",
+                                            },
                                           },
-                                          Number {
-                                            "kind": "number",
+                                          Entry {
+                                            "byRef": false,
+                                            "key": null,
+                                            "kind": "entry",
                                             "loc": Location {
                                               "end": Position {
                                                 "column": 39,
@@ -5510,7 +5567,24 @@ next:
                                                 "offset": 2333,
                                               },
                                             },
-                                            "value": "3",
+                                            "unpack": false,
+                                            "value": Number {
+                                              "kind": "number",
+                                              "loc": Location {
+                                                "end": Position {
+                                                  "column": 39,
+                                                  "line": 111,
+                                                  "offset": 2334,
+                                                },
+                                                "source": "3",
+                                                "start": Position {
+                                                  "column": 38,
+                                                  "line": 111,
+                                                  "offset": 2333,
+                                                },
+                                              },
+                                              "value": "3",
+                                            },
                                           },
                                         ],
                                         "kind": "array",
@@ -5625,7 +5699,6 @@ next:
                                             "name": "crazy",
                                           },
                                           "what": Variable {
-                                            "byref": false,
                                             "curly": false,
                                             "kind": "variable",
                                             "loc": Location {
@@ -5735,7 +5808,6 @@ next:
                                             "name": "printStackTrace",
                                           },
                                           "what": Variable {
-                                            "byref": false,
                                             "curly": false,
                                             "kind": "variable",
                                             "loc": Location {
@@ -5805,7 +5877,6 @@ next:
                                   },
                                 },
                                 "variable": Variable {
-                                  "byref": false,
                                   "curly": false,
                                   "kind": "variable",
                                   "loc": Location {
@@ -5824,8 +5895,8 @@ next:
                                   "name": "ex",
                                 },
                                 "what": Array [
-                                  ClassReference {
-                                    "kind": "classreference",
+                                  Name {
+                                    "kind": "name",
                                     "loc": Location {
                                       "end": Position {
                                         "column": 18,
@@ -5842,8 +5913,8 @@ next:
                                     "name": "Coco",
                                     "resolution": "uqn",
                                   },
-                                  ClassReference {
-                                    "kind": "classreference",
+                                  Name {
+                                    "kind": "name",
                                     "loc": Location {
                                       "end": Position {
                                         "column": 22,
@@ -5975,7 +6046,6 @@ next:
                         "what": Bin {
                           "kind": "bin",
                           "left": Variable {
-                            "byref": false,
                             "curly": false,
                             "kind": "variable",
                             "loc": Location {
@@ -6007,8 +6077,8 @@ next:
                             },
                           },
                           "parenthesizedExpression": true,
-                          "right": Identifier {
-                            "kind": "identifier",
+                          "right": Name {
+                            "kind": "name",
                             "loc": Location {
                               "end": Position {
                                 "column": 45,
@@ -6022,24 +6092,8 @@ next:
                                 "offset": 2236,
                               },
                             },
-                            "name": ClassReference {
-                              "kind": "classreference",
-                              "loc": Location {
-                                "end": Position {
-                                  "column": 45,
-                                  "line": 108,
-                                  "offset": 2242,
-                                },
-                                "source": "Banana",
-                                "start": Position {
-                                  "column": 39,
-                                  "line": 108,
-                                  "offset": 2236,
-                                },
-                              },
-                              "name": "Banana",
-                              "resolution": "uqn",
-                            },
+                            "name": "Banana",
+                            "resolution": "uqn",
                           },
                           "type": "instanceof",
                         },
@@ -6072,8 +6126,8 @@ next:
                                   "children": Array [
                                     Break {
                                       "kind": "break",
-                                      "level": Identifier {
-                                        "kind": "identifier",
+                                      "level": Name {
+                                        "kind": "name",
                                         "loc": Location {
                                           "end": Position {
                                             "column": 19,
@@ -6087,24 +6141,8 @@ next:
                                             "offset": 2074,
                                           },
                                         },
-                                        "name": ClassReference {
-                                          "kind": "classreference",
-                                          "loc": Location {
-                                            "end": Position {
-                                              "column": 19,
-                                              "line": 100,
-                                              "offset": 2077,
-                                            },
-                                            "source": "foo",
-                                            "start": Position {
-                                              "column": 16,
-                                              "line": 100,
-                                              "offset": 2074,
-                                            },
-                                          },
-                                          "name": "foo",
-                                          "resolution": "uqn",
-                                        },
+                                        "name": "foo",
+                                        "resolution": "uqn",
                                       },
                                       "loc": Location {
                                         "end": Position {
@@ -6158,23 +6196,7 @@ next:
                                 "test": Bin {
                                   "kind": "bin",
                                   "left": Cast {
-                                    "kind": "cast",
-                                    "loc": Location {
-                                      "end": Position {
-                                        "column": 41,
-                                        "line": 99,
-                                        "offset": 2047,
-                                      },
-                                      "source": "(int)calculateMeaningOfLife()",
-                                      "start": Position {
-                                        "column": 12,
-                                        "line": 99,
-                                        "offset": 2018,
-                                      },
-                                    },
-                                    "raw": "(int)",
-                                    "type": "int",
-                                    "what": Call {
+                                    "expr": Call {
                                       "arguments": Array [],
                                       "kind": "call",
                                       "loc": Location {
@@ -6190,8 +6212,8 @@ next:
                                           "offset": 2023,
                                         },
                                       },
-                                      "what": ClassReference {
-                                        "kind": "classreference",
+                                      "what": Name {
+                                        "kind": "name",
                                         "loc": Location {
                                           "end": Position {
                                             "column": 39,
@@ -6209,6 +6231,22 @@ next:
                                         "resolution": "uqn",
                                       },
                                     },
+                                    "kind": "cast",
+                                    "loc": Location {
+                                      "end": Position {
+                                        "column": 41,
+                                        "line": 99,
+                                        "offset": 2047,
+                                      },
+                                      "source": "(int)calculateMeaningOfLife()",
+                                      "start": Position {
+                                        "column": 12,
+                                        "line": 99,
+                                        "offset": 2018,
+                                      },
+                                    },
+                                    "raw": "(int)",
+                                    "type": "int",
                                   },
                                   "loc": Location {
                                     "end": Position {
@@ -6283,7 +6321,6 @@ next:
                           },
                           "shortForm": false,
                           "test": Variable {
-                            "byref": false,
                             "curly": false,
                             "kind": "variable",
                             "loc": Location {
@@ -6461,7 +6498,6 @@ next:
                     "test": Bin {
                       "kind": "bin",
                       "left": Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -6524,8 +6560,8 @@ next:
                           },
                           "name": "NUMBAR",
                         },
-                        "what": ClassReference {
-                          "kind": "classreference",
+                        "what": Name {
+                          "kind": "name",
                           "loc": Location {
                             "end": Position {
                               "column": 20,
@@ -6548,8 +6584,8 @@ next:
                   },
                   Return {
                     "expr": Empty {
-                      "expression": Identifier {
-                        "kind": "identifier",
+                      "expression": Name {
+                        "kind": "name",
                         "loc": Location {
                           "end": Position {
                             "column": 33,
@@ -6563,24 +6599,8 @@ next:
                             "offset": 2855,
                           },
                         },
-                        "name": ClassReference {
-                          "kind": "classreference",
-                          "loc": Location {
-                            "end": Position {
-                              "column": 33,
-                              "line": 130,
-                              "offset": 2871,
-                            },
-                            "source": "namespace\\\\FOOBAR",
-                            "start": Position {
-                              "column": 17,
-                              "line": 130,
-                              "offset": 2855,
-                            },
-                          },
-                          "name": "FOOBAR",
-                          "resolution": "rn",
-                        },
+                        "name": "FOOBAR",
+                        "resolution": "rn",
                       },
                       "kind": "empty",
                       "loc": Location {
@@ -6701,7 +6721,6 @@ next:
               },
               "uses": Array [
                 Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "loc": Location {
@@ -6834,6 +6853,7 @@ next:
                               "offset": 2937,
                             },
                           },
+                          "syntax": null,
                         },
                       ],
                     },
@@ -6887,7 +6907,6 @@ next:
             },
             "shortForm": true,
             "test": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "loc": Location {
@@ -6964,6 +6983,7 @@ next:
                             "offset": 2903,
                           },
                         },
+                        "syntax": null,
                       },
                     ],
                   },
@@ -7022,7 +7042,6 @@ next:
           },
           "shortForm": true,
           "test": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "loc": Location {
@@ -7046,11 +7065,26 @@ next:
             "kind": "assign",
             "left": List {
               "items": Array [
-                null,
-                Variable {
-                  "byref": false,
-                  "curly": false,
-                  "kind": "variable",
+                Noop {
+                  "kind": "noop",
+                  "loc": Location {
+                    "end": Position {
+                      "column": 7,
+                      "line": 140,
+                      "offset": 2984,
+                    },
+                    "source": "",
+                    "start": Position {
+                      "column": 7,
+                      "line": 140,
+                      "offset": 2984,
+                    },
+                  },
+                },
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
                   "loc": Location {
                     "end": Position {
                       "column": 10,
@@ -7064,50 +7098,30 @@ next:
                       "offset": 2985,
                     },
                   },
-                  "name": "a",
+                  "unpack": false,
+                  "value": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 10,
+                        "line": 140,
+                        "offset": 2987,
+                      },
+                      "source": "$a",
+                      "start": Position {
+                        "column": 8,
+                        "line": 140,
+                        "offset": 2985,
+                      },
+                    },
+                    "name": "a",
+                  },
                 },
-                List {
-                  "items": Array [
-                    Variable {
-                      "byref": false,
-                      "curly": false,
-                      "kind": "variable",
-                      "loc": Location {
-                        "end": Position {
-                          "column": 19,
-                          "line": 140,
-                          "offset": 2996,
-                        },
-                        "source": "$b",
-                        "start": Position {
-                          "column": 17,
-                          "line": 140,
-                          "offset": 2994,
-                        },
-                      },
-                      "name": "b",
-                    },
-                    Variable {
-                      "byref": false,
-                      "curly": false,
-                      "kind": "variable",
-                      "loc": Location {
-                        "end": Position {
-                          "column": 23,
-                          "line": 140,
-                          "offset": 3000,
-                        },
-                        "source": "$c",
-                        "start": Position {
-                          "column": 21,
-                          "line": 140,
-                          "offset": 2998,
-                        },
-                      },
-                      "name": "c",
-                    },
-                  ],
-                  "kind": "list",
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
                   "loc": Location {
                     "end": Position {
                       "column": 24,
@@ -7121,7 +7135,100 @@ next:
                       "offset": 2989,
                     },
                   },
-                  "shortForm": false,
+                  "unpack": false,
+                  "value": List {
+                    "items": Array [
+                      Entry {
+                        "byRef": false,
+                        "key": null,
+                        "kind": "entry",
+                        "loc": Location {
+                          "end": Position {
+                            "column": 19,
+                            "line": 140,
+                            "offset": 2996,
+                          },
+                          "source": "$b",
+                          "start": Position {
+                            "column": 17,
+                            "line": 140,
+                            "offset": 2994,
+                          },
+                        },
+                        "unpack": false,
+                        "value": Variable {
+                          "curly": false,
+                          "kind": "variable",
+                          "loc": Location {
+                            "end": Position {
+                              "column": 19,
+                              "line": 140,
+                              "offset": 2996,
+                            },
+                            "source": "$b",
+                            "start": Position {
+                              "column": 17,
+                              "line": 140,
+                              "offset": 2994,
+                            },
+                          },
+                          "name": "b",
+                        },
+                      },
+                      Entry {
+                        "byRef": false,
+                        "key": null,
+                        "kind": "entry",
+                        "loc": Location {
+                          "end": Position {
+                            "column": 23,
+                            "line": 140,
+                            "offset": 3000,
+                          },
+                          "source": "$c",
+                          "start": Position {
+                            "column": 21,
+                            "line": 140,
+                            "offset": 2998,
+                          },
+                        },
+                        "unpack": false,
+                        "value": Variable {
+                          "curly": false,
+                          "kind": "variable",
+                          "loc": Location {
+                            "end": Position {
+                              "column": 23,
+                              "line": 140,
+                              "offset": 3000,
+                            },
+                            "source": "$c",
+                            "start": Position {
+                              "column": 21,
+                              "line": 140,
+                              "offset": 2998,
+                            },
+                          },
+                          "name": "c",
+                        },
+                      },
+                    ],
+                    "kind": "list",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 24,
+                        "line": 140,
+                        "offset": 3001,
+                      },
+                      "source": "list($b, $c)",
+                      "start": Position {
+                        "column": 12,
+                        "line": 140,
+                        "offset": 2989,
+                      },
+                    },
+                    "shortForm": false,
+                  },
                 },
               ],
               "kind": "list",
@@ -7156,8 +7263,10 @@ next:
             "operator": "=",
             "right": Array {
               "items": Array [
-                Number {
-                  "kind": "number",
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
                   "loc": Location {
                     "end": Position {
                       "column": 30,
@@ -7171,46 +7280,29 @@ next:
                       "offset": 3006,
                     },
                   },
-                  "value": "1",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 30,
+                        "line": 140,
+                        "offset": 3007,
+                      },
+                      "source": "1",
+                      "start": Position {
+                        "column": 29,
+                        "line": 140,
+                        "offset": 3006,
+                      },
+                    },
+                    "value": "1",
+                  },
                 },
-                Array {
-                  "items": Array [
-                    Number {
-                      "kind": "number",
-                      "loc": Location {
-                        "end": Position {
-                          "column": 34,
-                          "line": 140,
-                          "offset": 3011,
-                        },
-                        "source": "2",
-                        "start": Position {
-                          "column": 33,
-                          "line": 140,
-                          "offset": 3010,
-                        },
-                      },
-                      "value": "2",
-                    },
-                    Number {
-                      "kind": "number",
-                      "loc": Location {
-                        "end": Position {
-                          "column": 37,
-                          "line": 140,
-                          "offset": 3014,
-                        },
-                        "source": "3",
-                        "start": Position {
-                          "column": 36,
-                          "line": 140,
-                          "offset": 3013,
-                        },
-                      },
-                      "value": "3",
-                    },
-                  ],
-                  "kind": "array",
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
                   "loc": Location {
                     "end": Position {
                       "column": 38,
@@ -7224,7 +7316,98 @@ next:
                       "offset": 3009,
                     },
                   },
-                  "shortForm": true,
+                  "unpack": false,
+                  "value": Array {
+                    "items": Array [
+                      Entry {
+                        "byRef": false,
+                        "key": null,
+                        "kind": "entry",
+                        "loc": Location {
+                          "end": Position {
+                            "column": 34,
+                            "line": 140,
+                            "offset": 3011,
+                          },
+                          "source": "2",
+                          "start": Position {
+                            "column": 33,
+                            "line": 140,
+                            "offset": 3010,
+                          },
+                        },
+                        "unpack": false,
+                        "value": Number {
+                          "kind": "number",
+                          "loc": Location {
+                            "end": Position {
+                              "column": 34,
+                              "line": 140,
+                              "offset": 3011,
+                            },
+                            "source": "2",
+                            "start": Position {
+                              "column": 33,
+                              "line": 140,
+                              "offset": 3010,
+                            },
+                          },
+                          "value": "2",
+                        },
+                      },
+                      Entry {
+                        "byRef": false,
+                        "key": null,
+                        "kind": "entry",
+                        "loc": Location {
+                          "end": Position {
+                            "column": 37,
+                            "line": 140,
+                            "offset": 3014,
+                          },
+                          "source": "3",
+                          "start": Position {
+                            "column": 36,
+                            "line": 140,
+                            "offset": 3013,
+                          },
+                        },
+                        "unpack": false,
+                        "value": Number {
+                          "kind": "number",
+                          "loc": Location {
+                            "end": Position {
+                              "column": 37,
+                              "line": 140,
+                              "offset": 3014,
+                            },
+                            "source": "3",
+                            "start": Position {
+                              "column": 36,
+                              "line": 140,
+                              "offset": 3013,
+                            },
+                          },
+                          "value": "3",
+                        },
+                      },
+                    ],
+                    "kind": "array",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 38,
+                        "line": 140,
+                        "offset": 3015,
+                      },
+                      "source": "[2, 3]",
+                      "start": Position {
+                        "column": 32,
+                        "line": 140,
+                        "offset": 3009,
+                      },
+                    },
+                    "shortForm": true,
+                  },
                 },
               ],
               "kind": "array",
@@ -7286,11 +7469,26 @@ next:
             "kind": "assign",
             "left": List {
               "items": Array [
-                null,
-                Variable {
-                  "byref": false,
-                  "curly": false,
-                  "kind": "variable",
+                Noop {
+                  "kind": "noop",
+                  "loc": Location {
+                    "end": Position {
+                      "column": 3,
+                      "line": 141,
+                      "offset": 3021,
+                    },
+                    "source": "",
+                    "start": Position {
+                      "column": 3,
+                      "line": 141,
+                      "offset": 3021,
+                    },
+                  },
+                },
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
                   "loc": Location {
                     "end": Position {
                       "column": 6,
@@ -7304,51 +7502,30 @@ next:
                       "offset": 3022,
                     },
                   },
-                  "name": "a",
+                  "unpack": false,
+                  "value": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 6,
+                        "line": 141,
+                        "offset": 3024,
+                      },
+                      "source": "$a",
+                      "start": Position {
+                        "column": 4,
+                        "line": 141,
+                        "offset": 3022,
+                      },
+                    },
+                    "name": "a",
+                  },
                 },
-                Array {
-                  "items": Array [
-                    Variable {
-                      "byref": false,
-                      "curly": false,
-                      "kind": "variable",
-                      "loc": Location {
-                        "end": Position {
-                          "column": 10,
-                          "line": 141,
-                          "offset": 3028,
-                        },
-                        "source": "$b",
-                        "start": Position {
-                          "column": 8,
-                          "line": 141,
-                          "offset": 3026,
-                        },
-                      },
-                      "name": "b",
-                    },
-                    null,
-                    Variable {
-                      "byref": false,
-                      "curly": false,
-                      "kind": "variable",
-                      "loc": Location {
-                        "end": Position {
-                          "column": 15,
-                          "line": 141,
-                          "offset": 3033,
-                        },
-                        "source": "$c",
-                        "start": Position {
-                          "column": 13,
-                          "line": 141,
-                          "offset": 3031,
-                        },
-                      },
-                      "name": "c",
-                    },
-                  ],
-                  "kind": "array",
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
                   "loc": Location {
                     "end": Position {
                       "column": 16,
@@ -7362,7 +7539,116 @@ next:
                       "offset": 3025,
                     },
                   },
-                  "shortForm": true,
+                  "unpack": false,
+                  "value": List {
+                    "items": Array [
+                      Entry {
+                        "byRef": false,
+                        "key": null,
+                        "kind": "entry",
+                        "loc": Location {
+                          "end": Position {
+                            "column": 10,
+                            "line": 141,
+                            "offset": 3028,
+                          },
+                          "source": "$b",
+                          "start": Position {
+                            "column": 8,
+                            "line": 141,
+                            "offset": 3026,
+                          },
+                        },
+                        "unpack": false,
+                        "value": Variable {
+                          "curly": false,
+                          "kind": "variable",
+                          "loc": Location {
+                            "end": Position {
+                              "column": 10,
+                              "line": 141,
+                              "offset": 3028,
+                            },
+                            "source": "$b",
+                            "start": Position {
+                              "column": 8,
+                              "line": 141,
+                              "offset": 3026,
+                            },
+                          },
+                          "name": "b",
+                        },
+                      },
+                      Noop {
+                        "kind": "noop",
+                        "loc": Location {
+                          "end": Position {
+                            "column": 11,
+                            "line": 141,
+                            "offset": 3029,
+                          },
+                          "source": " ",
+                          "start": Position {
+                            "column": 12,
+                            "line": 141,
+                            "offset": 3030,
+                          },
+                        },
+                      },
+                      Entry {
+                        "byRef": false,
+                        "key": null,
+                        "kind": "entry",
+                        "loc": Location {
+                          "end": Position {
+                            "column": 15,
+                            "line": 141,
+                            "offset": 3033,
+                          },
+                          "source": "$c",
+                          "start": Position {
+                            "column": 13,
+                            "line": 141,
+                            "offset": 3031,
+                          },
+                        },
+                        "unpack": false,
+                        "value": Variable {
+                          "curly": false,
+                          "kind": "variable",
+                          "loc": Location {
+                            "end": Position {
+                              "column": 15,
+                              "line": 141,
+                              "offset": 3033,
+                            },
+                            "source": "$c",
+                            "start": Position {
+                              "column": 13,
+                              "line": 141,
+                              "offset": 3031,
+                            },
+                          },
+                          "name": "c",
+                        },
+                      },
+                    ],
+                    "kind": "list",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 16,
+                        "line": 141,
+                        "offset": 3034,
+                      },
+                      "source": "[$b, ,$c]",
+                      "start": Position {
+                        "column": 7,
+                        "line": 141,
+                        "offset": 3025,
+                      },
+                    },
+                    "shortForm": true,
+                  },
                 },
               ],
               "kind": "list",
@@ -7396,7 +7682,6 @@ next:
             },
             "operator": "=",
             "right": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "loc": Location {
@@ -7451,7 +7736,7 @@ BAZ",
                 },
               },
               "parenthesizedExpression": true,
-              "raw": "
+              "raw": "<<<BAZ
   Hello world
 BAZ
 ",
@@ -7479,8 +7764,7 @@ BAZ
                     "raw": "  Hello world
 ",
                     "unicode": false,
-                    "value": "  Hello world
-",
+                    "value": "  Hello world",
                   },
                   "kind": "encapsedpart",
                   "loc": Location {
@@ -7497,6 +7781,7 @@ BAZ
                       "offset": 3057,
                     },
                   },
+                  "syntax": null,
                 },
               ],
             },
@@ -7538,24 +7823,7 @@ BAZ
         },
         ExpressionStatement {
           "expression": Exit {
-            "kind": "exit",
-            "loc": Location {
-              "end": Position {
-                "column": 3,
-                "line": 149,
-                "offset": 3119,
-              },
-              "source": "die($foo(<<<'BAR'
-  $foo + $bar
-BAR
-));",
-              "start": Position {
-                "column": 2,
-                "line": 146,
-                "offset": 3080,
-              },
-            },
-            "status": Call {
+            "expression": Call {
               "arguments": Array [
                 Nowdoc {
                   "kind": "nowdoc",
@@ -7575,19 +7843,9 @@ BAR",
                       "offset": 3089,
                     },
                   },
-                  "quote": true,
                   "raw": "<<<'BAR'
   $foo + $bar
 BAR
-));
-  eval(<<<FOO
-  return 'This is madness!';
-FOO
-);
-
-}
-__halt_compiler();
-THE END ...
 ",
                   "value": "  $foo + $bar",
                 },
@@ -7610,7 +7868,6 @@ BAR
                 },
               },
               "what": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "loc": Location {
@@ -7627,6 +7884,23 @@ BAR
                   },
                 },
                 "name": "foo",
+              },
+            },
+            "kind": "exit",
+            "loc": Location {
+              "end": Position {
+                "column": 3,
+                "line": 149,
+                "offset": 3119,
+              },
+              "source": "die($foo(<<<'BAR'
+  $foo + $bar
+BAR
+));",
+              "start": Position {
+                "column": 2,
+                "line": 146,
+                "offset": 3080,
               },
             },
             "useDie": true,
@@ -7686,7 +7960,7 @@ FOO",
                   "offset": 3127,
                 },
               },
-              "raw": "
+              "raw": "<<<FOO
   return 'This is madness!';
 FOO
 ",
@@ -7714,8 +7988,7 @@ FOO
                     "raw": "  return 'This is madness!';
 ",
                     "unicode": false,
-                    "value": "  return 'This is madness!';
-",
+                    "value": "  return 'This is madness!';",
                   },
                   "kind": "encapsedpart",
                   "loc": Location {
@@ -7732,6 +8005,7 @@ FOO
                       "offset": 3134,
                     },
                   },
+                  "syntax": null,
                 },
               ],
             },

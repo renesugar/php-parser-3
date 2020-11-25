@@ -1,5 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Test scalar statements test constants #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "operator": "=",
+        "right": Name {
+          "kind": "name",
+          "name": "Foo",
+          "resolution": "uqn",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test scalar statements test constants #3 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "operator": "=",
+        "right": StaticLookup {
+          "kind": "staticlookup",
+          "offset": Identifier {
+            "kind": "identifier",
+            "name": "foo",
+          },
+          "what": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "var",
+          },
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`Test scalar statements test constants 1`] = `
 Program {
   "children": Array [
@@ -7,7 +66,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -29,8 +87,8 @@ Program {
               "kind": "identifier",
               "name": "ref",
             },
-            "what": ClassReference {
-              "kind": "classreference",
+            "what": Name {
+              "kind": "name",
               "name": "foo",
               "resolution": "uqn",
             },
@@ -52,7 +110,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -79,8 +136,8 @@ Program {
                   "kind": "identifier",
                   "name": "bar",
                 },
-                "what": ClassReference {
-                  "kind": "classreference",
+                "what": Name {
+                  "kind": "name",
                   "name": "foo",
                   "resolution": "uqn",
                 },
@@ -95,7 +152,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "b",
@@ -114,8 +170,8 @@ Program {
               "arguments": Array [],
               "kind": "new",
               "parenthesizedExpression": true,
-              "what": ClassReference {
-                "kind": "classreference",
+              "what": Name {
+                "kind": "name",
                 "name": "test",
                 "resolution": "uqn",
               },
@@ -129,7 +185,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "c",
@@ -145,8 +200,8 @@ Program {
             "arguments": Array [],
             "kind": "call",
             "parenthesizedExpression": true,
-            "what": ClassReference {
-              "kind": "classreference",
+            "what": Name {
+              "kind": "name",
               "name": "foo",
               "resolution": "uqn",
             },
@@ -159,7 +214,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "d",
@@ -194,7 +248,6 @@ Program {
                   "expr": Bin {
                     "kind": "bin",
                     "left": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "a",
@@ -218,6 +271,108 @@ Program {
             "type": null,
             "uses": Array [],
           },
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test scalar statements test dereferencable_scalar #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "var",
+        },
+        "operator": "=",
+        "right": Array {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "value": "1",
+              },
+            },
+          ],
+          "kind": "array",
+          "shortForm": true,
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test scalar statements test dereferencable_scalar #3 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "var",
+        },
+        "operator": "=",
+        "right": String {
+          "isDoubleQuote": true,
+          "kind": "string",
+          "raw": "\\"test\\"",
+          "unicode": false,
+          "value": "test",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test scalar statements test dereferencable_scalar 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "var",
+        },
+        "operator": "=",
+        "right": Array {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "value": "1",
+              },
+            },
+          ],
+          "kind": "array",
+          "shortForm": false,
         },
       },
       "kind": "expressionstatement",

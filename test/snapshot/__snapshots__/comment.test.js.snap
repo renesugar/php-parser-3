@@ -94,7 +94,6 @@ Program {
               "expression": Assign {
                 "kind": "assign",
                 "left": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "a",
@@ -147,7 +146,6 @@ Program {
             "expression": Assign {
               "kind": "assign",
               "left": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "a",
@@ -217,7 +215,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -310,7 +307,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -342,7 +338,6 @@ Program {
               "name": "each",
             },
             "what": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -392,8 +387,8 @@ Program {
             "offset": 12,
           },
         },
-        "what": ClassReference {
-          "kind": "classreference",
+        "what": Name {
+          "kind": "name",
           "loc": Location {
             "end": Position {
               "column": 3,
@@ -440,11 +435,11 @@ Program {
           "line": 3,
           "offset": 18,
         },
-        "source": "();",
+        "source": "foo();",
         "start": Position {
-          "column": 3,
+          "column": 0,
           "line": 3,
-          "offset": 15,
+          "offset": 12,
         },
       },
     },
@@ -485,8 +480,8 @@ Program {
             "value": "/* inner */",
           },
         ],
-        "what": ClassReference {
-          "kind": "classreference",
+        "what": Name {
+          "kind": "name",
           "loc": Location {
             "end": Position {
               "column": 3,
@@ -533,11 +528,11 @@ Program {
           "line": 5,
           "offset": 45,
         },
-        "source": "() /* inner */ ;",
+        "source": "bar() /* inner */ ;",
         "start": Position {
-          "column": 3,
+          "column": 0,
           "line": 5,
-          "offset": 29,
+          "offset": 26,
         },
       },
       "trailingComments": Array [
@@ -668,6 +663,193 @@ bar() /* inner */ ;
 }
 `;
 
+exports[`Test comments issues fix #278 1`] = `
+Program {
+  "children": Array [
+    Class {
+      "body": Array [
+        Method {
+          "arguments": Array [],
+          "body": Block {
+            "children": Array [
+              Return {
+                "expr": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "array",
+                },
+                "kind": "return",
+              },
+            ],
+            "kind": "block",
+          },
+          "byref": false,
+          "isAbstract": false,
+          "isFinal": false,
+          "isStatic": true,
+          "kind": "method",
+          "leadingComments": Array [
+            CommentBlock {
+              "kind": "commentblock",
+              "offset": 51,
+              "value": "/**
+     * Description
+     */",
+            },
+          ],
+          "name": Identifier {
+            "kind": "identifier",
+            "name": "bar",
+          },
+          "nullable": false,
+          "type": null,
+          "visibility": "public",
+        },
+        Method {
+          "arguments": Array [],
+          "body": Block {
+            "children": Array [
+              Return {
+                "expr": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "array",
+                },
+                "kind": "return",
+              },
+            ],
+            "kind": "block",
+          },
+          "byref": false,
+          "isAbstract": false,
+          "isFinal": false,
+          "isStatic": true,
+          "kind": "method",
+          "leadingComments": Array [
+            CommentBlock {
+              "kind": "commentblock",
+              "offset": 155,
+              "value": "/**
+     * Description
+     */",
+            },
+          ],
+          "name": Identifier {
+            "kind": "identifier",
+            "name": "baz",
+          },
+          "nullable": false,
+          "type": null,
+          "visibility": "public",
+        },
+        Method {
+          "arguments": Array [],
+          "body": Block {
+            "children": Array [
+              Return {
+                "expr": Variable {
+                  "curly": false,
+                  "kind": "variable",
+                  "name": "array",
+                },
+                "kind": "return",
+              },
+            ],
+            "kind": "block",
+            "trailingComments": Array [
+              CommentLine {
+                "kind": "commentline",
+                "offset": 364,
+                "value": "// true trailing comment
+",
+              },
+            ],
+          },
+          "byref": false,
+          "isAbstract": false,
+          "isFinal": false,
+          "isStatic": true,
+          "kind": "method",
+          "leadingComments": Array [
+            CommentBlock {
+              "kind": "commentblock",
+              "offset": 261,
+              "value": "/**
+     * Description
+     */",
+            },
+          ],
+          "name": Identifier {
+            "kind": "identifier",
+            "name": "woo",
+          },
+          "nullable": false,
+          "type": null,
+          "visibility": "public",
+        },
+      ],
+      "extends": null,
+      "implements": null,
+      "isAbstract": false,
+      "isAnonymous": false,
+      "isFinal": false,
+      "kind": "class",
+      "leadingComments": Array [
+        CommentBlock {
+          "kind": "commentblock",
+          "offset": 1,
+          "value": "/**
+ * Class description
+ */",
+        },
+      ],
+      "name": Identifier {
+        "kind": "identifier",
+        "name": "FooClass",
+      },
+    },
+  ],
+  "comments": Array [
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 1,
+      "value": "/**
+ * Class description
+ */",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 51,
+      "value": "/**
+     * Description
+     */",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 155,
+      "value": "/**
+     * Description
+     */",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 261,
+      "value": "/**
+     * Description
+     */",
+    },
+    CommentLine {
+      "kind": "commentline",
+      "offset": 364,
+      "value": "// true trailing comment
+",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`Test comments issues impl #194 1`] = `
 Program {
   "children": Array [
@@ -675,7 +857,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
@@ -748,8 +929,8 @@ Program {
             "value": "/* trail call */",
           },
         ],
-        "what": ClassReference {
-          "kind": "classreference",
+        "what": Name {
+          "kind": "name",
           "name": "callback",
           "resolution": "uqn",
         },
@@ -855,7 +1036,6 @@ Program {
         "children": Array [
           Return {
             "expr": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "arg",
@@ -1069,7 +1249,19 @@ Program {
         },
       },
       "body": Block {
-        "children": Array [],
+        "children": Array [
+          Noop {
+            "kind": "noop",
+            "leadingComments": Array [
+              CommentLine {
+                "kind": "commentline",
+                "offset": 61,
+                "value": "# inner statement
+",
+              },
+            ],
+          },
+        ],
         "kind": "block",
         "leadingComments": Array [
           CommentBlock {
@@ -1096,14 +1288,6 @@ Program {
           },
         ],
         "raw": "true",
-        "trailingComments": Array [
-          CommentLine {
-            "kind": "commentline",
-            "offset": 61,
-            "value": "# inner statement
-",
-          },
-        ],
         "value": true,
       },
     },
@@ -1280,7 +1464,18 @@ Program {
   "children": Array [
     Try {
       "always": Block {
-        "children": Array [],
+        "children": Array [
+          Noop {
+            "kind": "noop",
+            "leadingComments": Array [
+              CommentBlock {
+                "kind": "commentblock",
+                "offset": 218,
+                "value": "/* ignore */",
+              },
+            ],
+          },
+        ],
         "kind": "block",
         "leadingComments": Array [
           CommentBlock {
@@ -1296,7 +1491,19 @@ Program {
         ],
       },
       "body": Block {
-        "children": Array [],
+        "children": Array [
+          Noop {
+            "kind": "noop",
+            "leadingComments": Array [
+              CommentLine {
+                "kind": "commentline",
+                "offset": 36,
+                "value": "# inner statement
+",
+              },
+            ],
+          },
+        ],
         "kind": "block",
         "leadingComments": Array [
           CommentBlock {
@@ -1309,7 +1516,18 @@ Program {
       "catches": Array [
         Catch {
           "body": Block {
-            "children": Array [],
+            "children": Array [
+              Noop {
+                "kind": "noop",
+                "leadingComments": Array [
+                  CommentBlock {
+                    "kind": "commentblock",
+                    "offset": 163,
+                    "value": "/* ee */",
+                  },
+                ],
+              },
+            ],
             "kind": "block",
             "leadingComments": Array [
               CommentBlock {
@@ -1326,27 +1544,13 @@ Program {
           },
           "kind": "catch",
           "leadingComments": Array [
-            CommentLine {
-              "kind": "commentline",
-              "offset": 36,
-              "value": "# inner statement
-",
-            },
             CommentBlock {
               "kind": "commentblock",
               "offset": 64,
               "value": "/* dd */",
             },
           ],
-          "trailingComments": Array [
-            CommentBlock {
-              "kind": "commentblock",
-              "offset": 218,
-              "value": "/* ignore */",
-            },
-          ],
           "variable": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "leadingComments": Array [
@@ -1357,17 +1561,10 @@ Program {
               },
             ],
             "name": "e",
-            "trailingComments": Array [
-              CommentBlock {
-                "kind": "commentblock",
-                "offset": 163,
-                "value": "/* ee */",
-              },
-            ],
           },
           "what": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "leadingComments": Array [
                 CommentBlock {
                   "kind": "commentblock",
@@ -1378,8 +1575,8 @@ Program {
               "name": "\\\\Exception",
               "resolution": "fqn",
             },
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "leadingComments": Array [
                 CommentBlock {
                   "kind": "commentblock",
@@ -1516,6 +1713,8 @@ Program {
                 "kind": "identifier",
                 "name": "test",
               },
+              "nullable": false,
+              "type": null,
               "value": null,
             },
             Property {
@@ -1524,6 +1723,8 @@ Program {
                 "kind": "identifier",
                 "name": "toto",
               },
+              "nullable": false,
+              "type": null,
               "value": null,
             },
           ],
@@ -1552,6 +1753,8 @@ Program {
                 "kind": "identifier",
                 "name": "foo",
               },
+              "nullable": false,
+              "type": null,
               "value": Number {
                 "kind": "number",
                 "value": "123",
@@ -1682,7 +1885,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",

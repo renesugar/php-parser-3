@@ -1,5 +1,602 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Test list expressions array with empty values #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'baz'",
+                "unicode": false,
+                "value": "baz",
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions array with empty values #3 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'baz'",
+                "unicode": false,
+                "value": "baz",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions array with empty values 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'baz'",
+                "unicode": false,
+                "value": "baz",
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions array with multiple trailing commas #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+            Noop {
+              "kind": "noop",
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions array with multiple trailing commas 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+            Noop {
+              "kind": "noop",
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions array with trailing commas #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions array with trailing commas #3 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions array with trailing commas 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions array without trailing commas 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`Test list expressions fix #137 1`] = `
 Program {
   "children": Array [
@@ -8,12 +605,42 @@ Program {
         "kind": "assign",
         "left": List {
           "items": Array [
-            null,
-            null,
-            Variable {
-              "byref": false,
-              "curly": false,
-              "kind": "variable",
+            Noop {
+              "kind": "noop",
+              "loc": Location {
+                "end": Position {
+                  "column": 5,
+                  "line": 1,
+                  "offset": 5,
+                },
+                "source": null,
+                "start": Position {
+                  "column": 5,
+                  "line": 1,
+                  "offset": 5,
+                },
+              },
+            },
+            Noop {
+              "kind": "noop",
+              "loc": Location {
+                "end": Position {
+                  "column": 6,
+                  "line": 1,
+                  "offset": 6,
+                },
+                "source": null,
+                "start": Position {
+                  "column": 6,
+                  "line": 1,
+                  "offset": 6,
+                },
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 9,
@@ -27,13 +654,46 @@ Program {
                   "offset": 7,
                 },
               },
-              "name": "a",
+              "unpack": false,
+              "value": Variable {
+                "curly": false,
+                "kind": "variable",
+                "loc": Location {
+                  "end": Position {
+                    "column": 9,
+                    "line": 1,
+                    "offset": 9,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 7,
+                    "line": 1,
+                    "offset": 7,
+                  },
+                },
+                "name": "a",
+              },
             },
-            null,
-            Variable {
-              "byref": false,
-              "curly": false,
-              "kind": "variable",
+            Noop {
+              "kind": "noop",
+              "loc": Location {
+                "end": Position {
+                  "column": 10,
+                  "line": 1,
+                  "offset": 10,
+                },
+                "source": null,
+                "start": Position {
+                  "column": 10,
+                  "line": 1,
+                  "offset": 10,
+                },
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 13,
@@ -47,7 +707,25 @@ Program {
                   "offset": 11,
                 },
               },
-              "name": "b",
+              "unpack": false,
+              "value": Variable {
+                "curly": false,
+                "kind": "variable",
+                "loc": Location {
+                  "end": Position {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 13,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 11,
+                    "line": 1,
+                    "offset": 11,
+                  },
+                },
+                "name": "b",
+              },
             },
           ],
           "kind": "list",
@@ -82,8 +760,10 @@ Program {
         "operator": "=",
         "right": Array {
           "items": Array [
-            Identifier {
-              "kind": "identifier",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 22,
@@ -97,8 +777,9 @@ Program {
                   "offset": 18,
                 },
               },
-              "name": ClassReference {
-                "kind": "classreference",
+              "unpack": false,
+              "value": NullKeyword {
+                "kind": "nullkeyword",
                 "loc": Location {
                   "end": Position {
                     "column": 22,
@@ -112,12 +793,13 @@ Program {
                     "offset": 18,
                   },
                 },
-                "name": "null",
-                "resolution": "uqn",
+                "raw": "null",
               },
             },
-            Number {
-              "kind": "number",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 25,
@@ -131,10 +813,29 @@ Program {
                   "offset": 24,
                 },
               },
-              "value": "1",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "loc": Location {
+                  "end": Position {
+                    "column": 25,
+                    "line": 1,
+                    "offset": 25,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 24,
+                    "line": 1,
+                    "offset": 24,
+                  },
+                },
+                "value": "1",
+              },
             },
-            Identifier {
-              "kind": "identifier",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 31,
@@ -148,8 +849,9 @@ Program {
                   "offset": 27,
                 },
               },
-              "name": ClassReference {
-                "kind": "classreference",
+              "unpack": false,
+              "value": NullKeyword {
+                "kind": "nullkeyword",
                 "loc": Location {
                   "end": Position {
                     "column": 31,
@@ -163,12 +865,13 @@ Program {
                     "offset": 27,
                   },
                 },
-                "name": "null",
-                "resolution": "uqn",
+                "raw": "null",
               },
             },
-            Number {
-              "kind": "number",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 34,
@@ -182,7 +885,24 @@ Program {
                   "offset": 33,
                 },
               },
-              "value": "2",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "loc": Location {
+                  "end": Position {
+                    "column": 34,
+                    "line": 1,
+                    "offset": 34,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 33,
+                    "line": 1,
+                    "offset": 33,
+                  },
+                },
+                "value": "2",
+              },
             },
           ],
           "kind": "array",
@@ -245,6 +965,7 @@ Program {
         "left": List {
           "items": Array [
             Entry {
+              "byRef": false,
               "key": String {
                 "isDoubleQuote": false,
                 "kind": "string",
@@ -253,8 +974,8 @@ Program {
                 "value": "foo",
               },
               "kind": "entry",
+              "unpack": false,
               "value": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "bar",
@@ -268,6 +989,7 @@ Program {
         "right": Array {
           "items": Array [
             Entry {
+              "byRef": false,
               "key": String {
                 "isDoubleQuote": false,
                 "kind": "string",
@@ -276,6 +998,7 @@ Program {
                 "value": "foo",
               },
               "kind": "entry",
+              "unpack": false,
               "value": String {
                 "isDoubleQuote": false,
                 "kind": "string",
@@ -297,6 +1020,411 @@ Program {
 }
 `;
 
+exports[`Test list expressions handles comments in nested shorthand lists 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "leadingComments": Array [
+                CommentBlock {
+                  "kind": "commentblock",
+                  "offset": 1,
+                  "value": "/*a*/",
+                },
+              ],
+              "trailingComments": Array [
+                CommentBlock {
+                  "kind": "commentblock",
+                  "offset": 29,
+                  "value": "/*e*/",
+                },
+              ],
+              "unpack": false,
+              "value": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "a",
+                "trailingComments": Array [
+                  CommentBlock {
+                    "kind": "commentblock",
+                    "offset": 8,
+                    "value": "/*b*/",
+                  },
+                ],
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "leadingComments": Array [
+                CommentBlock {
+                  "kind": "commentblock",
+                  "offset": 15,
+                  "value": "/*c*/",
+                },
+              ],
+              "trailingComments": Array [
+                CommentBlock {
+                  "kind": "commentblock",
+                  "offset": 55,
+                  "value": "/*i*/",
+                },
+              ],
+              "unpack": false,
+              "value": List {
+                "items": Array [
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
+                    "leadingComments": Array [
+                      CommentBlock {
+                        "kind": "commentblock",
+                        "offset": 22,
+                        "value": "/*d*/",
+                      },
+                    ],
+                    "trailingComments": Array [
+                      CommentBlock {
+                        "kind": "commentblock",
+                        "offset": 43,
+                        "value": "/*g*/",
+                      },
+                    ],
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "b",
+                    },
+                  },
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
+                    "leadingComments": Array [
+                      CommentBlock {
+                        "kind": "commentblock",
+                        "offset": 36,
+                        "value": "/*f*/",
+                      },
+                    ],
+                    "trailingComments": Array [
+                      CommentBlock {
+                        "kind": "commentblock",
+                        "offset": 49,
+                        "value": "/*h*/",
+                      },
+                    ],
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "c",
+                    },
+                  },
+                ],
+                "kind": "list",
+                "shortForm": true,
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Array {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "value": "1",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Array {
+                "items": Array [
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "value": "2",
+                    },
+                  },
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "value": "3",
+                    },
+                  },
+                ],
+                "kind": "array",
+                "shortForm": true,
+              },
+            },
+          ],
+          "kind": "array",
+          "shortForm": true,
+        },
+        "trailingComments": Array [
+          CommentBlock {
+            "kind": "commentblock",
+            "offset": 73,
+            "value": "/*j*/",
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "comments": Array [
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 1,
+      "value": "/*a*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 8,
+      "value": "/*b*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 15,
+      "value": "/*c*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 22,
+      "value": "/*d*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 29,
+      "value": "/*e*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 36,
+      "value": "/*f*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 43,
+      "value": "/*g*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 49,
+      "value": "/*h*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 55,
+      "value": "/*i*/",
+    },
+    CommentBlock {
+      "kind": "commentblock",
+      "offset": 73,
+      "value": "/*j*/",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions handles nested shorthand lists (fix #512) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "a",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": List {
+                "items": Array [
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "b",
+                    },
+                  },
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "name": "c",
+                    },
+                  },
+                ],
+                "kind": "list",
+                "shortForm": true,
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Array {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "value": "1",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Array {
+                "items": Array [
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "value": "2",
+                    },
+                  },
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "value": "3",
+                    },
+                  },
+                ],
+                "kind": "array",
+                "shortForm": true,
+              },
+            },
+          ],
+          "kind": "array",
+          "shortForm": true,
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test list expressions list without trailing commas 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": List {
+          "items": Array [
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'foo'",
+                "unicode": false,
+                "value": "foo",
+              },
+            },
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": false,
+                "kind": "string",
+                "raw": "'bar'",
+                "unicode": false,
+                "value": "bar",
+              },
+            },
+          ],
+          "kind": "list",
+          "shortForm": true,
+        },
+        "operator": "=",
+        "right": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`Test list expressions test list statements 1`] = `
 Program {
   "children": Array [
@@ -306,8 +1434,8 @@ Program {
         "left": List {
           "items": Array [
             Entry {
+              "byRef": false,
               "key": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "loc": Location {
@@ -339,12 +1467,13 @@ Program {
                   "offset": 5,
                 },
               },
+              "unpack": false,
               "value": List {
                 "items": Array [
-                  Variable {
-                    "byref": false,
-                    "curly": false,
-                    "kind": "variable",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 18,
@@ -358,12 +1487,30 @@ Program {
                         "offset": 16,
                       },
                     },
-                    "name": "c",
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 18,
+                          "line": 1,
+                          "offset": 18,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 16,
+                          "line": 1,
+                          "offset": 16,
+                        },
+                      },
+                      "name": "c",
+                    },
                   },
-                  Variable {
-                    "byref": false,
-                    "curly": false,
-                    "kind": "variable",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 21,
@@ -377,13 +1524,46 @@ Program {
                         "offset": 19,
                       },
                     },
-                    "name": "d",
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 21,
+                          "line": 1,
+                          "offset": 21,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 19,
+                          "line": 1,
+                          "offset": 19,
+                        },
+                      },
+                      "name": "d",
+                    },
                   },
-                  null,
-                  Variable {
-                    "byref": false,
-                    "curly": false,
-                    "kind": "variable",
+                  Noop {
+                    "kind": "noop",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 22,
+                        "line": 1,
+                        "offset": 22,
+                      },
+                      "source": null,
+                      "start": Position {
+                        "column": 22,
+                        "line": 1,
+                        "offset": 22,
+                      },
+                    },
+                  },
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 25,
@@ -397,9 +1577,26 @@ Program {
                         "offset": 23,
                       },
                     },
-                    "name": "e",
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 25,
+                          "line": 1,
+                          "offset": 25,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 23,
+                          "line": 1,
+                          "offset": 23,
+                        },
+                      },
+                      "name": "e",
+                    },
                   },
-                  null,
                 ],
                 "kind": "list",
                 "loc": Location {
@@ -418,10 +1615,10 @@ Program {
                 "shortForm": false,
               },
             },
-            Variable {
-              "byref": false,
-              "curly": false,
-              "kind": "variable",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 31,
@@ -435,7 +1632,25 @@ Program {
                   "offset": 29,
                 },
               },
-              "name": "b",
+              "unpack": false,
+              "value": Variable {
+                "curly": false,
+                "kind": "variable",
+                "loc": Location {
+                  "end": Position {
+                    "column": 31,
+                    "line": 1,
+                    "offset": 31,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 29,
+                    "line": 1,
+                    "offset": 29,
+                  },
+                },
+                "name": "b",
+              },
             },
           ],
           "kind": "list",
@@ -470,8 +1685,10 @@ Program {
         "operator": "=",
         "right": Array {
           "items": Array [
-            Number {
-              "kind": "number",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 37,
@@ -485,10 +1702,29 @@ Program {
                   "offset": 36,
                 },
               },
-              "value": "1",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "loc": Location {
+                  "end": Position {
+                    "column": 37,
+                    "line": 1,
+                    "offset": 37,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 36,
+                    "line": 1,
+                    "offset": 36,
+                  },
+                },
+                "value": "1",
+              },
             },
-            Number {
-              "kind": "number",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 40,
@@ -502,7 +1738,24 @@ Program {
                   "offset": 39,
                 },
               },
-              "value": "2",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "loc": Location {
+                  "end": Position {
+                    "column": 40,
+                    "line": 1,
+                    "offset": 40,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 39,
+                    "line": 1,
+                    "offset": 39,
+                  },
+                },
+                "value": "2",
+              },
             },
           ],
           "kind": "array",
@@ -565,8 +1818,8 @@ Program {
         "left": List {
           "items": Array [
             Entry {
+              "byRef": false,
               "key": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "loc": Location {
@@ -598,12 +1851,13 @@ Program {
                   "offset": 1,
                 },
               },
-              "value": Array {
+              "unpack": false,
+              "value": List {
                 "items": Array [
-                  Variable {
-                    "byref": false,
-                    "curly": false,
-                    "kind": "variable",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 10,
@@ -617,12 +1871,30 @@ Program {
                         "offset": 8,
                       },
                     },
-                    "name": "c",
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 10,
+                          "line": 1,
+                          "offset": 10,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 8,
+                          "line": 1,
+                          "offset": 8,
+                        },
+                      },
+                      "name": "c",
+                    },
                   },
-                  Variable {
-                    "byref": false,
-                    "curly": false,
-                    "kind": "variable",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 13,
@@ -636,13 +1908,46 @@ Program {
                         "offset": 11,
                       },
                     },
-                    "name": "d",
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 13,
+                          "line": 1,
+                          "offset": 13,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 11,
+                          "line": 1,
+                          "offset": 11,
+                        },
+                      },
+                      "name": "d",
+                    },
                   },
-                  null,
-                  Variable {
-                    "byref": false,
-                    "curly": false,
-                    "kind": "variable",
+                  Noop {
+                    "kind": "noop",
+                    "loc": Location {
+                      "end": Position {
+                        "column": 14,
+                        "line": 1,
+                        "offset": 14,
+                      },
+                      "source": null,
+                      "start": Position {
+                        "column": 14,
+                        "line": 1,
+                        "offset": 14,
+                      },
+                    },
+                  },
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 17,
@@ -656,11 +1961,28 @@ Program {
                         "offset": 15,
                       },
                     },
-                    "name": "e",
+                    "unpack": false,
+                    "value": Variable {
+                      "curly": false,
+                      "kind": "variable",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 17,
+                          "line": 1,
+                          "offset": 17,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 15,
+                          "line": 1,
+                          "offset": 15,
+                        },
+                      },
+                      "name": "e",
+                    },
                   },
-                  null,
                 ],
-                "kind": "array",
+                "kind": "list",
                 "loc": Location {
                   "end": Position {
                     "column": 19,
@@ -677,10 +1999,10 @@ Program {
                 "shortForm": true,
               },
             },
-            Variable {
-              "byref": false,
-              "curly": false,
-              "kind": "variable",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 23,
@@ -694,7 +2016,25 @@ Program {
                   "offset": 21,
                 },
               },
-              "name": "b",
+              "unpack": false,
+              "value": Variable {
+                "curly": false,
+                "kind": "variable",
+                "loc": Location {
+                  "end": Position {
+                    "column": 23,
+                    "line": 1,
+                    "offset": 23,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 21,
+                    "line": 1,
+                    "offset": 21,
+                  },
+                },
+                "name": "b",
+              },
             },
           ],
           "kind": "list",
@@ -730,6 +2070,7 @@ Program {
         "right": Array {
           "items": Array [
             Entry {
+              "byRef": false,
               "key": Number {
                 "kind": "number",
                 "loc": Location {
@@ -761,10 +2102,13 @@ Program {
                   "offset": 28,
                 },
               },
+              "unpack": false,
               "value": Array {
                 "items": Array [
-                  Number {
-                    "kind": "number",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 35,
@@ -778,10 +2122,29 @@ Program {
                         "offset": 34,
                       },
                     },
-                    "value": "5",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 35,
+                          "line": 1,
+                          "offset": 35,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 34,
+                          "line": 1,
+                          "offset": 34,
+                        },
+                      },
+                      "value": "5",
+                    },
                   },
-                  Number {
-                    "kind": "number",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 38,
@@ -795,10 +2158,29 @@ Program {
                         "offset": 37,
                       },
                     },
-                    "value": "6",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 38,
+                          "line": 1,
+                          "offset": 38,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 37,
+                          "line": 1,
+                          "offset": 37,
+                        },
+                      },
+                      "value": "6",
+                    },
                   },
-                  Number {
-                    "kind": "number",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 41,
@@ -812,10 +2194,29 @@ Program {
                         "offset": 40,
                       },
                     },
-                    "value": "7",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 41,
+                          "line": 1,
+                          "offset": 41,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 40,
+                          "line": 1,
+                          "offset": 40,
+                        },
+                      },
+                      "value": "7",
+                    },
                   },
-                  Number {
-                    "kind": "number",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 44,
@@ -829,10 +2230,29 @@ Program {
                         "offset": 43,
                       },
                     },
-                    "value": "8",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 44,
+                          "line": 1,
+                          "offset": 44,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 43,
+                          "line": 1,
+                          "offset": 43,
+                        },
+                      },
+                      "value": "8",
+                    },
                   },
-                  Number {
-                    "kind": "number",
+                  Entry {
+                    "byRef": false,
+                    "key": null,
+                    "kind": "entry",
                     "loc": Location {
                       "end": Position {
                         "column": 47,
@@ -846,9 +2266,25 @@ Program {
                         "offset": 46,
                       },
                     },
-                    "value": "9",
+                    "unpack": false,
+                    "value": Number {
+                      "kind": "number",
+                      "loc": Location {
+                        "end": Position {
+                          "column": 47,
+                          "line": 1,
+                          "offset": 47,
+                        },
+                        "source": null,
+                        "start": Position {
+                          "column": 46,
+                          "line": 1,
+                          "offset": 46,
+                        },
+                      },
+                      "value": "9",
+                    },
                   },
-                  null,
                 ],
                 "kind": "array",
                 "loc": Location {
@@ -867,8 +2303,10 @@ Program {
                 "shortForm": true,
               },
             },
-            Number {
-              "kind": "number",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
               "loc": Location {
                 "end": Position {
                   "column": 52,
@@ -882,7 +2320,24 @@ Program {
                   "offset": 51,
                 },
               },
-              "value": "2",
+              "unpack": false,
+              "value": Number {
+                "kind": "number",
+                "loc": Location {
+                  "end": Position {
+                    "column": 52,
+                    "line": 1,
+                    "offset": 52,
+                  },
+                  "source": null,
+                  "start": Position {
+                    "column": 51,
+                    "line": 1,
+                    "offset": 51,
+                  },
+                },
+                "value": "2",
+              },
             },
           ],
           "kind": "array",

@@ -9,19 +9,31 @@ Program {
         "kind": "call",
         "what": Array {
           "items": Array [
-            String {
-              "isDoubleQuote": true,
-              "kind": "string",
-              "raw": "\\"Foo\\"",
-              "unicode": false,
-              "value": "Foo",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": true,
+                "kind": "string",
+                "raw": "\\"Foo\\"",
+                "unicode": false,
+                "value": "Foo",
+              },
             },
-            String {
-              "isDoubleQuote": true,
-              "kind": "string",
-              "raw": "\\"bar\\"",
-              "unicode": false,
-              "value": "bar",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": true,
+                "kind": "string",
+                "raw": "\\"bar\\"",
+                "unicode": false,
+                "value": "bar",
+              },
             },
           ],
           "kind": "array",
@@ -45,19 +57,31 @@ Program {
         "kind": "call",
         "what": Array {
           "items": Array [
-            String {
-              "isDoubleQuote": true,
-              "kind": "string",
-              "raw": "\\"Foo\\"",
-              "unicode": false,
-              "value": "Foo",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": true,
+                "kind": "string",
+                "raw": "\\"Foo\\"",
+                "unicode": false,
+                "value": "Foo",
+              },
             },
-            String {
-              "isDoubleQuote": true,
-              "kind": "string",
-              "raw": "\\"bar\\"",
-              "unicode": false,
-              "value": "bar",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": String {
+                "isDoubleQuote": true,
+                "kind": "string",
+                "raw": "\\"bar\\"",
+                "unicode": false,
+                "value": "bar",
+              },
             },
           ],
           "kind": "array",
@@ -89,15 +113,14 @@ Program {
         "what": Call {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "obj",
             },
           ],
           "kind": "call",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "get_class",
             "resolution": "uqn",
           },
@@ -124,15 +147,14 @@ Program {
         "what": Call {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "obj",
             },
           ],
           "kind": "call",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "get_class",
             "resolution": "uqn",
           },
@@ -180,15 +202,14 @@ Program {
                   "what": Call {
                     "arguments": Array [
                       Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "name": "obj",
                       },
                     ],
                     "kind": "call",
-                    "what": ClassReference {
-                      "kind": "classreference",
+                    "what": Name {
+                      "kind": "name",
                       "name": "get_class",
                       "resolution": "uqn",
                     },
@@ -214,7 +235,6 @@ Program {
       "expression": StaticLookup {
         "kind": "staticlookup",
         "offset": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "property",
@@ -222,15 +242,14 @@ Program {
         "what": Call {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "obj",
             },
           ],
           "kind": "call",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "get_class",
             "resolution": "uqn",
           },
@@ -251,7 +270,6 @@ Program {
       "expression": StaticLookup {
         "kind": "staticlookup",
         "offset": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "property",
@@ -259,7 +277,6 @@ Program {
         "what": StaticLookup {
           "kind": "staticlookup",
           "offset": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "property",
@@ -267,7 +284,6 @@ Program {
           "what": StaticLookup {
             "kind": "staticlookup",
             "offset": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "property",
@@ -275,15 +291,14 @@ Program {
             "what": Call {
               "arguments": Array [
                 Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "obj",
                 },
               ],
               "kind": "call",
-              "what": ClassReference {
-                "kind": "classreference",
+              "what": Name {
+                "kind": "name",
                 "name": "get_class",
                 "resolution": "uqn",
               },
@@ -312,15 +327,14 @@ Program {
         "what": Call {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "obj",
             },
           ],
           "kind": "call",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "get_class",
             "resolution": "uqn",
           },
@@ -340,10 +354,10 @@ Program {
     ExpressionStatement {
       "expression": StaticLookup {
         "kind": "staticlookup",
-        "offset": Literal {
-          "kind": "literal",
-          "value": Variable {
-            "byref": false,
+        "offset": Variable {
+          "curly": true,
+          "kind": "variable",
+          "name": Variable {
             "curly": false,
             "kind": "variable",
             "name": "property",
@@ -352,15 +366,14 @@ Program {
         "what": Call {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
             },
           ],
           "kind": "call",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "get_class",
             "resolution": "uqn",
           },
@@ -380,10 +393,10 @@ Program {
     ExpressionStatement {
       "expression": StaticLookup {
         "kind": "staticlookup",
-        "offset": Literal {
-          "kind": "literal",
-          "value": Variable {
-            "byref": false,
+        "offset": Variable {
+          "curly": true,
+          "kind": "variable",
+          "name": Variable {
             "curly": false,
             "kind": "variable",
             "name": "property",
@@ -391,10 +404,10 @@ Program {
         },
         "what": StaticLookup {
           "kind": "staticlookup",
-          "offset": Literal {
-            "kind": "literal",
-            "value": Variable {
-              "byref": false,
+          "offset": Variable {
+            "curly": true,
+            "kind": "variable",
+            "name": Variable {
               "curly": false,
               "kind": "variable",
               "name": "property",
@@ -402,10 +415,10 @@ Program {
           },
           "what": StaticLookup {
             "kind": "staticlookup",
-            "offset": Literal {
-              "kind": "literal",
-              "value": Variable {
-                "byref": false,
+            "offset": Variable {
+              "curly": true,
+              "kind": "variable",
+              "name": Variable {
                 "curly": false,
                 "kind": "variable",
                 "name": "property",
@@ -414,15 +427,14 @@ Program {
             "what": Call {
               "arguments": Array [
                 Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "var",
                 },
               ],
               "kind": "call",
-              "what": ClassReference {
-                "kind": "classreference",
+              "what": Name {
+                "kind": "name",
                 "name": "get_class",
                 "resolution": "uqn",
               },
@@ -444,9 +456,10 @@ Program {
     ExpressionStatement {
       "expression": StaticLookup {
         "kind": "staticlookup",
-        "offset": Literal {
-          "kind": "literal",
-          "value": String {
+        "offset": Variable {
+          "curly": true,
+          "kind": "variable",
+          "name": String {
             "isDoubleQuote": true,
             "kind": "string",
             "raw": "\\"property\\"",
@@ -457,15 +470,14 @@ Program {
         "what": Call {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
             },
           ],
           "kind": "call",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "get_class",
             "resolution": "uqn",
           },
@@ -485,10 +497,10 @@ Program {
     ExpressionStatement {
       "expression": StaticLookup {
         "kind": "staticlookup",
-        "offset": Literal {
-          "kind": "literal",
-          "value": Variable {
-            "byref": false,
+        "offset": Variable {
+          "curly": true,
+          "kind": "variable",
+          "name": Variable {
             "curly": false,
             "kind": "variable",
             "name": "property",
@@ -497,15 +509,14 @@ Program {
         "what": Call {
           "arguments": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
             },
           ],
           "kind": "call",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "get_class",
             "resolution": "uqn",
           },
@@ -535,8 +546,8 @@ Program {
               "kind": "identifier",
               "name": "call",
             },
-            "what": ClassReference {
-              "kind": "classreference",
+            "what": Name {
+              "kind": "name",
               "name": "Order",
               "resolution": "uqn",
             },
@@ -565,15 +576,15 @@ Program {
             "value": Call {
               "arguments": Array [],
               "kind": "call",
-              "what": ClassReference {
-                "kind": "classreference",
+              "what": Name {
+                "kind": "name",
                 "name": "call",
                 "resolution": "uqn",
               },
             },
           },
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "Order",
             "resolution": "uqn",
           },
@@ -603,15 +614,14 @@ Program {
           "what": Call {
             "arguments": Array [
               Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "obj",
               },
             ],
             "kind": "call",
-            "what": ClassReference {
-              "kind": "classreference",
+            "what": Name {
+              "kind": "name",
               "name": "get_class",
               "resolution": "uqn",
             },
@@ -658,7 +668,6 @@ Program {
                     "name": "call",
                   },
                   "what": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "obj",
@@ -690,8 +699,8 @@ Program {
           "what": Call {
             "arguments": Array [],
             "kind": "call",
-            "what": ClassReference {
-              "kind": "classreference",
+            "what": Name {
+              "kind": "name",
               "name": "call",
               "resolution": "uqn",
             },
@@ -713,27 +722,24 @@ Program {
       "expression": Call {
         "arguments": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "a",
           },
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "b",
           },
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "c",
           },
         ],
         "kind": "call",
-        "what": ClassReference {
-          "kind": "classreference",
+        "what": Name {
+          "kind": "name",
           "name": "call",
           "resolution": "uqn",
         },
@@ -757,24 +763,24 @@ Program {
               Call {
                 "arguments": Array [],
                 "kind": "call",
-                "what": ClassReference {
-                  "kind": "classreference",
+                "what": Name {
+                  "kind": "name",
                   "name": "call",
                   "resolution": "uqn",
                 },
               },
             ],
             "kind": "call",
-            "what": ClassReference {
-              "kind": "classreference",
+            "what": Name {
+              "kind": "name",
               "name": "call",
               "resolution": "uqn",
             },
           },
         ],
         "kind": "call",
-        "what": ClassReference {
-          "kind": "classreference",
+        "what": Name {
+          "kind": "name",
           "name": "call",
           "resolution": "uqn",
         },
@@ -804,7 +810,6 @@ Program {
             "value": "index",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "array",
@@ -856,7 +861,7 @@ Program {
           "kind": "method",
           "name": Identifier {
             "kind": "identifier",
-            "name": "fn",
+            "name": "foo",
           },
           "nullable": false,
           "type": null,
@@ -900,7 +905,6 @@ Program {
               "name": "property",
             },
             "what": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "obj",
@@ -930,7 +934,6 @@ Program {
             "name": "call",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "obj",
@@ -982,7 +985,7 @@ Program {
           "kind": "method",
           "name": Identifier {
             "kind": "identifier",
-            "name": "fn",
+            "name": "foo",
           },
           "nullable": false,
           "type": null,
@@ -1013,8 +1016,8 @@ Program {
       "expression": Call {
         "arguments": Array [],
         "kind": "call",
-        "what": ClassReference {
-          "kind": "classreference",
+        "what": Name {
+          "kind": "name",
           "name": "call",
           "resolution": "uqn",
         },
@@ -1034,15 +1037,14 @@ Program {
       "expression": Call {
         "arguments": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "a",
           },
         ],
         "kind": "call",
-        "what": ClassReference {
-          "kind": "classreference",
+        "what": Name {
+          "kind": "name",
           "name": "call",
           "resolution": "uqn",
         },
@@ -1092,7 +1094,7 @@ Program {
           "kind": "method",
           "name": Identifier {
             "kind": "identifier",
-            "name": "fn",
+            "name": "foo",
           },
           "nullable": false,
           "type": null,
@@ -1129,8 +1131,8 @@ Program {
             "kind": "identifier",
             "name": "call",
           },
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "Foo",
             "resolution": "uqn",
           },
@@ -1158,7 +1160,6 @@ Program {
             "name": "call",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "obj",
@@ -1197,6 +1198,121 @@ Program {
 }
 `;
 
+exports[`Test call trailing comma #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Call {
+        "arguments": Array [
+          String {
+            "isDoubleQuote": true,
+            "kind": "string",
+            "raw": "\\"method\\"",
+            "unicode": false,
+            "value": "method",
+          },
+          String {
+            "isDoubleQuote": true,
+            "kind": "string",
+            "raw": "\\"bar\\"",
+            "unicode": false,
+            "value": "bar",
+          },
+        ],
+        "kind": "call",
+        "what": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "foo",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test call trailing comma #3 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Call {
+        "arguments": Array [
+          String {
+            "isDoubleQuote": true,
+            "kind": "string",
+            "raw": "\\"method\\"",
+            "unicode": false,
+            "value": "method",
+          },
+          String {
+            "isDoubleQuote": true,
+            "kind": "string",
+            "raw": "\\"bar\\"",
+            "unicode": false,
+            "value": "bar",
+          },
+        ],
+        "kind": "call",
+        "what": PropertyLookup {
+          "kind": "propertylookup",
+          "offset": Identifier {
+            "kind": "identifier",
+            "name": "bar",
+          },
+          "what": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "foo",
+          },
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test call trailing comma 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Call {
+        "arguments": Array [
+          String {
+            "isDoubleQuote": true,
+            "kind": "string",
+            "raw": "\\"method\\"",
+            "unicode": false,
+            "value": "method",
+          },
+          String {
+            "isDoubleQuote": true,
+            "kind": "string",
+            "raw": "\\"bar\\"",
+            "unicode": false,
+            "value": "bar",
+          },
+        ],
+        "kind": "call",
+        "what": Name {
+          "kind": "name",
+          "name": "foo",
+          "resolution": "uqn",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`Test call variable function (2) 1`] = `
 Program {
   "children": Array [
@@ -1207,13 +1323,11 @@ Program {
         "what": PropertyLookup {
           "kind": "propertylookup",
           "offset": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "func",
           },
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "obj",
@@ -1238,13 +1352,12 @@ Program {
         "what": StaticLookup {
           "kind": "staticlookup",
           "offset": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "func",
           },
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "Foo",
             "resolution": "uqn",
           },
@@ -1266,7 +1379,6 @@ Program {
         "arguments": Array [],
         "kind": "call",
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "func",

@@ -14,16 +14,18 @@ const Position = require("./ast/position");
  * - [Location](#location)
  * - [Position](#position)
  * - [Node](#node)
+ *   - [Noop](#noop)
+ *   - [NullKeyword](#nullkeyword)
  *   - [StaticVariable](#staticvariable)
  *   - [EncapsedPart](#encapsedpart)
  *   - [Constant](#constant)
  *   - [Identifier](#identifier)
  *   - [Reference](#reference)
- *     - [TypeReference](#classreference)
- *     - [ParentReference](#classreference)
- *     - [StaticReference](#classreference)
- *     - [SelfReference](#classreference)
- *     - [ClassReference](#classreference)
+ *     - [TypeReference](#typereference)
+ *     - [ParentReference](#parentreference)
+ *     - [StaticReference](#staticreference)
+ *     - [SelfReference](#selfreference)
+ *     - [Name](#name)
  *   - [TraitUse](#traituse)
  *   - [TraitAlias](#traitalias)
  *   - [TraitPrecedence](#traitprecedence)
@@ -33,7 +35,9 @@ const Position = require("./ast/position");
  *   - [Error](#error)
  *   - [Expression](#expression)
  *     - [Entry](#entry)
+ *     - [ArrowFunc](#arrowfunc)
  *     - [Closure](#closure)
+ *     - [ByRef](#byref)
  *     - [Silent](#silent)
  *     - [RetIf](#retif)
  *     - [New](#new)
@@ -43,6 +47,7 @@ const Position = require("./ast/position");
  *     - [Exit](#exit)
  *     - [Clone](#clone)
  *     - [Assign](#assign)
+ *     - [AssignRef](#assignref)
  *     - [Array](#array)
  *     - [List](#list)
  *     - [Variable](#variable)
@@ -118,7 +123,7 @@ const Position = require("./ast/position");
  * @property {Boolean} withPositions - Should locate any node (by default false)
  * @property {Boolean} withSource - Should extract the node original code (by default false)
  */
-const AST = function(withPositions, withSource) {
+const AST = function (withPositions, withSource) {
   this.withPositions = withPositions;
   this.withSource = withSource;
 };
@@ -130,7 +135,7 @@ const AST = function(withPositions, withSource) {
  * @return {Position}
  * @private
  */
-AST.prototype.position = function(parser) {
+AST.prototype.position = function (parser) {
   return new Position(
     parser.lexer.yylloc.first_line,
     parser.lexer.yylloc.first_column,
@@ -159,20 +164,24 @@ AST.precedence = {};
   ["*", "/", "%"],
   ["!"],
   ["instanceof"],
-  ["cast"]
-  // TODO: typecasts
+  ["cast", "silent"],
+  ["**"],
   // TODO: [ (array)
   // TODO: clone, new
-].forEach(function(list, index) {
-  list.forEach(function(operator) {
+].forEach(function (list, index) {
+  list.forEach(function (operator) {
     AST.precedence[operator] = index + 1;
   });
 });
 
+AST.prototype.isRightAssociative = function (operator) {
+  return operator === "**" || operator === "??";
+};
+
 /**
  * Change parent node informations after swapping childs
  */
-AST.prototype.swapLocations = function(target, first, last, parser) {
+AST.prototype.swapLocations = function (target, first, last, parser) {
   if (this.withPositions) {
     target.loc.start = first.loc.start;
     target.loc.end = last.loc.end;
@@ -188,7 +197,7 @@ AST.prototype.swapLocations = function(target, first, last, parser) {
 /**
  * Includes locations from first & last into the target
  */
-AST.prototype.resolveLocations = function(target, first, last, parser) {
+AST.prototype.resolveLocations = function (target, first, last, parser) {
   if (this.withPositions) {
     if (target.loc.start.offset > first.loc.start.offset) {
       target.loc.start = first.loc.start;
@@ -208,7 +217,7 @@ AST.prototype.resolveLocations = function(target, first, last, parser) {
 /**
  * Check and fix precence, by default using right
  */
-AST.prototype.resolvePrecedence = function(result, parser) {
+AST.prototype.resolvePrecedence = function (result, parser) {
   let buffer, lLevel, rLevel;
   // handling precendence
   if (result.kind === "call") {
@@ -217,7 +226,7 @@ AST.prototype.resolvePrecedence = function(result, parser) {
   } else if (
     result.kind === "propertylookup" ||
     result.kind === "staticlookup" ||
-    result.kind === "offsetlookup"
+    (result.kind === "offsetlookup" && result.offset)
   ) {
     // including what argument into location
     this.resolveLocations(result, result.what, result.offset, parser);
@@ -226,13 +235,20 @@ AST.prototype.resolvePrecedence = function(result, parser) {
       if (result.right.kind === "bin") {
         lLevel = AST.precedence[result.type];
         rLevel = AST.precedence[result.right.type];
-        if (lLevel && rLevel && rLevel <= lLevel) {
+        if (
+          lLevel &&
+          rLevel &&
+          rLevel <= lLevel &&
+          (result.type !== result.right.type ||
+            !this.isRightAssociative(result.type))
+        ) {
           // https://github.com/glayzzle/php-parser/issues/79
           // shift precedence
           buffer = result.right;
           result.right = result.right.left;
           this.swapLocations(result, result.left, result.right, parser);
           buffer.left = this.resolvePrecedence(result, parser);
+          this.swapLocations(buffer, buffer.left, buffer.right, parser);
           result = buffer;
         }
       } else if (result.right.kind === "retif") {
@@ -249,22 +265,22 @@ AST.prototype.resolvePrecedence = function(result, parser) {
       }
     }
   } else if (
-    result.kind === "cast" &&
-    result.what &&
-    !result.what.parenthesizedExpression
+    (result.kind === "silent" || result.kind === "cast") &&
+    result.expr &&
+    !result.expr.parenthesizedExpression
   ) {
     // https://github.com/glayzzle/php-parser/issues/172
-    if (result.what.kind === "bin") {
-      buffer = result.what;
-      result.what = result.what.left;
-      this.swapLocations(result, result, result.what, parser);
+    if (result.expr.kind === "bin") {
+      buffer = result.expr;
+      result.expr = result.expr.left;
+      this.swapLocations(result, result, result.expr, parser);
       buffer.left = this.resolvePrecedence(result, parser);
       this.swapLocations(buffer, buffer.left, buffer.right, parser);
       result = buffer;
-    } else if (result.what.kind === "retif") {
-      buffer = result.what;
-      result.what = result.what.test;
-      this.swapLocations(result, result, result.what, parser);
+    } else if (result.expr.kind === "retif") {
+      buffer = result.expr;
+      result.expr = result.expr.test;
+      this.swapLocations(result, result, result.expr, parser);
       buffer.test = this.resolvePrecedence(result, parser);
       this.swapLocations(buffer, buffer.test, buffer.falseExpr, parser);
       result = buffer;
@@ -321,17 +337,8 @@ AST.prototype.resolvePrecedence = function(result, parser) {
         result = buffer;
       }
     }
-  } else if (
-    result.kind === "silent" &&
-    result.expr.right &&
-    !result.expr.parenthesizedExpression
-  ) {
-    // overall least precedence
-    buffer = result.expr;
-    result.expr = buffer.left;
-    buffer.left = result;
-    this.swapLocations(buffer, buffer.left, buffer.right, parser);
-    result = buffer;
+  } else if (result.kind === "expressionstatement") {
+    this.swapLocations(result, result.expression, result, parser);
   }
   return result;
 };
@@ -343,34 +350,28 @@ AST.prototype.resolvePrecedence = function(result, parser) {
  * @param {Parser} parser - The parser instance (use for extracting locations)
  * @return {Function}
  */
-AST.prototype.prepare = function(kind, docs, parser) {
+AST.prototype.prepare = function (kind, docs, parser) {
   let start = null;
   if (this.withPositions || this.withSource) {
     start = this.position(parser);
   }
   const self = this;
   // returns the node
-  const result = function() {
+  const result = function () {
     let location = null;
     const args = Array.prototype.slice.call(arguments);
     args.push(docs);
-    if (typeof result.preBuild === "function") {
-      result.preBuild(arguments);
-    }
     if (self.withPositions || self.withSource) {
       let src = null;
       if (self.withSource) {
         src = parser.lexer._input.substring(start.offset, parser.prev[2]);
       }
-      if (self.withPositions) {
-        location = new Location(
-          src,
-          start,
-          new Position(parser.prev[0], parser.prev[1], parser.prev[2])
-        );
-      } else {
-        location = new Location(src, null, null);
-      }
+      // if with source, need location on swapLocations function
+      location = new Location(
+        src,
+        start,
+        new Position(parser.prev[0], parser.prev[1], parser.prev[2])
+      );
       // last argument is allways the location
       args.push(location);
     }
@@ -405,23 +406,16 @@ AST.prototype.prepare = function(kind, docs, parser) {
     }
     AST.stack[++AST.stackUid] = {
       position: start,
-      stack: new Error().stack.split("\n").slice(3, 5)
+      stack: new Error().stack.split("\n").slice(3, 5),
     };
     result.stackUid = AST.stackUid;
   }
 
   /**
-   * Helper to change a node kind
-   * @param {String} newKind
-   */
-  result.setKind = function(newKind) {
-    kind = newKind;
-  };
-  /**
    * Sets a list of trailing comments
    * @param {*} docs
    */
-  result.setTrailingComments = function(docs) {
+  result.setTrailingComments = function (docs) {
     if (result.instance) {
       // already created
       result.instance.setTrailingComments(docs);
@@ -433,7 +427,7 @@ AST.prototype.prepare = function(kind, docs, parser) {
   /**
    * Release a node without using it on the AST
    */
-  result.destroy = function(target) {
+  result.destroy = function (target) {
     if (docs) {
       // release current docs stack
       if (target) {
@@ -453,7 +447,7 @@ AST.prototype.prepare = function(kind, docs, parser) {
   return result;
 };
 
-AST.prototype.checkNodes = function() {
+AST.prototype.checkNodes = function () {
   const errors = [];
   for (const k in AST.stack) {
     if (AST.stack.hasOwnProperty(k)) {
@@ -467,18 +461,20 @@ AST.prototype.checkNodes = function() {
 // Define all AST nodes
 [
   require("./ast/array"),
+  require("./ast/arrowfunc"),
   require("./ast/assign"),
+  require("./ast/assignref"),
   require("./ast/bin"),
   require("./ast/block"),
   require("./ast/boolean"),
   require("./ast/break"),
+  require("./ast/byref"),
   require("./ast/call"),
   require("./ast/case"),
   require("./ast/cast"),
   require("./ast/catch"),
   require("./ast/class"),
   require("./ast/classconstant"),
-  require("./ast/classreference"),
   require("./ast/clone"),
   require("./ast/closure"),
   require("./ast/comment"),
@@ -519,10 +515,13 @@ AST.prototype.checkNodes = function() {
   require("./ast/lookup"),
   require("./ast/magic"),
   require("./ast/method"),
+  require("./ast/name"),
   require("./ast/namespace"),
   require("./ast/new"),
   require("./ast/node"),
+  require("./ast/noop"),
   require("./ast/nowdoc"),
+  require("./ast/nullkeyword"),
   require("./ast/number"),
   require("./ast/offsetlookup"),
   require("./ast/operation"),
@@ -562,8 +561,8 @@ AST.prototype.checkNodes = function() {
   require("./ast/variadic"),
   require("./ast/while"),
   require("./ast/yield"),
-  require("./ast/yieldfrom")
-].forEach(function(ctor) {
+  require("./ast/yieldfrom"),
+].forEach(function (ctor) {
   AST.prototype[ctor.kind] = ctor;
 });
 

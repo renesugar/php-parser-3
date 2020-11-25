@@ -43,7 +43,6 @@ Program {
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -59,8 +58,8 @@ Program {
         },
       ],
       "kind": "namespace",
-      "name": ClassReference {
-        "kind": "classreference",
+      "name": Name {
+        "kind": "name",
         "name": "",
         "resolution": "fqn",
       },
@@ -97,7 +96,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "obj",
@@ -106,8 +104,8 @@ Program {
         "right": New {
           "arguments": Array [],
           "kind": "new",
-          "what": ClassReference {
-            "kind": "classreference",
+          "what": Name {
+            "kind": "name",
             "name": "\\\\Foo",
             "resolution": "fqn",
           },
@@ -216,6 +214,8 @@ Program {
                     },
                     "name": "test",
                   },
+                  "nullable": false,
+                  "type": null,
                   "value": null,
                 },
               ],
@@ -322,7 +322,6 @@ Program {
                     "expression": Assign {
                       "kind": "assign",
                       "left": Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -389,7 +388,6 @@ Program {
                   },
                   Return {
                     "expr": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "loc": Location {
@@ -478,8 +476,8 @@ Program {
               "visibility": "public",
             },
           ],
-          "extends": ClassReference {
-            "kind": "classreference",
+          "extends": Name {
+            "kind": "name",
             "loc": Location {
               "end": Position {
                 "column": 27,
@@ -497,8 +495,8 @@ Program {
             "resolution": "uqn",
           },
           "implements": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "loc": Location {
                 "end": Position {
                   "column": 42,
@@ -515,8 +513,8 @@ Program {
               "name": "Baz",
               "resolution": "uqn",
             },
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "loc": Location {
                 "end": Position {
                   "column": 48,
@@ -745,6 +743,8 @@ Program {
                     },
                     "name": "test",
                   },
+                  "nullable": false,
+                  "type": null,
                   "value": null,
                 },
               ],
@@ -851,7 +851,6 @@ Program {
                     "expression": Assign {
                       "kind": "assign",
                       "left": Variable {
-                        "byref": false,
                         "curly": false,
                         "kind": "variable",
                         "loc": Location {
@@ -918,7 +917,6 @@ Program {
                   },
                   Return {
                     "expr": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "loc": Location {
@@ -1007,8 +1005,8 @@ Program {
               "visibility": "public",
             },
           ],
-          "extends": ClassReference {
-            "kind": "classreference",
+          "extends": Name {
+            "kind": "name",
             "loc": Location {
               "end": Position {
                 "column": 27,
@@ -1026,8 +1024,8 @@ Program {
             "resolution": "uqn",
           },
           "implements": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "loc": Location {
                 "end": Position {
                   "column": 42,
@@ -1044,8 +1042,8 @@ Program {
               "name": "Baz",
               "resolution": "uqn",
             },
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "loc": Location {
                 "end": Position {
                   "column": 48,
@@ -1145,7 +1143,6 @@ Program {
             "kind": "post",
             "type": "+",
             "what": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "i",
@@ -1165,7 +1162,6 @@ Program {
             "kind": "post",
             "type": "+",
             "what": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "b",
@@ -1195,7 +1191,6 @@ Program {
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -1211,8 +1206,8 @@ Program {
         },
       ],
       "kind": "namespace",
-      "name": ClassReference {
-        "kind": "classreference",
+      "name": Name {
+        "kind": "name",
         "name": "",
         "resolution": "fqn",
       },
@@ -1248,8 +1243,8 @@ Program {
     Call {
       "arguments": Array [],
       "kind": "call",
-      "what": ClassReference {
-        "kind": "classreference",
+      "what": Name {
+        "kind": "name",
         "name": "foo",
         "resolution": undefined,
       },
@@ -1258,19 +1253,15 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
         },
         "operator": "=",
-        "right": Identifier {
-          "kind": "identifier",
-          "name": ClassReference {
-            "kind": "classreference",
-            "name": "bar",
-            "resolution": "rn",
-          },
+        "right": Name {
+          "kind": "name",
+          "name": "bar",
+          "resolution": "rn",
         },
       },
       "kind": "expressionstatement",
@@ -1406,19 +1397,15 @@ Program {
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "a",
             },
             "operator": "=",
-            "right": Identifier {
-              "kind": "identifier",
-              "name": ClassReference {
-                "kind": "classreference",
-                "name": "barBaz",
-                "resolution": "rn",
-              },
+            "right": Name {
+              "kind": "name",
+              "name": "barBaz",
+              "resolution": "rn",
             },
           },
           "kind": "expressionstatement",
@@ -1427,19 +1414,15 @@ Program {
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "b",
             },
             "operator": "=",
-            "right": Identifier {
-              "kind": "identifier",
-              "name": ClassReference {
-                "kind": "classreference",
-                "name": "\\\\barBaz",
-                "resolution": "fqn",
-              },
+            "right": Name {
+              "kind": "name",
+              "name": "\\\\barBaz",
+              "resolution": "fqn",
             },
           },
           "kind": "expressionstatement",
@@ -1448,19 +1431,15 @@ Program {
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "c",
             },
             "operator": "=",
-            "right": Identifier {
-              "kind": "identifier",
-              "name": ClassReference {
-                "kind": "classreference",
-                "name": "barBaz\\\\foo",
-                "resolution": "qn",
-              },
+            "right": Name {
+              "kind": "name",
+              "name": "barBaz\\\\foo",
+              "resolution": "qn",
             },
           },
           "kind": "expressionstatement",
@@ -1469,19 +1448,15 @@ Program {
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "d",
             },
             "operator": "=",
-            "right": Identifier {
-              "kind": "identifier",
-              "name": ClassReference {
-                "kind": "classreference",
-                "name": "barBaz",
-                "resolution": "uqn",
-              },
+            "right": Name {
+              "kind": "name",
+              "name": "barBaz",
+              "resolution": "uqn",
             },
           },
           "kind": "expressionstatement",

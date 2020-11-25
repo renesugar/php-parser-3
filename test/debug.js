@@ -14,21 +14,26 @@
   ]
 }
  */
-const util = require('util');
+const util = require("util");
 const parser = require("../src/index");
-const ast = parser.parseEval(`
-$var[ 'foo' ];
-`, { 
+const ast = parser.parseCode(
+  `
+<?php
+
+function foo() {
+  $test = 123;
+  yield "bar {$test}" => 123;
+}
+`,
+  {
     parser: {
       debug: true,
-      extractDoc: true
+      extractDoc: true,
     },
     ast: {
       withPositions: true,
-      withSource: true
-    }
+      withSource: true,
+    },
   }
 );
-console.log(
-  util.inspect(ast, false, 10, true)
-);
+console.log(util.inspect(ast, false, 10, true));

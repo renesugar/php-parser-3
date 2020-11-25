@@ -7,11 +7,16 @@ Program {
       "body": ExpressionStatement {
         "expression": Array {
           "items": Array [
-            Variable {
-              "byref": false,
-              "curly": false,
-              "kind": "variable",
-              "name": "foo",
+            Entry {
+              "byRef": false,
+              "key": null,
+              "kind": "entry",
+              "unpack": false,
+              "value": Variable {
+                "curly": false,
+                "kind": "variable",
+                "name": "foo",
+              },
             },
           ],
           "kind": "array",
@@ -20,7 +25,6 @@ Program {
         "kind": "expressionstatement",
       },
       "key": Variable {
-        "byref": false,
         "curly": false,
         "kind": "variable",
         "name": "bar",
@@ -28,7 +32,6 @@ Program {
       "kind": "foreach",
       "shortForm": false,
       "source": Variable {
-        "byref": false,
         "curly": false,
         "kind": "variable",
         "name": "foo",
@@ -50,12 +53,12 @@ Program {
             EncapsedPart {
               "curly": false,
               "expression": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "k",
               },
               "kind": "encapsedpart",
+              "syntax": "simple",
             },
             EncapsedPart {
               "curly": false,
@@ -67,16 +70,17 @@ Program {
                 "value": " -> ",
               },
               "kind": "encapsedpart",
+              "syntax": null,
             },
             EncapsedPart {
               "curly": false,
               "expression": Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "v",
               },
               "kind": "encapsedpart",
+              "syntax": "simple",
             },
             EncapsedPart {
               "curly": false,
@@ -86,10 +90,10 @@ Program {
                 "raw": "
 ",
                 "unicode": false,
-                "value": "
-",
+                "value": "",
               },
               "kind": "encapsedpart",
+              "syntax": null,
             },
           ],
         },
@@ -154,12 +158,12 @@ Program {
               EncapsedPart {
                 "curly": false,
                 "expression": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "k",
                 },
                 "kind": "encapsedpart",
+                "syntax": "simple",
               },
               EncapsedPart {
                 "curly": false,
@@ -171,16 +175,17 @@ Program {
                   "value": " -> ",
                 },
                 "kind": "encapsedpart",
+                "syntax": null,
               },
               EncapsedPart {
                 "curly": false,
                 "expression": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "v",
                 },
                 "kind": "encapsedpart",
+                "syntax": "simple",
               },
               EncapsedPart {
                 "curly": false,
@@ -190,10 +195,10 @@ Program {
                   "raw": "
 ",
                   "unicode": false,
-                  "value": "
-",
+                  "value": "",
                 },
                 "kind": "encapsedpart",
+                "syntax": null,
               },
             ],
           },
@@ -203,11 +208,16 @@ Program {
       },
       "key": List {
         "items": Array [
-          Variable {
-            "byref": false,
-            "curly": false,
-            "kind": "variable",
-            "name": "bar",
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "bar",
+            },
           },
         ],
         "kind": "list",
@@ -216,13 +226,11 @@ Program {
       "kind": "foreach",
       "shortForm": false,
       "source": Variable {
-        "byref": false,
         "curly": false,
         "kind": "variable",
         "name": "foo",
       },
       "value": Variable {
-        "byref": false,
         "curly": false,
         "kind": "variable",
         "name": "foo",
@@ -284,7 +292,6 @@ Program {
       "body": Echo {
         "expressions": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "i",
@@ -298,7 +305,6 @@ Program {
           "kind": "post",
           "type": "+",
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "i",
@@ -309,7 +315,6 @@ Program {
         Assign {
           "kind": "assign",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "i",
@@ -323,7 +328,6 @@ Program {
         Assign {
           "kind": "assign",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "b",
@@ -341,7 +345,6 @@ Program {
         Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "i",
@@ -353,7 +356,6 @@ Program {
           "type": "<",
         },
         Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "ok",
@@ -366,7 +368,6 @@ Program {
           Echo {
             "expressions": Array [
               Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "ok",
@@ -420,12 +421,12 @@ Program {
               EncapsedPart {
                 "curly": false,
                 "expression": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "k",
                 },
                 "kind": "encapsedpart",
+                "syntax": "simple",
               },
               EncapsedPart {
                 "curly": false,
@@ -437,16 +438,17 @@ Program {
                   "value": " -> ",
                 },
                 "kind": "encapsedpart",
+                "syntax": null,
               },
               EncapsedPart {
                 "curly": false,
                 "expression": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "v",
                 },
                 "kind": "encapsedpart",
+                "syntax": "simple",
               },
               EncapsedPart {
                 "curly": false,
@@ -456,10 +458,10 @@ Program {
                   "raw": "
 ",
                   "unicode": false,
-                  "value": "
-",
+                  "value": "",
                 },
                 "kind": "encapsedpart",
+                "syntax": null,
               },
             ],
           },
@@ -477,7 +479,6 @@ Program {
         "name": "foo",
       },
       "value": Variable {
-        "byref": false,
         "curly": false,
         "kind": "variable",
         "name": "v",
@@ -497,12 +498,12 @@ Program {
                   EncapsedPart {
                     "curly": false,
                     "expression": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "a",
                     },
                     "kind": "encapsedpart",
+                    "syntax": "simple",
                   },
                   EncapsedPart {
                     "curly": false,
@@ -514,16 +515,17 @@ Program {
                       "value": " -> ",
                     },
                     "kind": "encapsedpart",
+                    "syntax": null,
                   },
                   EncapsedPart {
                     "curly": false,
                     "expression": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "b",
                     },
                     "kind": "encapsedpart",
+                    "syntax": "simple",
                   },
                   EncapsedPart {
                     "curly": false,
@@ -533,10 +535,10 @@ Program {
                       "raw": "
 ",
                       "unicode": false,
-                      "value": "
-",
+                      "value": "",
                     },
                     "kind": "encapsedpart",
+                    "syntax": null,
                   },
                 ],
               },
@@ -548,7 +550,6 @@ Program {
         "kind": "block",
       },
       "key": Variable {
-        "byref": false,
         "curly": false,
         "kind": "variable",
         "name": "a",
@@ -557,33 +558,69 @@ Program {
       "shortForm": true,
       "source": Array {
         "items": Array [
-          Array {
-            "items": Array [
-              Number {
-                "kind": "number",
-                "value": "1",
-              },
-              Number {
-                "kind": "number",
-                "value": "2",
-              },
-            ],
-            "kind": "array",
-            "shortForm": true,
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Array {
+              "items": Array [
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "value": "1",
+                  },
+                },
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "value": "2",
+                  },
+                },
+              ],
+              "kind": "array",
+              "shortForm": true,
+            },
           },
-          Array {
-            "items": Array [
-              Number {
-                "kind": "number",
-                "value": "3",
-              },
-              Number {
-                "kind": "number",
-                "value": "4",
-              },
-            ],
-            "kind": "array",
-            "shortForm": true,
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Array {
+              "items": Array [
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "value": "3",
+                  },
+                },
+                Entry {
+                  "byRef": false,
+                  "key": null,
+                  "kind": "entry",
+                  "unpack": false,
+                  "value": Number {
+                    "kind": "number",
+                    "value": "4",
+                  },
+                },
+              ],
+              "kind": "array",
+              "shortForm": true,
+            },
           },
         ],
         "kind": "array",
@@ -591,17 +628,27 @@ Program {
       },
       "value": List {
         "items": Array [
-          Variable {
-            "byref": false,
-            "curly": false,
-            "kind": "variable",
-            "name": "c",
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "c",
+            },
           },
-          Variable {
-            "byref": false,
-            "curly": false,
-            "kind": "variable",
-            "name": "d",
+          Entry {
+            "byRef": false,
+            "key": null,
+            "kind": "entry",
+            "unpack": false,
+            "value": Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "d",
+            },
           },
         ],
         "kind": "list",

@@ -9,8 +9,8 @@ Program {
           "adaptations": null,
           "kind": "traituse",
           "traits": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "name": "A",
               "resolution": "uqn",
             },
@@ -31,8 +31,8 @@ Program {
           ],
           "kind": "traituse",
           "traits": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "name": "B",
               "resolution": "uqn",
             },
@@ -69,6 +69,8 @@ Program {
                 "kind": "identifier",
                 "name": "var",
               },
+              "nullable": false,
+              "type": null,
               "value": Boolean {
                 "kind": "boolean",
                 "raw": "true",
@@ -119,8 +121,8 @@ Program {
       ],
       "extends": null,
       "implements": Array [
-        ClassReference {
-          "kind": "classreference",
+        Name {
+          "kind": "name",
           "name": "boo",
           "resolution": "uqn",
         },
@@ -186,8 +188,8 @@ Program {
         },
       ],
       "extends": Array [
-        ClassReference {
-          "kind": "classreference",
+        Name {
+          "kind": "name",
           "name": "something",
           "resolution": "uqn",
         },
@@ -365,8 +367,8 @@ Program {
                       "kind": "identifier",
                       "name": "fooBar",
                     },
-                    "what": ClassReference {
-                      "kind": "classreference",
+                    "what": Name {
+                      "kind": "name",
                       "name": "A",
                       "resolution": "uqn",
                     },
@@ -385,7 +387,6 @@ Program {
                       "name": "fooBaz",
                     },
                     "what": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "this",
@@ -428,6 +429,81 @@ Program {
 }
 `;
 
+exports[`Test classes Implement typed_properties_v2 / php74 1`] = `
+Program {
+  "children": Array [
+    Class {
+      "body": Array [
+        PropertyStatement {
+          "isStatic": false,
+          "kind": "propertystatement",
+          "properties": Array [
+            Property {
+              "kind": "property",
+              "name": Identifier {
+                "kind": "identifier",
+                "name": "prop",
+              },
+              "nullable": true,
+              "type": TypeReference {
+                "kind": "typereference",
+                "name": "int",
+                "raw": "int",
+              },
+              "value": NullKeyword {
+                "kind": "nullkeyword",
+                "raw": "null",
+              },
+            },
+          ],
+          "visibility": "public",
+        },
+        PropertyStatement {
+          "isStatic": true,
+          "kind": "propertystatement",
+          "properties": Array [
+            Property {
+              "kind": "property",
+              "name": Identifier {
+                "kind": "identifier",
+                "name": "y",
+              },
+              "nullable": false,
+              "type": Array [
+                TypeReference {
+                  "kind": "typereference",
+                  "name": "float",
+                  "raw": "float",
+                },
+                TypeReference {
+                  "kind": "typereference",
+                  "name": "string",
+                  "raw": "string",
+                },
+              ],
+              "value": null,
+            },
+          ],
+          "visibility": "protected",
+        },
+      ],
+      "extends": null,
+      "implements": null,
+      "isAbstract": false,
+      "isAnonymous": false,
+      "isFinal": false,
+      "kind": "class",
+      "name": Identifier {
+        "kind": "identifier",
+        "name": "Test",
+      },
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`Test classes Test js properties 1`] = `
 Program {
   "children": Array [
@@ -443,6 +519,8 @@ Program {
                 "kind": "identifier",
                 "name": "constructor",
               },
+              "nullable": false,
+              "type": null,
               "value": null,
             },
           ],
@@ -481,20 +559,15 @@ Program {
                       "name": "constructor",
                     },
                     "what": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "this",
                     },
                   },
                   "operator": "=",
-                  "right": Identifier {
-                    "kind": "identifier",
-                    "name": ClassReference {
-                      "kind": "classreference",
-                      "name": "null",
-                      "resolution": "uqn",
-                    },
+                  "right": NullKeyword {
+                    "kind": "nullkeyword",
+                    "raw": "null",
                   },
                 },
                 "kind": "expressionstatement",
@@ -505,7 +578,6 @@ Program {
                   "left": StaticLookup {
                     "kind": "staticlookup",
                     "offset": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "constructor",
@@ -516,13 +588,9 @@ Program {
                     },
                   },
                   "operator": "=",
-                  "right": Identifier {
-                    "kind": "identifier",
-                    "name": ClassReference {
-                      "kind": "classreference",
-                      "name": "null",
-                      "resolution": "uqn",
-                    },
+                  "right": NullKeyword {
+                    "kind": "nullkeyword",
+                    "raw": "null",
                   },
                 },
                 "kind": "expressionstatement",
@@ -570,8 +638,8 @@ Program {
           "adaptations": null,
           "kind": "traituse",
           "traits": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "name": "A",
               "resolution": "uqn",
             },
@@ -596,8 +664,8 @@ Program {
           ],
           "kind": "traituse",
           "traits": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "name": "B",
               "resolution": "uqn",
             },
@@ -705,6 +773,8 @@ Program {
                 "kind": "identifier",
                 "name": "var",
               },
+              "nullable": false,
+              "type": null,
               "value": null,
             },
           ],
@@ -725,13 +795,9 @@ Program {
                 "name": "array",
                 "raw": "array",
               },
-              "value": Identifier {
-                "kind": "identifier",
-                "name": ClassReference {
-                  "kind": "classreference",
-                  "name": "null",
-                  "resolution": "uqn",
-                },
+              "value": NullKeyword {
+                "kind": "nullkeyword",
+                "raw": "null",
               },
               "variadic": false,
             },
@@ -748,7 +814,6 @@ Program {
                       "name": "data",
                     },
                     "what": Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "this",
@@ -756,7 +821,6 @@ Program {
                   },
                   "operator": "=",
                   "right": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "data",
@@ -835,7 +899,6 @@ Program {
                     "name": "list",
                   },
                   "what": Variable {
-                    "byref": false,
                     "curly": false,
                     "kind": "variable",
                     "name": "this",
@@ -869,6 +932,8 @@ Program {
                 "kind": "identifier",
                 "name": "foo",
               },
+              "nullable": false,
+              "type": null,
               "value": null,
             },
           ],
@@ -884,6 +949,8 @@ Program {
                 "kind": "identifier",
                 "name": "bar",
               },
+              "nullable": false,
+              "type": null,
               "value": null,
             },
           ],
@@ -909,24 +976,24 @@ Program {
           "visibility": "",
         },
       ],
-      "extends": ClassReference {
-        "kind": "classreference",
+      "extends": Name {
+        "kind": "name",
         "name": "bar",
         "resolution": "uqn",
       },
       "implements": Array [
-        ClassReference {
-          "kind": "classreference",
+        Name {
+          "kind": "name",
           "name": "bim",
           "resolution": "uqn",
         },
-        ClassReference {
-          "kind": "classreference",
+        Name {
+          "kind": "name",
           "name": "bam",
           "resolution": "uqn",
         },
-        ClassReference {
-          "kind": "classreference",
+        Name {
+          "kind": "name",
           "name": "boum",
           "resolution": "uqn",
         },
@@ -946,8 +1013,8 @@ Program {
           "adaptations": Array [
             TraitPrecedence {
               "instead": Array [
-                ClassReference {
-                  "kind": "classreference",
+                Name {
+                  "kind": "name",
                   "name": "A",
                   "resolution": "uqn",
                 },
@@ -957,21 +1024,21 @@ Program {
                 "kind": "identifier",
                 "name": "smallTalk",
               },
-              "trait": ClassReference {
-                "kind": "classreference",
+              "trait": Name {
+                "kind": "name",
                 "name": "B",
                 "resolution": "uqn",
               },
             },
             TraitPrecedence {
               "instead": Array [
-                ClassReference {
-                  "kind": "classreference",
+                Name {
+                  "kind": "name",
                   "name": "B",
                   "resolution": "uqn",
                 },
-                ClassReference {
-                  "kind": "classreference",
+                Name {
+                  "kind": "name",
                   "name": "C",
                   "resolution": "uqn",
                 },
@@ -981,8 +1048,8 @@ Program {
                 "kind": "identifier",
                 "name": "bigTalk",
               },
-              "trait": ClassReference {
-                "kind": "classreference",
+              "trait": Name {
+                "kind": "name",
                 "name": "A",
                 "resolution": "uqn",
               },
@@ -997,8 +1064,8 @@ Program {
                 "kind": "identifier",
                 "name": "bigTalk",
               },
-              "trait": ClassReference {
-                "kind": "classreference",
+              "trait": Name {
+                "kind": "name",
                 "name": "B",
                 "resolution": "uqn",
               },
@@ -1014,8 +1081,8 @@ Program {
                 "kind": "identifier",
                 "name": "bigTalk",
               },
-              "trait": ClassReference {
-                "kind": "classreference",
+              "trait": Name {
+                "kind": "name",
                 "name": "B",
                 "resolution": "uqn",
               },
@@ -1031,8 +1098,8 @@ Program {
                 "kind": "identifier",
                 "name": "bigTalk",
               },
-              "trait": ClassReference {
-                "kind": "classreference",
+              "trait": Name {
+                "kind": "name",
                 "name": "B",
                 "resolution": "uqn",
               },
@@ -1048,8 +1115,8 @@ Program {
                 "kind": "identifier",
                 "name": "new",
               },
-              "trait": ClassReference {
-                "kind": "classreference",
+              "trait": Name {
+                "kind": "name",
                 "name": "A",
                 "resolution": "uqn",
               },
@@ -1071,13 +1138,13 @@ Program {
           ],
           "kind": "traituse",
           "traits": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "name": "A",
               "resolution": "uqn",
             },
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "name": "B",
               "resolution": "uqn",
             },
@@ -1096,8 +1163,8 @@ Program {
             "name": "foo",
           },
           "nullable": false,
-          "type": ClassReference {
-            "kind": "classreference",
+          "type": Name {
+            "kind": "name",
             "name": "bar",
             "resolution": "uqn",
           },
@@ -1117,6 +1184,36 @@ Program {
     },
   ],
   "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test classes abstract and final 1`] = `
+Program {
+  "children": Array [
+    Class {
+      "body": Array [],
+      "extends": null,
+      "implements": null,
+      "isAbstract": false,
+      "isAnonymous": false,
+      "isFinal": false,
+      "kind": "class",
+      "name": Identifier {
+        "kind": "identifier",
+        "name": "foo",
+      },
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": 187,
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected 'final' (T_FINAL), expecting T_CLASS on line 1",
+      "token": "'final' (T_FINAL)",
+    },
+  ],
   "kind": "program",
 }
 `;
@@ -1161,6 +1258,36 @@ Program {
     },
   ],
   "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test classes final and abstract 1`] = `
+Program {
+  "children": Array [
+    Class {
+      "body": Array [],
+      "extends": null,
+      "implements": null,
+      "isAbstract": false,
+      "isAnonymous": false,
+      "isFinal": false,
+      "kind": "class",
+      "name": Identifier {
+        "kind": "identifier",
+        "name": "foo",
+      },
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": 187,
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected 'abstract' (T_ABSTRACT), expecting T_CLASS on line 1",
+      "token": "'abstract' (T_ABSTRACT)",
+    },
+  ],
   "kind": "program",
 }
 `;

@@ -7,7 +7,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -17,7 +16,6 @@ Program {
           "kind": "isset",
           "variables": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -41,19 +39,16 @@ Program {
         "kind": "isset",
         "variables": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
           },
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
           },
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
@@ -76,10 +71,100 @@ Program {
         "kind": "isset",
         "variables": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`isset test errors 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "var",
+        },
+        "operator": "=",
+        "right": Isset {
+          "kind": "isset",
+          "variables": Array [
+            undefined,
+          ],
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": "EXPR",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected ')' on line 1",
+      "token": "')'",
+    },
+    Error {
+      "expected": ")",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected ';', expecting ')' on line 1",
+      "token": "';'",
+    },
+  ],
+  "kind": "program",
+}
+`;
+
+exports[`isset trailing comma #2 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Isset {
+        "kind": "isset",
+        "variables": Array [
+          Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "foo",
+          },
+          Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "bar",
+          },
+        ],
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`isset trailing comma 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Isset {
+        "kind": "isset",
+        "variables": Array [
+          Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "foo",
           },
         ],
       },

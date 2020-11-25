@@ -29,7 +29,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "b",
@@ -63,7 +62,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -128,7 +126,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -165,13 +162,10 @@ Program {
             "kind": "bin",
             "left": Bin {
               "kind": "bin",
-              "left": Identifier {
-                "kind": "identifier",
-                "name": ClassReference {
-                  "kind": "classreference",
-                  "name": "ISO",
-                  "resolution": "uqn",
-                },
+              "left": Name {
+                "kind": "name",
+                "name": "ISO",
+                "resolution": "uqn",
               },
               "right": Number {
                 "kind": "number",
@@ -194,7 +188,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "b",
@@ -213,7 +206,6 @@ Program {
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "c",
@@ -249,7 +241,6 @@ Program {
           "expression": Assign {
             "kind": "assign",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "d",
@@ -286,7 +277,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "e",
@@ -315,13 +305,11 @@ Program {
           Global {
             "items": Array [
               Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "a",
               },
               Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "b",
@@ -352,14 +340,16 @@ Program {
   "children": Array [
     Label {
       "kind": "label",
-      "name": "start",
+      "name": Identifier {
+        "kind": "identifier",
+        "name": "start",
+      },
     },
     ExpressionStatement {
       "expression": Post {
         "kind": "post",
         "type": "+",
         "what": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "i",
@@ -369,7 +359,10 @@ Program {
     },
     Goto {
       "kind": "goto",
-      "label": "start",
+      "label": Identifier {
+        "kind": "identifier",
+        "name": "start",
+      },
     },
   ],
   "errors": Array [],
@@ -483,7 +476,6 @@ Program {
             "kind": "static",
             "variables": Array [
               Variable {
-                "byref": false,
                 "curly": false,
                 "kind": "variable",
                 "name": "a",
@@ -495,7 +487,6 @@ Program {
                 },
                 "kind": "staticvariable",
                 "variable": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "b",
@@ -525,7 +516,6 @@ Program {
           },
           "kind": "staticvariable",
           "variable": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "sVar1",
@@ -549,8 +539,8 @@ Program {
             "expression": Call {
               "arguments": Array [],
               "kind": "call",
-              "what": ClassReference {
-                "kind": "classreference",
+              "what": Name {
+                "kind": "name",
                 "name": "clean",
                 "resolution": "uqn",
               },
@@ -566,8 +556,8 @@ Program {
             "expression": Call {
               "arguments": Array [],
               "kind": "call",
-              "what": ClassReference {
-                "kind": "classreference",
+              "what": Name {
+                "kind": "name",
                 "name": "foo",
                 "resolution": "uqn",
               },
@@ -585,15 +575,14 @@ Program {
                 "expression": Call {
                   "arguments": Array [
                     Variable {
-                      "byref": false,
                       "curly": false,
                       "kind": "variable",
                       "name": "err",
                     },
                   ],
                   "kind": "call",
-                  "what": ClassReference {
-                    "kind": "classreference",
+                  "what": Name {
+                    "kind": "name",
                     "name": "var_dump",
                     "resolution": "uqn",
                   },
@@ -603,7 +592,6 @@ Program {
               Throw {
                 "kind": "throw",
                 "what": Variable {
-                  "byref": false,
                   "curly": false,
                   "kind": "variable",
                   "name": "err",
@@ -614,19 +602,18 @@ Program {
           },
           "kind": "catch",
           "variable": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "err",
           },
           "what": Array [
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "name": "FooError",
               "resolution": "uqn",
             },
-            ClassReference {
-              "kind": "classreference",
+            Name {
+              "kind": "name",
               "name": "BarError",
               "resolution": "uqn",
             },

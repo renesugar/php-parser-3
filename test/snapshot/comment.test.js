@@ -1,30 +1,32 @@
-const parser = require('../main');
+const parser = require("../main");
 
-describe("Test comments", function() {
-  describe("issues", function() {
-    it("fix #250 : Leading comments are treated as trailing comments", function() {
-      expect(parser.parseEval(
-        `
+describe("Test comments", function () {
+  describe("issues", function () {
+    it("fix #250 : Leading comments are treated as trailing comments", function () {
+      expect(
+        parser.parseEval(
+          `
 // leading
 foo();
 // bar
 bar() /* inner */ ;
 // trailing
         `,
-        {
-          parser: {
-            extractDoc: true
-            // debug: true
-          },
-          ast: {
-            withPositions: true,
-            withSource: true
+          {
+            parser: {
+              extractDoc: true,
+              // debug: true
+            },
+            ast: {
+              withPositions: true,
+              withSource: true,
+            },
           }
-        }
-      )).toMatchSnapshot();
+        )
+      ).toMatchSnapshot();
     });
 
-    it("fix #126 : new option", function() {
+    it("fix #126 : new option", function () {
       const ast = parser.parseEval(
         `
         if (true) {
@@ -39,13 +41,13 @@ bar() /* inner */ ;
         `,
         {
           parser: {
-            extractDoc: true
-          }
+            extractDoc: true,
+          },
         }
       );
       expect(ast).toMatchSnapshot();
     });
-    it("fix #55", function() {
+    it("fix #55", function () {
       const ast = parser.parseEval(
         `
         if (true):
@@ -56,15 +58,15 @@ bar() /* inner */ ;
         `,
         {
           parser: {
-            extractDoc: true
+            extractDoc: true,
             // debug: true
-          }
+          },
         }
       );
       expect(ast).toMatchSnapshot();
     });
 
-    it("fix #189", function() {
+    it("fix #189", function () {
       const ast = parser.parseEval(
         `
       $var = 'string1'
@@ -77,13 +79,13 @@ bar() /* inner */ ;
           parser: {
             extractDoc: true,
             // debug: true
-          }
+          },
         }
       );
       expect(ast).toMatchSnapshot();
     });
-    
-    it("fix #193", function() {
+
+    it("fix #193", function () {
       const ast = parser.parseEval(
         `
         $a = $var
@@ -96,13 +98,57 @@ bar() /* inner */ ;
           parser: {
             extractDoc: true,
             // debug: true
-          }
+          },
         }
       );
       expect(ast).toMatchSnapshot();
     });
 
-    it("impl #194", function() {
+    it("fix #278", function () {
+      const ast = parser.parseEval(
+        `
+/**
+ * Class description
+ */
+class FooClass
+{
+    /**
+     * Description
+     */
+    public static function bar()
+    {
+        return $array;
+    }
+
+    /**
+     * Description
+     */
+    public static function baz()
+    {
+        return $array;
+    }
+  
+    /**
+     * Description
+     */
+    public static function woo()
+    {
+        return $array;
+    }
+    // true trailing comment
+}
+        `,
+        {
+          parser: {
+            extractDoc: true,
+            // debug: true
+          },
+        }
+      );
+      expect(ast).toMatchSnapshot();
+    });
+
+    it("impl #194", function () {
       const ast = parser.parseEval(
         `
         // lead assign
@@ -115,14 +161,14 @@ bar() /* inner */ ;
           parser: {
             extractDoc: true,
             // debug: true
-          }
+          },
         }
       );
       expect(ast).toMatchSnapshot();
     });
   });
 
-  it("test single line comments", function() {
+  it("test single line comments", function () {
     const ast = parser.parseEval(
       `
       # some information
@@ -132,15 +178,15 @@ bar() /* inner */ ;
       `,
       {
         parser: {
-          extractDoc: true
-        }
+          extractDoc: true,
+        },
       }
     );
     expect(ast).toMatchSnapshot();
   });
 
-  describe("multi line comments", function() {
-    it("test function", function() {
+  describe("multi line comments", function () {
+    it("test function", function () {
       const ast = parser.parseEval(
         `
         /**
@@ -153,13 +199,13 @@ bar() /* inner */ ;
         `,
         {
           parser: {
-            extractDoc: true
-          }
+            extractDoc: true,
+          },
         }
       );
       expect(ast).toMatchSnapshot();
     });
-    it("test if statements", function() {
+    it("test if statements", function () {
       const ast = parser.parseEval(
         `
         if /* ignore */ (/* */ true) /* ignore */ {
@@ -175,13 +221,13 @@ bar() /* inner */ ;
         `,
         {
           parser: {
-            extractDoc: true
-          }
+            extractDoc: true,
+          },
         }
       );
       expect(ast).toMatchSnapshot();
     });
-    it("test try statements", function() {
+    it("test try statements", function () {
       const ast = parser.parseEval(
         `
         try /* ignore */ {
@@ -194,15 +240,15 @@ bar() /* inner */ ;
         `,
         {
           parser: {
-            extractDoc: true
-          }
+            extractDoc: true,
+          },
         }
       );
       expect(ast).toMatchSnapshot();
     });
   });
 
-  it("test classes", function() {
+  it("test classes", function () {
     const ast = parser.parseEval(
       `
       /**
@@ -223,8 +269,8 @@ bar() /* inner */ ;
       `,
       {
         parser: {
-          extractDoc: true
-        }
+          extractDoc: true,
+        },
       }
     );
     expect(ast).toMatchSnapshot();

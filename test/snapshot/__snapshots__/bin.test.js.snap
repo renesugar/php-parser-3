@@ -7,13 +7,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -35,13 +33,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -63,13 +59,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -91,13 +85,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -119,13 +111,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -147,13 +137,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -175,16 +163,49 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
+        },
+        "type": "**",
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`bin ** right-associative 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Bin {
+        "kind": "bin",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "right": Bin {
+          "kind": "bin",
+          "left": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "b",
+          },
+          "right": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "c",
+          },
+          "type": "**",
         },
         "type": "**",
       },
@@ -203,13 +224,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -231,13 +250,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -259,13 +276,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -287,13 +302,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -315,13 +328,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -343,13 +354,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -371,13 +380,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -399,13 +406,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -427,13 +432,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -455,13 +458,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -483,13 +484,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -511,13 +510,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -532,6 +529,47 @@ Program {
 }
 `;
 
+exports[`bin ?? (php < 7) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": RetIf {
+        "falseExpr": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "var",
+        },
+        "kind": "retif",
+        "test": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "var",
+        },
+        "trueExpr": undefined,
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [
+    Error {
+      "expected": "EXPR",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected '?' on line 1",
+      "token": "'?'",
+    },
+    Error {
+      "expected": ":",
+      "kind": "error",
+      "line": 1,
+      "message": "Parse Error : syntax error, unexpected '$var' (T_VARIABLE), expecting ':' on line 1",
+      "token": "'$var' (T_VARIABLE)",
+    },
+  ],
+  "kind": "program",
+}
+`;
+
 exports[`bin ?? 1`] = `
 Program {
   "children": Array [
@@ -539,16 +577,49 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
+        },
+        "type": "??",
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`bin ?? right-associative 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Bin {
+        "kind": "bin",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "right": Bin {
+          "kind": "bin",
+          "left": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "b",
+          },
+          "right": Variable {
+            "curly": false,
+            "kind": "variable",
+            "name": "c",
+          },
+          "type": "??",
         },
         "type": "??",
       },
@@ -567,13 +638,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -595,13 +664,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -623,13 +690,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -651,13 +716,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -679,13 +742,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -707,7 +768,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -716,13 +776,11 @@ Program {
         "right": Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
           },
           "right": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
@@ -745,18 +803,14 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
-        "right": Identifier {
-          "kind": "identifier",
-          "name": ClassReference {
-            "kind": "classreference",
-            "name": "MyClass",
-            "resolution": "uqn",
-          },
+        "right": Name {
+          "kind": "name",
+          "name": "MyClass",
+          "resolution": "uqn",
         },
         "type": "instanceof",
       },
@@ -775,7 +829,6 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
@@ -801,7 +854,6 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
@@ -827,7 +879,6 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
@@ -853,13 +904,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -881,7 +930,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -892,13 +940,11 @@ Program {
           "left": Bin {
             "kind": "bin",
             "left": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
             },
             "right": Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "var",
@@ -906,7 +952,6 @@ Program {
             "type": "+",
           },
           "right": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
@@ -931,7 +976,6 @@ Program {
         "left": Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "foo",
@@ -945,7 +989,6 @@ Program {
         "right": Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "bar",
@@ -973,13 +1016,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",
@@ -1001,14 +1042,12 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
         },
         "parenthesizedExpression": true,
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -1030,7 +1069,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -1039,14 +1077,12 @@ Program {
         "right": Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
           },
           "parenthesizedExpression": true,
           "right": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
@@ -1069,7 +1105,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -1078,14 +1113,12 @@ Program {
         "right": Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
           },
           "parenthesizedExpression": true,
           "right": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
@@ -1108,7 +1141,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -1117,14 +1149,12 @@ Program {
         "right": Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
           },
           "parenthesizedExpression": true,
           "right": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
@@ -1147,13 +1177,11 @@ Program {
       "expression": Bin {
         "kind": "bin",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "foo",
         },
         "right": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "bar",

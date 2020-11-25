@@ -1,7 +1,7 @@
-const parser = require('../main');
+const parser = require("../main");
 
-describe("Test IF statements", function() {
-  it("test common cases", function() {
+describe("Test IF statements", function () {
+  it("test common cases", function () {
     const ast = parser.parseEval(
       `
       if (true) {
@@ -15,13 +15,13 @@ describe("Test IF statements", function() {
       }
       `,
       {
-        parser: { debug: false }
+        parser: { debug: false },
       }
     );
     expect(ast).toMatchSnapshot();
   });
 
-  it("test short form", function() {
+  it("test short form", function () {
     const ast = parser.parseEval(
       `
       if (true):
@@ -33,13 +33,13 @@ describe("Test IF statements", function() {
       endif;
       `,
       {
-        parser: { debug: false }
+        parser: { debug: false },
       }
     );
     expect(ast).toMatchSnapshot();
   });
 
-  it("test various cases", function() {
+  it("test various cases", function () {
     const ast = parser.parseEval(
       `
       if (true):
@@ -56,13 +56,13 @@ describe("Test IF statements", function() {
       endif;
       `,
       {
-        parser: { debug: false }
+        parser: { debug: false },
       }
     );
     expect(ast).toMatchSnapshot();
   });
 
-  it("test issue #84", function() {
+  it("test issue #84", function () {
     const ast = parser.parseCode(
       `
         <?php if (true): ?>
@@ -70,13 +70,12 @@ describe("Test IF statements", function() {
         <?php endif; ?>
       `,
       {
-        parser: { debug: false }
+        parser: { debug: false },
       }
     );
     expect(ast).toMatchSnapshot();
   });
   it("test issue #168", () => {
-    
     // should be ok
     let ast = parser.parseCode(
       `<?php if ($foo); ?>
@@ -84,8 +83,8 @@ describe("Test IF statements", function() {
       {
         ast: {
           withPositions: true,
-          withSource: true
-        }
+          withSource: true,
+        },
       }
     );
     expect(ast).toMatchSnapshot();
@@ -97,8 +96,8 @@ describe("Test IF statements", function() {
       {
         ast: {
           withPositions: true,
-          withSource: true
-        }
+          withSource: true,
+        },
       }
     );
     expect(ast).toMatchSnapshot();
@@ -110,11 +109,10 @@ describe("Test IF statements", function() {
       {
         ast: {
           withPositions: true,
-          withSource: true
-        }
+          withSource: true,
+        },
       }
     );
     expect(ast).toMatchSnapshot();
-
   });
 });

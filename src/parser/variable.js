@@ -22,23 +22,24 @@ module.exports = {
    *  $var->func()->property    // chained calls
    * ```
    */
-  read_variable: function(read_only, encapsed, byref) {
+  read_variable: function (read_only, encapsed) {
     let result;
 
     // check the byref flag
-    if (!byref && this.token === "&") {
-      byref = true;
-      this.next();
+    if (this.token === "&") {
+      return this.read_byref(
+        this.read_variable.bind(this, read_only, encapsed)
+      );
     }
 
     // reads the entry point
     if (this.is([this.tok.T_VARIABLE, "$"])) {
-      result = this.read_reference_variable(encapsed, byref);
+      result = this.read_reference_variable(encapsed);
     } else if (
       this.is([
         this.tok.T_NS_SEPARATOR,
         this.tok.T_STRING,
-        this.tok.T_NAMESPACE
+        this.tok.T_NAMESPACE,
       ])
     ) {
       result = this.node();
@@ -54,9 +55,11 @@ module.exports = {
           result = name.destroy(result("boolean", true, name.name));
         } else if (literal === "false") {
           result = name.destroy(result("boolean", false, name.name));
+        } else if (literal === "null") {
+          result = name.destroy(result("nullkeyword", name.name));
         } else {
-          // @todo null keyword ?
-          result = result("identifier", name);
+          result.destroy(name);
+          result = name;
         }
       } else {
         // @fixme possible #193 bug
@@ -81,15 +84,15 @@ module.exports = {
   },
 
   // resolves a static call
-  read_static_getter: function(what, encapsed) {
+  read_static_getter: function (what, encapsed) {
     const result = this.node("staticlookup");
     let offset, name;
     if (this.next().is([this.tok.T_VARIABLE, "$"])) {
-      offset = this.read_reference_variable(encapsed, false);
+      offset = this.read_reference_variable(encapsed);
     } else if (
       this.token === this.tok.T_STRING ||
       this.token === this.tok.T_CLASS ||
-      (this.php7 && this.is("IDENTIFIER"))
+      (this.version >= 700 && this.is("IDENTIFIER"))
     ) {
       offset = this.node("identifier");
       name = this.text();
@@ -112,7 +115,7 @@ module.exports = {
     return result(what, offset);
   },
 
-  read_what: function(is_static_lookup = false) {
+  read_what: function (is_static_lookup = false) {
     let what = null;
     let name = null;
     switch (this.next().token) {
@@ -125,33 +128,12 @@ module.exports = {
         if (is_static_lookup && this.token === this.tok.T_OBJECT_OPERATOR) {
           this.error();
         }
-
-        if (this.token === this.tok.T_VARIABLE) {
-          const inner = this.node("variable");
-          name = this.text().substring(1);
-          this.next();
-          what = this.node("encapsed")(
-            [what, inner(name, false, false)],
-            null,
-            "offset"
-          );
-          if (what.loc && what.value[0].loc) {
-            what.loc.start = what.value[0].loc.start;
-          }
-        } else if (this.token === "{") {
-          const expr = this.next().read_expr();
-          this.expect("}") && this.next();
-          what = this.node("encapsed")([what, expr], null, "offset");
-          if (what.loc && what.value[0].loc) {
-            what.loc.start = what.value[0].loc.start;
-          }
-        }
         break;
       case this.tok.T_VARIABLE:
         what = this.node("variable");
         name = this.text().substring(1);
         this.next();
-        what = what(name, false, false);
+        what = what(name, false);
         break;
       case "$":
         what = this.node();
@@ -160,18 +142,18 @@ module.exports = {
           // $obj->${$varname}
           name = this.next().read_expr();
           this.expect("}") && this.next();
-          what = what("literal", "literal", name, null);
+          what = what("variable", name, true);
         } else {
           // $obj->$$varname
           name = this.read_expr();
-          what = what("variable", name, false, false);
+          what = what("variable", name, false);
         }
         break;
       case "{":
-        what = this.node("literal");
+        what = this.node("encapsedpart");
         name = this.next().read_expr();
         this.expect("}") && this.next();
-        what = what("literal", name, null);
+        what = what(name, "complex", false);
         break;
       default:
         this.error([this.tok.T_STRING, this.tok.T_VARIABLE, "$", "{"]);
@@ -186,7 +168,7 @@ module.exports = {
     return what;
   },
 
-  recursive_variable_chain_scan: function(result, read_only, encapsed) {
+  recursive_variable_chain_scan: function (result, read_only, encapsed) {
     let node, offset;
     recursive_scan_loop: while (this.token != this.EOF) {
       switch (this.token) {
@@ -195,30 +177,34 @@ module.exports = {
             // @fixme : add more informations & test
             return result;
           } else {
-            result = this.node("call")(
-              result,
-              this.read_function_argument_list()
-            );
+            result = this.node("call")(result, this.read_argument_list());
           }
           break;
         case "[":
+        case "{": {
+          const backet = this.token;
+          const isSquareBracket = backet === "[";
           node = this.node("offsetlookup");
           this.next();
           offset = false;
           if (encapsed) {
             offset = this.read_encaps_var_offset();
-            this.expect("]") && this.next();
+            this.expect(isSquareBracket ? "]" : "}") && this.next();
           } else {
+            const isCallableVariable = isSquareBracket
+              ? this.token !== "]"
+              : this.token !== "}";
             // callable_variable : https://github.com/php/php-src/blob/493524454d66adde84e00d249d607ecd540de99f/Zend/zend_language_parser.y#L1122
-            if (this.token !== "]") {
+            if (isCallableVariable) {
               offset = this.read_expr();
-              this.expect("]") && this.next();
+              this.expect(isSquareBracket ? "]" : "}") && this.next();
             } else {
               this.next();
             }
           }
           result = node(result, offset);
           break;
+        }
         case this.tok.T_DOUBLE_COLON:
           // @see https://github.com/glayzzle/php-parser/issues/107#issuecomment-354104574
           if (
@@ -251,7 +237,7 @@ module.exports = {
   /**
    * https://github.com/php/php-src/blob/493524454d66adde84e00d249d607ecd540de99f/Zend/zend_language_parser.y#L1231
    */
-  read_encaps_var_offset: function() {
+  read_encaps_var_offset: function () {
     let offset = this.node();
     if (this.token === this.tok.T_STRING) {
       const text = this.text();
@@ -261,15 +247,21 @@ module.exports = {
       const num = this.text();
       this.next();
       offset = offset("number", num, null);
+    } else if (this.token === "-") {
+      this.next();
+      const num = -1 * this.text();
+      this.expect(this.tok.T_NUM_STRING) && this.next();
+      offset = offset("number", num, null);
     } else if (this.token === this.tok.T_VARIABLE) {
       const name = this.text().substring(1);
       this.next();
-      offset = offset("variable", name, false, false);
+      offset = offset("variable", name, false);
     } else {
       this.expect([
         this.tok.T_STRING,
         this.tok.T_NUM_STRING,
-        this.tok.T_VARIABLE
+        "-",
+        this.tok.T_VARIABLE,
       ]);
       // fallback : consider as identifier
       const text = this.text();
@@ -289,22 +281,11 @@ module.exports = {
    *  $foo[123]{1};   // gets the 2nd char from the 123 array entry
    * </code>
    */
-  read_reference_variable: function(encapsed, byref) {
-    let result = this.read_simple_variable(byref);
+  read_reference_variable: function (encapsed) {
+    let result = this.read_simple_variable();
     let offset;
     while (this.token != this.EOF) {
       const node = this.node();
-      /*
-      if (this.token == "[") {
-        offset = null;
-        if (encapsed) {
-          offset = this.next().read_encaps_var_offset();
-        } else {
-          offset = this.next().token === "]" ? null : this.read_dim_offset();
-        }
-        this.expect("]") && this.next();
-        result = node("offsetlookup", result, offset);
-      } else */
       if (this.token == "{" && !encapsed) {
         // @fixme check coverage, not sure thats working
         offset = this.next().read_expr();
@@ -322,7 +303,7 @@ module.exports = {
    *  simple_variable ::= T_VARIABLE | '$' '{' expr '}' | '$' simple_variable
    * ```
    */
-  read_simple_variable: function(byref) {
+  read_simple_variable: function () {
     let result = this.node("variable");
     let name;
     if (
@@ -332,7 +313,7 @@ module.exports = {
       // plain variable name
       name = this.text().substring(1);
       this.next();
-      result = result(name, byref, false);
+      result = result(name, false);
     } else {
       if (this.token === "$") this.next();
       // dynamic variable name
@@ -340,19 +321,18 @@ module.exports = {
         case "{": {
           const expr = this.next().read_expr();
           this.expect("}") && this.next();
-          result = result(expr, byref, true);
+          result = result(expr, true);
           break;
         }
         case "$": // $$$var
-          // @fixme check coverage here
-          result = result(this.read_simple_variable(false), byref, false);
+          result = result(this.read_simple_variable(), false);
           break;
         case this.tok.T_VARIABLE: {
           // $$var
           name = this.text().substring(1);
           const node = this.node("variable");
           this.next();
-          result = result(node(name, false, false), byref, false);
+          result = result(node(name, false), false);
           break;
         }
         default:
@@ -360,9 +340,9 @@ module.exports = {
           // graceful mode
           name = this.text();
           this.next();
-          result = result(name, byref, false);
+          result = result(name, false);
       }
     }
     return result;
-  }
+  },
 };

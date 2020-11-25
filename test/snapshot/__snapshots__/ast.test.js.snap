@@ -127,6 +127,57 @@ Program {
 }
 `;
 
+exports[`Test AST structure fix #370 - classreference instead identifier(classreferent) 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "operator": "=",
+        "right": Name {
+          "kind": "name",
+          "name": "test",
+          "resolution": "uqn",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`Test AST structure fix #370 - nullkeyword 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "a",
+        },
+        "operator": "=",
+        "right": NullKeyword {
+          "kind": "nullkeyword",
+          "raw": "Null",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`Test AST structure test clone 1`] = `
 Program {
   "children": Array [
@@ -134,7 +185,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "a",
@@ -143,7 +193,6 @@ Program {
         "right": Clone {
           "kind": "clone",
           "what": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "var",
@@ -165,7 +214,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -174,7 +222,6 @@ Program {
         "right": Bin {
           "kind": "bin",
           "left": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "a",
@@ -225,22 +272,21 @@ Program {
   "children": Array [
     ExpressionStatement {
       "expression": Exit {
-        "kind": "exit",
-        "status": String {
+        "expression": String {
           "isDoubleQuote": true,
           "kind": "string",
           "raw": "\\"bye\\"",
           "unicode": false,
           "value": "bye",
         },
+        "kind": "exit",
         "useDie": true,
       },
       "kind": "expressionstatement",
     },
     ExpressionStatement {
       "expression": Exit {
-        "kind": "exit",
-        "status": Unary {
+        "expression": Unary {
           "kind": "unary",
           "type": "-",
           "what": Number {
@@ -248,6 +294,7 @@ Program {
             "value": "1",
           },
         },
+        "kind": "exit",
         "useDie": false,
       },
       "kind": "expressionstatement",
@@ -273,7 +320,6 @@ Program {
           },
           "kind": "retif",
           "test": Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "expr",
@@ -309,13 +355,11 @@ Program {
         "kind": "isset",
         "variables": Array [
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "foo",
           },
           Variable {
-            "byref": false,
             "curly": false,
             "kind": "variable",
             "name": "bar",
@@ -328,7 +372,6 @@ Program {
       "kind": "unset",
       "variables": Array [
         Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -338,7 +381,6 @@ Program {
     ExpressionStatement {
       "expression": Empty {
         "expression": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -400,13 +442,10 @@ Program {
         "require": false,
         "target": Bin {
           "kind": "bin",
-          "left": Identifier {
-            "kind": "identifier",
-            "name": ClassReference {
-              "kind": "classreference",
-              "name": "PATH",
-              "resolution": "uqn",
-            },
+          "left": Name {
+            "kind": "name",
+            "name": "PATH",
+            "resolution": "uqn",
           },
           "parenthesizedExpression": true,
           "right": String {
@@ -543,6 +582,7 @@ Program {
                 "value": "ls -larth",
               },
               "kind": "encapsedpart",
+              "syntax": null,
             },
           ],
         },

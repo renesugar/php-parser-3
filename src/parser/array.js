@@ -5,9 +5,6 @@
  */
 "use strict";
 
-const ArrayExpr = "array";
-const ArrayEntry = "entry";
-
 module.exports = {
   /**
    * Parse an array
@@ -16,10 +13,10 @@ module.exports = {
    *   '[' array_pair_list ']'
    * ```
    */
-  read_array: function() {
+  read_array: function () {
     let expect = null;
     let shortForm = false;
-    const result = this.node(ArrayExpr);
+    const result = this.node("array");
 
     if (this.token === this.tok.T_ARRAY) {
       this.next().expect("(");
@@ -32,14 +29,6 @@ module.exports = {
     if (this.next().token !== expect) {
       items = this.read_array_pair_list(shortForm);
     }
-    // check non empty entries
-    /*for(let i = 0, size = items.length - 1; i < size; i++) {
-      if (items[i] === null) {
-        this.raiseError(
-          "Cannot use empty array elements in arrays"
-        );
-      }
-    }*/
     this.expect(expect);
     this.next();
     return result(shortForm, items);
@@ -50,10 +39,10 @@ module.exports = {
    * array_pair_list ::= array_pair (',' array_pair?)*
    * ```
    */
-  read_array_pair_list: function(shortForm) {
+  read_array_pair_list: function (shortForm) {
     const self = this;
     return this.read_list(
-      function() {
+      function () {
         return self.read_array_pair(shortForm);
       },
       ",",
@@ -70,36 +59,55 @@ module.exports = {
    *  | expr T_DOUBLE_ARROW T_LIST '(' array_pair_list ')'
    *  | T_LIST '(' array_pair_list ')'
    */
-  read_array_pair: function(shortForm) {
+  read_array_pair: function (shortForm) {
     if (
-      this.token === "," ||
       (!shortForm && this.token === ")") ||
       (shortForm && this.token === "]")
     ) {
-      return null;
+      return;
     }
+
+    if (this.token === ",") {
+      return this.node("noop")();
+    }
+
+    const entry = this.node("entry");
+
+    let key = null;
+    let value = null;
+    let byRef = false;
+    let unpack = false;
+
     if (this.token === "&") {
-      return this.next().read_variable(true, false, true);
-    } else {
-      const entry = this.node(ArrayEntry);
-      const expr = this.read_expr();
-      if (this.token === this.tok.T_DOUBLE_ARROW) {
-        if (this.next().token === "&") {
-          return entry(expr, this.next().read_variable(true, false, true));
-        } else {
-          return entry(expr, this.read_expr());
-        }
+      this.next();
+      byRef = true;
+      value = this.read_variable(true, false);
+    } else if (this.token === this.tok.T_ELLIPSIS && this.version >= 704) {
+      this.next();
+      if (this.token === "&") {
+        this.error();
       }
-      return expr;
+      unpack = true;
+      value = this.read_expr();
+    } else {
+      const expr = this.read_expr();
+
+      if (this.token === this.tok.T_DOUBLE_ARROW) {
+        this.next();
+        key = expr;
+
+        if (this.token === "&") {
+          this.next();
+          byRef = true;
+          value = this.read_variable(true, false);
+        } else {
+          value = this.read_expr();
+        }
+      } else {
+        value = expr;
+      }
     }
+
+    return entry(key, value, byRef, unpack);
   },
-  /**
-   * ```ebnf
-   *  dim_offset ::= expr?
-   * ```
-   */
-  read_dim_offset: function() {
-    if (this.token == "]") return false;
-    return this.read_expr();
-  }
 };

@@ -7,7 +7,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -69,7 +68,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -115,7 +113,6 @@ Program {
           "type": null,
           "uses": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "use",
@@ -138,7 +135,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -200,7 +196,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -286,7 +281,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -356,19 +350,16 @@ Program {
           "type": null,
           "uses": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "use",
             },
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "use",
             },
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "use",
@@ -391,7 +382,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -419,6 +409,63 @@ Program {
 }
 `;
 
+exports[`closure inside call 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Call {
+        "arguments": Array [
+          Closure {
+            "arguments": Array [
+              Parameter {
+                "byref": false,
+                "kind": "parameter",
+                "name": Identifier {
+                  "kind": "identifier",
+                  "name": "arg",
+                },
+                "nullable": false,
+                "type": null,
+                "value": null,
+                "variadic": false,
+              },
+            ],
+            "body": Block {
+              "children": Array [
+                Return {
+                  "expr": Variable {
+                    "curly": false,
+                    "kind": "variable",
+                    "name": "arg",
+                  },
+                  "kind": "return",
+                },
+              ],
+              "kind": "block",
+            },
+            "byref": false,
+            "isStatic": false,
+            "kind": "closure",
+            "nullable": false,
+            "type": null,
+            "uses": Array [],
+          },
+        ],
+        "kind": "call",
+        "what": Name {
+          "kind": "name",
+          "name": "call",
+          "resolution": "uqn",
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
 exports[`closure simple 1`] = `
 Program {
   "children": Array [
@@ -426,7 +473,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -475,7 +521,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -508,7 +553,6 @@ Program {
           "type": null,
           "uses": Array [
             Variable {
-              "byref": false,
               "curly": false,
               "kind": "variable",
               "name": "message",
@@ -531,7 +575,6 @@ Program {
       "expression": Assign {
         "kind": "assign",
         "left": Variable {
-          "byref": false,
           "curly": false,
           "kind": "variable",
           "name": "var",
@@ -568,6 +611,70 @@ Program {
               "curly": false,
               "kind": "variable",
               "name": "message",
+            },
+          ],
+        },
+      },
+      "kind": "expressionstatement",
+    },
+  ],
+  "errors": Array [],
+  "kind": "program",
+}
+`;
+
+exports[`closure use multiple 1`] = `
+Program {
+  "children": Array [
+    ExpressionStatement {
+      "expression": Assign {
+        "kind": "assign",
+        "left": Variable {
+          "curly": false,
+          "kind": "variable",
+          "name": "var",
+        },
+        "operator": "=",
+        "right": Closure {
+          "arguments": Array [],
+          "body": Block {
+            "children": Array [
+              Echo {
+                "expressions": Array [
+                  String {
+                    "isDoubleQuote": true,
+                    "kind": "string",
+                    "raw": "\\"something\\"",
+                    "unicode": false,
+                    "value": "something",
+                  },
+                ],
+                "kind": "echo",
+                "shortForm": false,
+              },
+            ],
+            "kind": "block",
+          },
+          "byref": false,
+          "isStatic": false,
+          "kind": "closure",
+          "nullable": false,
+          "type": null,
+          "uses": Array [
+            Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "message",
+            },
+            Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "message1",
+            },
+            Variable {
+              "curly": false,
+              "kind": "variable",
+              "name": "message2",
             },
           ],
         },

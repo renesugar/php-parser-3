@@ -1,10 +1,10 @@
-const parser = require('../main');
+const parser = require("../main");
 
-describe("global", function() {
-  it("simple", function() {
-    expect(parser.parseEval('global $var;')).toMatchSnapshot();
+describe("global", function () {
+  it("simple", function () {
+    expect(parser.parseEval("global $var;")).toMatchSnapshot();
   });
-  it("mutliple", function() {
-    expect(parser.parseEval('global $var, $foo;')).toMatchSnapshot();
+  it("mutliple", function () {
+    expect(parser.parseEval("global $var, $foo;")).toMatchSnapshot();
   });
 });
